@@ -284,6 +284,13 @@ export async function updateCast(
   return rows[0] ? toCast(rows[0]) : null
 }
 
+export async function deleteCast(id: string): Promise<boolean> {
+  if (!useDB) return store.casts.delete(id)
+  const sql = getSQL()
+  await sql`DELETE FROM casts WHERE id = ${id}`
+  return true
+}
+
 // ─── VisitRecord CRUD ─────────────────────────────────────────────────────────
 
 export async function getVisitRecords(): Promise<VisitRecord[]> {

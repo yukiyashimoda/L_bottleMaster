@@ -9,6 +9,8 @@ import {
 } from '@/lib/kv'
 import { formatDate, formatCurrency, formatEditedBy } from '@/lib/utils'
 import { isAuthenticated } from '@/lib/auth'
+import { DeleteConfirmButton } from '@/components/delete-confirm-button'
+import { deleteCustomerAction } from './delete-actions'
 import { BottleCard } from '@/components/bottle-card'
 import { VisitCard } from '@/components/visit-card'
 import { Badge } from '@/components/ui/badge'
@@ -67,12 +69,19 @@ export default async function CustomerDetailPage({
         </Link>
         <h1 className="font-bold text-gray-900 flex-1 truncate">{customer.name}</h1>
         {loggedIn && (
-          <Link href={`/customers/${id}/edit`}>
-            <Button variant="outline" size="sm" className="border-stone-200 text-gray-600 hover:text-gray-900">
-              <Edit className="h-3.5 w-3.5 mr-1" />
-              編集
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href={`/customers/${id}/edit`}>
+              <Button variant="outline" size="sm" className="border-stone-200 text-gray-600 hover:text-gray-900">
+                <Edit className="h-3.5 w-3.5 mr-1" />
+                編集
+              </Button>
+            </Link>
+            <DeleteConfirmButton
+              action={deleteCustomerAction.bind(null, id)}
+              redirectTo="/"
+              itemName={customer.name}
+            />
+          </div>
         )}
       </div>
 

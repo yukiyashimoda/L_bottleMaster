@@ -6,6 +6,8 @@ import { getCast, getVisitRecordsByCast, getCustomers, getBottles, getCasts } fr
 import { VisitCard } from '@/components/visit-card'
 import { isAuthenticated } from '@/lib/auth'
 import { formatEditedBy } from '@/lib/utils'
+import { DeleteConfirmButton } from '@/components/delete-confirm-button'
+import { deleteCastAction } from './delete-actions'
 
 export const dynamic = 'force-dynamic'
 
@@ -38,12 +40,19 @@ export default async function CastDetailPage({
         </Link>
         <h1 className="font-bold text-gray-900 flex-1">{cast.name}</h1>
         {loggedIn && (
-          <Link href={`/casts/${id}/edit`}>
-            <Button variant="outline" size="sm" className="border-stone-200 text-gray-600 hover:text-gray-900">
-              <Edit className="h-3.5 w-3.5 mr-1" />
-              編集
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href={`/casts/${id}/edit`}>
+              <Button variant="outline" size="sm" className="border-stone-200 text-gray-600 hover:text-gray-900">
+                <Edit className="h-3.5 w-3.5 mr-1" />
+                編集
+              </Button>
+            </Link>
+            <DeleteConfirmButton
+              action={deleteCastAction.bind(null, id)}
+              redirectTo="/casts"
+              itemName={cast.name}
+            />
+          </div>
         )}
       </div>
 

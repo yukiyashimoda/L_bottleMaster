@@ -165,10 +165,10 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center" onClick={closeModal}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={closeModal}>
           <div className="absolute inset-0 bg-black/40" />
           <div
-            className="relative bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-md max-h-[85vh] overflow-y-auto shadow-xl"
+            className="relative bg-white rounded-2xl w-full max-w-md max-h-[85vh] overflow-y-auto shadow-xl mx-4"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}

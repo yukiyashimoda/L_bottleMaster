@@ -229,9 +229,8 @@ export default async function CustomerDetailPage({
         </div>
       </div>
 
-      {/* Fixed Bottom Button */}
       {loggedIn && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur border-t border-stone-200 max-w-2xl mx-auto">
+        <div className="px-4 pb-6">
           <Link href={`/customers/${id}/visits/new`}>
             <Button className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold h-11">
               <Plus className="h-4 w-4 mr-2" />

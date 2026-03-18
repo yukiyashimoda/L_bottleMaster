@@ -122,6 +122,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   const [linkedIds, setLinkedIds] = useState<string[]>([])
   const [linkedQuery, setLinkedQuery] = useState('')
   const [bottles, setBottles] = useState<BottleInput[]>([])
+  const [firstVisitDate, setFirstVisitDate] = useState('')
 
   const filteredCustomers = linkedQuery.trim()
     ? customers.filter((c) => c.name.includes(linkedQuery) || c.ruby.includes(linkedQuery) || c.nickname.includes(linkedQuery))
@@ -164,7 +165,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         alertReason: isAlert ? alertReason : '',
         memo: data.get('memo') as string,
         linkedCustomerIds: linkedIds,
-        lastVisitDate: null,
+        lastVisitDate: firstVisitDate ? new Date(firstVisitDate).toISOString() : null,
       },
       bottles
         .filter((b) => b.name.trim())
@@ -204,6 +205,15 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
       <div className="space-y-1.5">
         <Label className="text-gray-700">ニックネーム</Label>
         <Input name="nickname" placeholder="たなちゃん" />
+      </div>
+
+      <div className="space-y-1.5">
+        <Label className="text-gray-700">最初の来店日</Label>
+        <Input
+          type="date"
+          value={firstVisitDate}
+          onChange={(e) => setFirstVisitDate(e.target.value)}
+        />
       </div>
 
       <CastMultiSelect

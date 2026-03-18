@@ -12,7 +12,7 @@ export function Fab({ href, label }: FabProps) {
   return (
     <Link
       href={href}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white font-semibold px-4 py-3 rounded-full shadow-lg shadow-gray-900/20 transition-all hover:scale-105 active:scale-95"
+      className="fixed bottom-20 sm:bottom-6 right-6 z-50 flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white font-semibold px-4 py-3 rounded-full shadow-lg shadow-gray-900/20 transition-all hover:scale-105 active:scale-95"
     >
       <Plus className="h-5 w-5" />
       {label && <span className="text-sm">{label}</span>}

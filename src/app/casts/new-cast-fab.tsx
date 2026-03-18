@@ -45,7 +45,7 @@ export function NewCastFab() {
       {/* FAB */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 rounded-full bg-gray-900 text-white shadow-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
+        className="fixed bottom-20 sm:bottom-6 right-6 z-30 w-14 h-14 rounded-full bg-gray-900 text-white shadow-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
         aria-label="キャストを追加"
       >
         <Plus className="h-6 w-6" />

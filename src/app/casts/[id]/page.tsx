@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Calendar, Edit, User } from 'lucide-react'
+import { ArrowLeft, Calendar, Edit } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getCast, getVisitRecordsByCast, getCustomers, getBottles, getCasts } from '@/lib/kv'
-import { VisitCard } from '@/components/visit-card'
+import { CastVisitGroup } from '@/components/cast-visit-group'
 import { isAuthenticated } from '@/lib/auth'
 import { formatEditedBy } from '@/lib/utils'
 import { DeleteConfirmButton } from '@/components/delete-confirm-button'
@@ -29,6 +29,20 @@ export default async function CastDetailPage({
   if (!cast) notFound()
 
   const customerMap = new Map(customers.map((c) => [c.id, c]))
+
+  // 顧客ごとにグループ化
+  const visitsByCustomer = new Map<string, typeof visits>()
+  for (const visit of visits) {
+    const arr = visitsByCustomer.get(visit.customerId) ?? []
+    arr.push(visit)
+    visitsByCustomer.set(visit.customerId, arr)
+  }
+  // 各顧客の最新来店日でソート
+  const sortedCustomerIds = Array.from(visitsByCustomer.keys()).sort((a, b) => {
+    const latestA = Math.max(...visitsByCustomer.get(a)!.map((v) => new Date(v.visitDate).getTime()))
+    const latestB = Math.max(...visitsByCustomer.get(b)!.map((v) => new Date(v.visitDate).getTime()))
+    return latestB - latestA
+  })
 
   return (
     <div className="min-h-screen pb-10">
@@ -103,29 +117,18 @@ export default async function CastDetailPage({
             <p className="text-brand-plum/50 text-sm">指名履歴はありません</p>
           ) : (
             <div className="space-y-4">
-              {visits.map((visit) => {
-                const customer = customerMap.get(visit.customerId)
+              {sortedCustomerIds.map((customerId) => {
+                const customer = customerMap.get(customerId)
+                if (!customer) return null
                 return (
-                  <div key={visit.id} className="space-y-2">
-                    {customer && (
-                      <Link
-                        href={`/customers/${customer.id}`}
-                        className="flex items-center gap-2 text-sm text-brand-plum hover:text-brand-plum font-medium"
-                      >
-                        <User className="h-3.5 w-3.5 text-brand-plum/50" />
-                        {customer.name}
-                        <span className="text-brand-plum/50 text-xs font-normal">
-                          ({customer.ruby})
-                        </span>
-                      </Link>
-                    )}
-                    <VisitCard
-                      visit={visit}
-                      casts={allCasts}
-                      bottles={bottles}
-                      loggedIn={loggedIn}
-                    />
-                  </div>
+                  <CastVisitGroup
+                    key={customerId}
+                    customer={customer}
+                    visits={visitsByCustomer.get(customerId)!}
+                    casts={allCasts}
+                    bottles={bottles}
+                    loggedIn={loggedIn}
+                  />
                 )
               })}
             </div>

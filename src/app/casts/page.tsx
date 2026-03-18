@@ -12,11 +12,11 @@ export const dynamic = 'force-dynamic'
 export default async function CastListPage() {
   const [casts, loggedIn] = await Promise.all([getCasts(), isAuthenticated()])
 
-  const visitCounts = new Map<string, number>()
+  const customerCounts = new Map<string, number>()
   await Promise.all(
     casts.map(async (c) => {
       const visits = await getVisitRecordsByCast(c.id)
-      visitCounts.set(c.id, visits.length)
+      customerCounts.set(c.id, new Set(visits.map((v) => v.customerId)).size)
     })
   )
 
@@ -36,7 +36,7 @@ export default async function CastListPage() {
         <h1 className="text-xl font-bold text-brand-plum mb-3">キャスト一覧</h1>
         <CastSearch
           casts={casts}
-          visitCounts={Object.fromEntries(visitCounts)}
+          visitCounts={Object.fromEntries(customerCounts)}
         />
       </div>
 
@@ -76,7 +76,7 @@ export default async function CastListPage() {
                     </div>
                     <div className="flex items-center gap-1 text-brand-plum/60 text-sm shrink-0">
                       <GiAmpleDress size={14} className="text-brand-plum/50" />
-                      <span>{visitCounts.get(cast.id) ?? 0} 指名</span>
+                      <span>{customerCounts.get(cast.id) ?? 0} 人</span>
                     </div>
                   </Link>
                 ))}

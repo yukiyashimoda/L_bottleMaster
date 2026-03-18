@@ -20,19 +20,19 @@ export function BottleCard({ bottle }: BottleCardProps) {
     <div
       className="relative flex items-center gap-3 p-3 rounded-lg border border-stone-200 overflow-hidden"
       style={{
-        background: `linear-gradient(to right, #d4b896 0%, #d4b896 ${pct}%, #fafaf9 ${pct}%, #fafaf9 100%)`,
+        background: `linear-gradient(to right, #374151 0%, #374151 ${pct}%, #fafaf9 ${pct}%, #fafaf9 100%)`,
       }}
     >
-      <div className="w-9 h-9 rounded-lg bg-white/60 flex items-center justify-center shrink-0">
-        <BottleWine className="h-5 w-5 text-gray-600" />
+      <div className="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center shrink-0" style={{ mixBlendMode: 'difference' }}>
+        <BottleWine className="h-5 w-5 text-white" />
       </div>
-      <div className="flex-1 min-w-0">
-        <div className="font-medium text-gray-900 text-sm truncate">{bottle.name}</div>
-        <div className="text-xs text-gray-500 mt-0.5">
+      <div className="flex-1 min-w-0" style={{ mixBlendMode: 'difference' }}>
+        <div className="font-medium text-white text-sm truncate">{bottle.name}</div>
+        <div className="text-xs text-white/80 mt-0.5">
           開封日: {formatDate(bottle.openedDate)}
         </div>
       </div>
-      <div className="text-sm font-semibold text-gray-700">{bottle.remaining}</div>
+      <div className="text-sm font-semibold text-white" style={{ mixBlendMode: 'difference' }}>{bottle.remaining}</div>
     </div>
   )
 }

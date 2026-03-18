@@ -89,7 +89,7 @@ export default async function CustomerDetailPage({
         <div className="rounded-xl border border-brand-beige bg-white p-5 shadow-sm">
           {/* 名前・ニックネーム */}
           <div className="flex items-start gap-4">
-            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 overflow-hidden ${customer.isAlert ? 'bg-brand-coral/20 text-brand-coral' : designatedCastRuby ? 'bg-brand-plum text-white' : 'bg-brand-gold text-brand-plum'}`}>
+            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 overflow-hidden ${customer.isAlert ? 'bg-brand-coral/20 text-brand-coral' : designatedCastRuby ? 'bg-brand-coral text-white' : 'bg-brand-gold text-brand-plum'}`}>
               {avatarLabel}
             </div>
             <div className="flex-1 min-w-0">

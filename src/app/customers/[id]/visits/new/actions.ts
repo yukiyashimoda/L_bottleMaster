@@ -30,13 +30,14 @@ export async function createVisitAction(
   data: CreateVisitInput
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    // Update existing bottles' remaining
-    await Promise.all(
+    // Update existing bottles' remaining, collect snapshots
+    const updatedBottles = await Promise.all(
       data.bottleUpdates.map((b) => updateBottle(b.id, { remaining: b.remaining }))
     )
 
-    // Create new bottles
+    // Create new bottles, collect snapshots
     const openedBottleIds: string[] = []
+    const newBottleSnapshots = []
     for (const nb of data.newBottles) {
       if (nb.name.trim()) {
         const bottle = await createBottle({
@@ -46,8 +47,19 @@ export async function createVisitAction(
           openedDate: nb.openedDate,
         })
         openedBottleIds.push(bottle.id)
+        newBottleSnapshots.push(bottle)
       }
     }
+
+    // Combine all affected bottles into snapshots (deduplicated by id)
+    const snapshotMap = new Map()
+    for (const b of updatedBottles) {
+      if (b) snapshotMap.set(b.id, b)
+    }
+    for (const b of newBottleSnapshots) {
+      snapshotMap.set(b.id, b)
+    }
+    const bottleSnapshots = Array.from(snapshotMap.values())
 
     await createVisitRecord({
       customerId: data.customerId,
@@ -59,6 +71,7 @@ export async function createVisitAction(
       memo: data.memo,
       isAlert: data.isAlert ?? false,
       alertReason: data.isAlert ? (data.alertReason ?? '') : '',
+      bottleSnapshots,
     })
 
     // 本指名キャストを顧客のdesignatedCastIdsにマージ

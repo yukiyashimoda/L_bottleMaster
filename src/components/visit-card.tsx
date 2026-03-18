@@ -45,6 +45,13 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
   const openedBottles = visit.bottlesOpened.map((id) => bottleMap.get(id)).filter(Boolean) as Bottle[]
   const usedBottles = visit.bottlesUsed.map((id) => bottleMap.get(id)).filter(Boolean) as Bottle[]
 
+  // Use snapshots for historical bottle remaining display if available
+  const snapshotMap = new Map((visit.bottleSnapshots ?? []).map((b) => [b.id, b]))
+  const hasSnapshots = snapshotMap.size > 0
+  const snapshotBottles = hasSnapshots
+    ? [...new Map([...openedBottles, ...usedBottles].map((b) => [b.id, snapshotMap.get(b.id) ?? b])).values()]
+    : [...new Map([...openedBottles, ...usedBottles].map((b) => [b.id, b])).values()]
+
   const isAlert = visit.isAlert ?? false
   const whiteStyle = isAlert ? { color: 'white' } : {}
 
@@ -266,7 +273,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     <div className="pt-1 space-y-2">
                       <span className="text-xs text-brand-plum/50">ボトル残量</span>
                       <div className="space-y-2">
-                        {[...new Map([...openedBottles, ...usedBottles].map(b => [b.id, b])).values()].map((bottle) => (
+                        {snapshotBottles.map((bottle) => (
                           <BottleCard key={bottle.id} bottle={bottle} />
                         ))}
                       </div>

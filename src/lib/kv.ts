@@ -86,6 +86,7 @@ function toVisitRecord(r: any): VisitRecord {
     memo: r.memo,
     isAlert: r.is_alert ?? false,
     alertReason: r.alert_reason ?? '',
+    bottleSnapshots: r.bottle_snapshots ?? [],
   }
 }
 
@@ -349,9 +350,10 @@ export async function createVisitRecord(data: Omit<VisitRecord, 'id'>): Promise<
     return record
   }
   const sql = getSQL()
+  const snapshotsJson = JSON.stringify(data.bottleSnapshots ?? [])
   const rows = await sql`
-    INSERT INTO visit_records (id, customer_id, visit_date, designated_cast_ids, in_store_cast_ids, bottles_opened, bottles_used, memo, is_alert, alert_reason)
-    VALUES (${id}, ${data.customerId}, ${data.visitDate}, ${data.designatedCastIds}, ${data.inStoreCastIds}, ${data.bottlesOpened}, ${data.bottlesUsed}, ${data.memo}, ${data.isAlert ?? false}, ${data.alertReason ?? ''})
+    INSERT INTO visit_records (id, customer_id, visit_date, designated_cast_ids, in_store_cast_ids, bottles_opened, bottles_used, memo, is_alert, alert_reason, bottle_snapshots)
+    VALUES (${id}, ${data.customerId}, ${data.visitDate}, ${data.designatedCastIds}, ${data.inStoreCastIds}, ${data.bottlesOpened}, ${data.bottlesUsed}, ${data.memo}, ${data.isAlert ?? false}, ${data.alertReason ?? ''}, ${snapshotsJson}::jsonb)
     RETURNING *
   `
   // Update customer lastVisitDate

@@ -53,7 +53,7 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
                 href={`/casts/${cast.id}`}
                 className="flex items-center gap-3 px-4 py-3 border-b border-stone-200 last:border-b-0 hover:bg-stone-100 transition-colors"
               >
-                <div className="px-3 h-9 rounded-xl bg-orange-400 text-white flex items-center justify-center text-xs font-bold shrink-0 min-w-[2.5rem]">
+                <div className="w-10 h-10 rounded-full bg-gray-700 text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
                   {cast.ruby}
                 </div>
                 <div className="flex-1">

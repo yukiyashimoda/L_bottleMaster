@@ -27,7 +27,7 @@ export function CustomerCard({ customer, bottles, designatedCastName }: Customer
         {/* Avatar */}
         <div className={cn(
           'w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0',
-          customer.isAlert ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-700'
+          customer.isAlert ? 'bg-red-100 text-red-600' : 'bg-gray-700 text-white'
         )}>
           {avatarLabel}
         </div>

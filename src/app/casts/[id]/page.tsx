@@ -60,7 +60,7 @@ export default async function CastDetailPage({
         {/* Profile */}
         <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm space-y-4">
           <div className="flex items-center gap-4">
-            <div className="px-3 h-9 rounded-xl bg-orange-400 text-white flex items-center justify-center text-xs font-bold shrink-0 min-w-[2.5rem]">
+            <div className="w-10 h-10 rounded-full bg-gray-700 text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
               {cast.ruby}
             </div>
             <div>

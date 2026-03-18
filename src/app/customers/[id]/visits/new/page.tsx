@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { getCustomer, getCasts, getBottlesByCustomer } from '@/lib/kv'
+import { getCustomer, getCasts, getBottlesByCustomer, getCustomers } from '@/lib/kv'
 import { NewVisitForm } from './new-visit-form'
 
 export const dynamic = 'force-dynamic'
@@ -13,10 +13,11 @@ export default async function NewVisitPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const [customer, casts, bottles] = await Promise.all([
+  const [customer, casts, bottles, allCustomers] = await Promise.all([
     getCustomer(id),
     getCasts(),
     getBottlesByCustomer(id),
+    getCustomers(),
   ])
 
   if (!customer) notFound()
@@ -41,6 +42,8 @@ export default async function NewVisitPage({
           casts={casts}
           existingBottles={bottles}
           defaultDesignatedCastIds={customer.designatedCastIds}
+          allCustomers={allCustomers.filter((c) => c.id !== id)}
+          defaultLinkedCustomerIds={customer.linkedCustomerIds}
         />
       </div>
     </div>

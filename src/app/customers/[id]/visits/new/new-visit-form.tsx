@@ -8,13 +8,15 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Search, X, Plus, BottleWine } from 'lucide-react'
 import { createVisitAction } from './actions'
-import type { Cast, Bottle } from '@/types'
+import type { Cast, Bottle, Customer } from '@/types'
 
 interface NewVisitFormProps {
   customerId: string
   casts: Cast[]
   existingBottles: Bottle[]
   defaultDesignatedCastIds: string[]
+  allCustomers: Customer[]
+  defaultLinkedCustomerIds: string[]
 }
 
 interface BottleRow {
@@ -131,12 +133,16 @@ export function NewVisitForm({
   casts,
   existingBottles,
   defaultDesignatedCastIds,
+  allCustomers,
+  defaultLinkedCustomerIds,
 }: NewVisitFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>(defaultDesignatedCastIds)
   const [inStoreCastIds, setInStoreCastIds] = useState<string[]>([])
+  const [linkedCustomerIds, setLinkedCustomerIds] = useState<string[]>(defaultLinkedCustomerIds)
+  const [linkedQuery, setLinkedQuery] = useState('')
   const [bottles, setBottles] = useState<BottleRow[]>(
     existingBottles.map((b) => ({
       id: b.id,
@@ -186,6 +192,7 @@ export function NewVisitForm({
           openedDate: visitDate,
         })),
       memo: formData.get('memo') as string,
+      linkedCustomerIds,
     })
 
     setLoading(false)
@@ -321,6 +328,86 @@ export function NewVisitForm({
           ))}
         </div>
       </div>
+
+      {/* 同伴者・グループ */}
+      {allCustomers.length > 0 && (
+        <div className="space-y-1.5">
+          <Label className="text-gray-700">
+            同伴者・グループ客
+            {linkedCustomerIds.length > 0 && (
+              <span className="ml-2 text-xs text-gray-500">{linkedCustomerIds.length}名選択中</span>
+            )}
+          </Label>
+          <div className="rounded-lg border border-stone-200 bg-stone-50 overflow-hidden">
+            {linkedCustomerIds.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-stone-200">
+                {linkedCustomerIds.map((lid) => {
+                  const c = allCustomers.find((x) => x.id === lid)
+                  if (!c) return null
+                  return (
+                    <span key={lid} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-200 text-xs text-gray-800">
+                      {c.name}
+                      <button
+                        type="button"
+                        onClick={() => setLinkedCustomerIds((prev) => prev.filter((x) => x !== lid))}
+                        className="text-gray-500 hover:text-gray-900"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </span>
+                  )
+                })}
+              </div>
+            )}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
+                value={linkedQuery}
+                onChange={(e) => setLinkedQuery(e.target.value)}
+                placeholder="名前・ふりがな・ニックネームで検索"
+                className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-gray-900 placeholder:text-gray-400"
+              />
+            </div>
+            <div className="max-h-40 overflow-y-auto border-t border-stone-200">
+              {(() => {
+                const filtered = linkedQuery.trim()
+                  ? allCustomers.filter((c) =>
+                      c.name.includes(linkedQuery) ||
+                      c.ruby.includes(linkedQuery) ||
+                      c.nickname.includes(linkedQuery)
+                    )
+                  : allCustomers
+                return filtered.length === 0 ? (
+                  <p className="px-3 py-2 text-xs text-gray-400">該当する顧客がいません</p>
+                ) : (
+                  filtered.map((c) => (
+                    <label
+                      key={c.id}
+                      className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors ${
+                        linkedCustomerIds.includes(c.id) ? 'bg-gray-100' : 'hover:bg-stone-100'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={linkedCustomerIds.includes(c.id)}
+                        onChange={() =>
+                          setLinkedCustomerIds((prev) =>
+                            prev.includes(c.id) ? prev.filter((x) => x !== c.id) : [...prev, c.id]
+                          )
+                        }
+                        className="accent-gray-800"
+                      />
+                      <span className="text-sm text-gray-800">{c.name}</span>
+                      <span className="text-xs text-gray-400">({c.ruby})</span>
+                    </label>
+                  ))
+                )
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-1.5">
         <Label className="text-gray-700">メモ</Label>

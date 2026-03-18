@@ -23,7 +23,7 @@ export function BottleCard({ bottle }: BottleCardProps) {
         background: `linear-gradient(to right, #374151 0%, #374151 ${pct}%, #fafaf9 ${pct}%, #fafaf9 100%)`,
       }}
     >
-      <div className="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center shrink-0" style={{ mixBlendMode: 'difference' }}>
+      <div className="flex items-center justify-center shrink-0" style={{ mixBlendMode: 'difference' }}>
         <BottleWine className="h-5 w-5 text-white" />
       </div>
       <div className="flex-1 min-w-0" style={{ mixBlendMode: 'difference' }}>

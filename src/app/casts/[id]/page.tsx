@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar, Edit } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getCast, getVisitRecordsByCast, getCustomers, getBottles, getCasts } from '@/lib/kv'
 import { CastVisitGroup } from '@/components/cast-visit-group'
+import { CustomerCard } from '@/components/customer-card'
 import { isAuthenticated } from '@/lib/auth'
 import { formatEditedBy } from '@/lib/utils'
 import { DeleteConfirmButton } from '@/components/delete-confirm-button'
@@ -106,6 +107,33 @@ export default async function CastDetailPage({
             </p>
           )}
         </div>
+
+        {/* 指名客一覧 */}
+        {sortedCustomerIds.length > 0 && (
+          <div>
+            <h3 className="text-sm font-semibold text-brand-plum/60 uppercase tracking-wider mb-1 flex items-center gap-2">
+              指名客 ({sortedCustomerIds.length})
+            </h3>
+            <div>
+              {sortedCustomerIds.map((customerId) => {
+                const customer = customerMap.get(customerId)
+                if (!customer) return null
+                const customerBottles = bottles.filter((b) => b.customerId === customerId)
+                const designatedCastRuby = customer.designatedCastIds[0]
+                  ? allCasts.find((c) => c.id === customer.designatedCastIds[0])?.ruby
+                  : undefined
+                return (
+                  <CustomerCard
+                    key={customerId}
+                    customer={customer}
+                    bottles={customerBottles}
+                    designatedCastRuby={designatedCastRuby}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Visit Records */}
         <div>

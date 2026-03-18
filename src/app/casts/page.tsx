@@ -63,9 +63,8 @@ export default async function CastListPage() {
                     href={`/casts/${cast.id}`}
                     className="flex items-center gap-3 px-4 py-3 border-b border-stone-200 hover:bg-stone-100 transition-colors"
                   >
-                    <div className="px-3 h-10 rounded-xl bg-orange-400 text-white flex flex-col items-center justify-center shrink-0 min-w-[3rem]">
-                      <span className="text-sm font-bold leading-none">{cast.name}</span>
-                      <span className="text-[10px] leading-none mt-0.5 opacity-90">{cast.ruby}</span>
+                    <div className="px-3 h-9 rounded-xl bg-orange-400 text-white flex items-center justify-center text-xs font-bold shrink-0 min-w-[2.5rem]">
+                      {cast.ruby}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">

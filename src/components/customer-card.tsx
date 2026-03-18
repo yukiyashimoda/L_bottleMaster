@@ -25,7 +25,7 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
         {/* Avatar */}
         <div className={cn(
           'w-10 h-10 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden',
-          customer.isAlert ? 'bg-red-100 text-red-600' : 'bg-gray-700 text-white'
+          customer.isAlert ? 'bg-red-100 text-red-600' : designatedCastRuby ? 'bg-gray-700 text-white' : 'bg-green-600 text-white'
         )}>
           {avatarLabel}
         </div>

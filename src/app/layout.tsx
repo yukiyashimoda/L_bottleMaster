@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Bottle Master β',
-  description: 'ナイトクラブ顧客管理システム',
+  description: 'ネオスナックエル ボトル管理アプリ',
 }
 
 export default async function RootLayout({

@@ -32,7 +32,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-brand-beige text-brand-plum;
+    @apply bg-white text-brand-plum;
   }
 }
 

@@ -47,8 +47,8 @@ export function Nav({ isLoggedIn }: NavProps) {
                 className={cn(
                   'hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   pathname === href || (href !== '/' && pathname.startsWith(href))
-                    ? 'bg-brand-beige text-brand-plum'
-                    : 'text-brand-plum/60 hover:text-brand-plum hover:bg-brand-beige'
+                    ? 'bg-white text-brand-plum'
+                    : 'text-brand-plum/60 hover:text-brand-plum hover:bg-white'
                 )}
               >
                 <Icon size={16} />
@@ -59,7 +59,7 @@ export function Nav({ isLoggedIn }: NavProps) {
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-brand-plum/60 hover:text-brand-plum hover:bg-brand-beige transition-colors ml-1"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-brand-plum/60 hover:text-brand-plum hover:bg-white transition-colors ml-1"
               >
                 <LogOut className="h-4 w-4" />
                 <span className="hidden sm:inline">ログアウト</span>
@@ -67,7 +67,7 @@ export function Nav({ isLoggedIn }: NavProps) {
             ) : (
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-brand-plum/60 hover:text-brand-plum hover:bg-brand-beige transition-colors ml-1"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-brand-plum/60 hover:text-brand-plum hover:bg-white transition-colors ml-1"
               >
                 <LogIn className="h-4 w-4" />
                 <span className="hidden sm:inline">ログイン</span>

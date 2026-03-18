@@ -32,7 +32,7 @@ export function CustomerSearch({ customers, bottlesMap, castMap }: CustomerSearc
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="名前・ふりがな・ニックネームで検索"
-          className="pl-9 pr-9 bg-brand-beige border-brand-beige"
+          className="pl-9 pr-9 bg-white border-brand-beige"
         />
         {query && (
           <button

@@ -211,7 +211,7 @@ export default async function CustomerDetailPage({
                   href={`/customers/${linked!.id}`}
                   className="flex items-center gap-3 p-3 rounded-lg bg-white border border-brand-beige hover:border-brand-plum/40 transition-colors shadow-sm"
                 >
-                  <div className="w-8 h-8 rounded-full bg-brand-beige text-brand-plum flex items-center justify-center text-sm font-bold">
+                  <div className="w-8 h-8 rounded-full bg-white text-brand-plum flex items-center justify-center text-sm font-bold">
                     {linked!.name.charAt(0)}
                   </div>
                   <div>

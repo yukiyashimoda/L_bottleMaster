@@ -29,7 +29,7 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="名前・ふりがなで検索"
-          className="pl-9 pr-9 bg-brand-beige border-brand-beige"
+          className="pl-9 pr-9 bg-white border-brand-beige"
         />
         {query && (
           <button
@@ -52,7 +52,7 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
               <Link
                 key={cast.id}
                 href={`/casts/${cast.id}`}
-                className="flex items-center gap-3 px-4 py-3 border-b border-brand-beige last:border-b-0 hover:bg-brand-beige transition-colors"
+                className="flex items-center gap-3 px-4 py-3 border-b border-brand-beige last:border-b-0 hover:bg-white transition-colors"
               >
                 <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
                   {cast.ruby}

@@ -52,7 +52,7 @@ export default async function CastListPage() {
             const groupCasts = grouped.get(group)!
             return (
               <div key={group} id={`group-${group}`}>
-                <div className="sticky top-[calc(3.5rem+4.5rem)] z-10 bg-brand-beige/90 backdrop-blur px-4 py-1.5">
+                <div className="sticky top-[calc(3.5rem+4.5rem)] z-10 bg-white/90 backdrop-blur px-4 py-1.5">
                   <span className="text-xs font-semibold text-brand-plum/60 uppercase tracking-wider">
                     {group}
                   </span>
@@ -61,7 +61,7 @@ export default async function CastListPage() {
                   <Link
                     key={cast.id}
                     href={`/casts/${cast.id}`}
-                    className="flex items-center gap-3 px-4 py-3 border-b border-brand-beige hover:bg-brand-beige transition-colors"
+                    className="flex items-center gap-3 px-4 py-3 border-b border-brand-beige hover:bg-white transition-colors"
                   >
                     <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
                       {cast.ruby}

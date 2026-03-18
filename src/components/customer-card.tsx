@@ -19,7 +19,7 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
     <Link href={`/customers/${customer.id}`}>
       <div
         className={cn(
-          'flex items-center gap-3 px-4 py-3 border-b border-brand-beige transition-colors hover:bg-brand-beige',
+          'flex items-center gap-3 px-4 py-3 border-b border-brand-beige transition-colors hover:bg-white',
           old && 'bg-brand-gold/20 hover:bg-brand-gold/30'
         )}
       >

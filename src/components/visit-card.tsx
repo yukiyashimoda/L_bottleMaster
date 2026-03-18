@@ -184,7 +184,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => setMode('edit')}
-                        className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/80"
+                        className="p-1.5 rounded-lg hover:bg-white text-brand-plum/80"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
@@ -196,7 +196,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                       </button>
                     </div>
                   )}
-                  <button onClick={closeModal} className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/60">
+                  <button onClick={closeModal} className="p-1.5 rounded-lg hover:bg-white text-brand-plum/60">
                     <X className="h-4 w-4" />
                   </button>
                 </>
@@ -204,7 +204,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
               {mode === 'edit' && (
                 <>
                   <span className="font-semibold text-brand-plum flex-1">来店記録を編集</span>
-                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/60">
+                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-white text-brand-plum/60">
                     <X className="h-4 w-4" />
                   </button>
                 </>
@@ -212,7 +212,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
               {mode === 'delete' && (
                 <>
                   <span className="font-semibold text-brand-coral flex-1">来店記録を削除</span>
-                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/60">
+                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-white text-brand-plum/60">
                     <X className="h-4 w-4" />
                   </button>
                 </>
@@ -278,9 +278,9 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
                   <div className="space-y-1.5">
                     <Label>本指名キャスト</Label>
-                    <div className="rounded-lg border border-brand-beige bg-brand-beige max-h-36 overflow-y-auto">
+                    <div className="rounded-lg border border-brand-beige bg-white max-h-36 overflow-y-auto">
                       {casts.map((cast) => (
-                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editDesignatedCastIds.includes(cast.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}>
+                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editDesignatedCastIds.includes(cast.id) ? 'bg-white' : 'hover:bg-white'}`}>
                           <input type="checkbox" checked={editDesignatedCastIds.includes(cast.id)} onChange={() => toggleCast(cast.id, 'designated')} className="accent-brand-plum" />
                           <span className="text-sm text-brand-plum">{cast.name}</span>
                           <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
@@ -291,9 +291,9 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
                   <div className="space-y-1.5">
                     <Label>場内指名キャスト</Label>
-                    <div className="rounded-lg border border-brand-beige bg-brand-beige max-h-36 overflow-y-auto">
+                    <div className="rounded-lg border border-brand-beige bg-white max-h-36 overflow-y-auto">
                       {casts.map((cast) => (
-                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editInStoreCastIds.includes(cast.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}>
+                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editInStoreCastIds.includes(cast.id) ? 'bg-white' : 'hover:bg-white'}`}>
                           <input type="checkbox" checked={editInStoreCastIds.includes(cast.id)} onChange={() => toggleCast(cast.id, 'inStore')} className="accent-brand-plum" />
                           <span className="text-sm text-brand-plum">{cast.name}</span>
                           <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
@@ -302,12 +302,12 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     </div>
                   </div>
 
-                  <div className={`rounded-lg border transition-colors ${editIsAlert ? 'border-brand-coral/40 bg-brand-coral/10' : 'border-brand-beige bg-brand-beige'}`}>
+                  <div className={`rounded-lg border transition-colors ${editIsAlert ? 'border-brand-coral/40 bg-brand-coral/10' : 'border-brand-beige bg-white'}`}>
                     <div className="flex items-center gap-3 p-3">
                       <button
                         type="button"
                         onClick={() => setEditIsAlert((v) => !v)}
-                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${editIsAlert ? 'bg-brand-coral' : 'bg-brand-beige'}`}
+                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${editIsAlert ? 'bg-brand-coral' : 'bg-white'}`}
                       >
                         <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${editIsAlert ? 'translate-x-5' : 'translate-x-0'}`} />
                       </button>

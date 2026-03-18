@@ -69,7 +69,7 @@ export default async function CastDetailPage({
           </div>
 
           {/* メモ */}
-          <div className="rounded-lg border border-brand-beige bg-brand-beige p-3">
+          <div className="rounded-lg border border-brand-beige bg-white p-3">
             <p className="text-xs text-brand-plum/50 mb-1">メモ</p>
             {cast.memo ? (
               <p className="text-sm text-brand-plum whitespace-pre-wrap">{cast.memo}</p>
@@ -79,7 +79,7 @@ export default async function CastDetailPage({
           </div>
 
           {/* 担当顧客数 */}
-          <div className="rounded-lg bg-brand-beige border border-brand-beige p-3 text-center">
+          <div className="rounded-lg bg-white border border-brand-beige p-3 text-center">
             <p className="text-2xl font-bold text-brand-plum">
               {new Set(visits.map((v) => v.customerId)).size}
             </p>

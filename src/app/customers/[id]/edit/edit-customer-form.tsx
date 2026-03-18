@@ -69,14 +69,14 @@ function CastMultiSelect({
   return (
     <div className="space-y-1.5">
       <Label className="text-brand-plum">{label}</Label>
-      <div className="rounded-lg border border-brand-beige bg-brand-beige overflow-hidden">
+      <div className="rounded-lg border border-brand-beige bg-white overflow-hidden">
         {selectedIds.length > 0 && (
           <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-brand-beige">
             {selectedIds.map((id) => {
               const c = casts.find((x) => x.id === id)
               if (!c) return null
               return (
-                <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-beige text-xs text-brand-plum">
+                <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white text-xs text-brand-plum">
                   {c.name}
                   <button type="button" onClick={() => toggle(id)} className="text-brand-plum/60 hover:text-brand-plum">
                     <X className="h-3 w-3" />
@@ -104,7 +104,7 @@ function CastMultiSelect({
               <label
                 key={cast.id}
                 className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors
-                  ${selectedIds.includes(cast.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}
+                  ${selectedIds.includes(cast.id) ? 'bg-white' : 'hover:bg-white'}`}
               >
                 <input
                   type="checkbox"
@@ -262,12 +262,12 @@ export function EditCustomerForm({
       </div>
 
       {/* 要注意フラグ */}
-      <div className={`rounded-lg border transition-colors ${isAlert ? 'border-brand-coral/40 bg-brand-coral/10' : 'border-brand-beige bg-brand-beige'}`}>
+      <div className={`rounded-lg border transition-colors ${isAlert ? 'border-brand-coral/40 bg-brand-coral/10' : 'border-brand-beige bg-white'}`}>
         <div className="flex items-center gap-3 p-3">
           <button
             type="button"
             onClick={() => setIsAlert(!isAlert)}
-            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-brand-beige'}`}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-white'}`}
           >
             <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${isAlert ? 'translate-x-5' : 'translate-x-0'}`} />
           </button>
@@ -314,7 +314,7 @@ export function EditCustomerForm({
 
         <div className="space-y-3">
           {visibleBottles.map((bottle) => (
-            <div key={bottle.id} className="rounded-lg border border-brand-beige bg-brand-beige p-3 space-y-3">
+            <div key={bottle.id} className="rounded-lg border border-brand-beige bg-white p-3 space-y-3">
               <div className="flex items-center gap-2">
                 <GiBrandyBottle size={16} className="text-brand-plum/60 shrink-0" />
                 <Input
@@ -385,14 +385,14 @@ export function EditCustomerForm({
               <span className="ml-2 text-xs text-brand-plum/60">{linkedIds.length}名選択中</span>
             )}
           </Label>
-          <div className="rounded-lg border border-brand-beige bg-brand-beige overflow-hidden">
+          <div className="rounded-lg border border-brand-beige bg-white overflow-hidden">
             {linkedIds.length > 0 && (
               <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-brand-beige">
                 {linkedIds.map((id) => {
                   const c = otherCustomers.find((x) => x.id === id)
                   if (!c) return null
                   return (
-                    <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-beige text-xs text-brand-plum">
+                    <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white text-xs text-brand-plum">
                       {c.name}
                       <button type="button" onClick={() => toggleLinked(id)} className="text-brand-plum/60 hover:text-brand-plum">
                         <X className="h-3 w-3" />
@@ -420,7 +420,7 @@ export function EditCustomerForm({
                   <label
                     key={c.id}
                     className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors
-                      ${linkedIds.includes(c.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}
+                      ${linkedIds.includes(c.id) ? 'bg-white' : 'hover:bg-white'}`}
                   >
                     <input
                       type="checkbox"

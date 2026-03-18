@@ -57,6 +57,15 @@ export async function createVisitAction(
       memo: data.memo,
     })
 
+    // 本指名キャストを顧客のdesignatedCastIdsにマージ
+    if (data.designatedCastIds.length > 0) {
+      const c = await getCustomer(data.customerId)
+      if (c) {
+        const merged = Array.from(new Set([...c.designatedCastIds, ...data.designatedCastIds]))
+        await updateCustomer(data.customerId, { designatedCastIds: merged })
+      }
+    }
+
     // 同伴者のlinkedCustomerIdsを双方向に更新
     if (data.linkedCustomerIds.length > 0) {
       const mainCustomer = await getCustomer(data.customerId)

@@ -44,7 +44,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
   const usedBottles = visit.bottlesUsed.map((id) => bottleMap.get(id)).filter(Boolean) as Bottle[]
 
   const isAlert = visit.isAlert ?? false
-  const blendStyle = isAlert ? { mixBlendMode: 'difference' as const, color: 'white' } : {}
+  const whiteStyle = isAlert ? { color: 'white' } : {}
 
   function openModal() {
     setMode('view')
@@ -109,10 +109,10 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
       <div
         onClick={openModal}
         className={`rounded-xl border p-4 space-y-3 shadow-sm cursor-pointer hover:opacity-90 transition-opacity ${
-          isAlert ? 'border-orange-300 bg-orange-400' : 'border-stone-200 bg-white'
+          isAlert ? 'border-red-800 bg-red-700' : 'border-stone-200 bg-white'
         }`}
       >
-        <div className="flex items-center gap-2 font-semibold" style={blendStyle}>
+        <div className="flex items-center gap-2 font-semibold" style={whiteStyle}>
           {isAlert && <AlertTriangle className="h-4 w-4 shrink-0" />}
           <Calendar className="h-4 w-4" />
           <span>{formatDate(visit.visitDate)}</span>
@@ -120,7 +120,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
         </div>
 
         {(designatedCasts.length > 0 || inStoreCasts.length > 0) && (
-          <div className="flex flex-wrap gap-3 text-sm" style={blendStyle}>
+          <div className="flex flex-wrap gap-3 text-sm" style={whiteStyle}>
             {designatedCasts.length > 0 && (
               <div className="flex items-center gap-1">
                 <User className="h-3.5 w-3.5" />
@@ -139,14 +139,14 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
         )}
 
         {openedBottles.length > 0 && (
-          <div className="text-sm flex items-center gap-1.5" style={blendStyle}>
+          <div className="text-sm flex items-center gap-1.5" style={whiteStyle}>
             <BottleWine className="h-3.5 w-3.5" />
             <span className={isAlert ? '' : 'text-gray-400'}>開封:</span>
             <span>{openedBottles.map((b) => b.name).join(', ')}</span>
           </div>
         )}
         {usedBottles.length > 0 && (
-          <div className="text-sm flex items-center gap-1.5" style={blendStyle}>
+          <div className="text-sm flex items-center gap-1.5" style={whiteStyle}>
             <BottleWine className="h-3.5 w-3.5 opacity-60" />
             <span className={isAlert ? '' : 'text-gray-400'}>使用:</span>
             <span>{usedBottles.map((b) => b.name).join(', ')}</span>
@@ -155,8 +155,8 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
         {visit.memo && (
           <p
-            className={`text-sm border-t pt-2 ${isAlert ? 'border-orange-300' : 'border-stone-100 text-gray-500'}`}
-            style={blendStyle}
+            className={`text-sm border-t pt-2 ${isAlert ? 'border-red-600' : 'border-stone-100 text-gray-500'}`}
+            style={whiteStyle}
           >
             {visit.memo}
           </p>

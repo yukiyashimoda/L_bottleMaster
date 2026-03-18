@@ -12,9 +12,7 @@ interface CustomerCardProps {
 
 export function CustomerCard({ customer, bottles, designatedCastName }: CustomerCardProps) {
   const old = isOldVisit(customer.lastVisitDate)
-  const avatarLabel = designatedCastName
-    ? designatedCastName.charAt(0)
-    : customer.name.charAt(0)
+  const avatarLabel = customer.ruby.charAt(0)
 
   return (
     <Link href={`/customers/${customer.id}`}>

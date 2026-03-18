@@ -8,6 +8,7 @@ export interface Customer {
   alertReason: string
   memo: string
   linkedCustomerIds: string[]
+  isFavorite: boolean
   lastVisitDate: string | null
   updatedAt: string
   updatedBy: string

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { AlertTriangle, Calendar } from 'lucide-react'
 import { GiBrandyBottle } from 'react-icons/gi'
 import { Badge } from '@/components/ui/badge'
+import { FavoriteButton } from '@/components/favorite-button'
 import { cn, formatDate, isOldVisit } from '@/lib/utils'
 import type { Customer, Bottle } from '@/types'
 
@@ -74,6 +75,9 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
             </div>
           )}
         </div>
+
+        {/* Favorite */}
+        <FavoriteButton customerId={customer.id} isFavorite={customer.isFavorite} />
       </div>
     </Link>
   )

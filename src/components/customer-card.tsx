@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { AlertTriangle, BottleWine, Calendar } from 'lucide-react'
+import { AlertTriangle, Calendar } from 'lucide-react'
+import { GiBrandyBottle } from 'react-icons/gi'
 import { Badge } from '@/components/ui/badge'
 import { cn, formatDate, isOldVisit } from '@/lib/utils'
 import type { Customer, Bottle } from '@/types'
@@ -66,7 +67,7 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
           )}
           {bottles.length > 0 && (
             <div className="flex items-center gap-1 text-xs text-gray-500">
-              <BottleWine className="h-3 w-3" />
+              <GiBrandyBottle size={12} />
               <span>{bottles.length}</span>
             </div>
           )}

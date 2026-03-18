@@ -20,11 +20,11 @@ import {
   AlertTriangle,
   ArrowLeft,
   Edit,
-  BottleWine,
   Calendar,
-  Users,
   Plus,
 } from 'lucide-react'
+import { GiBrandyBottle } from 'react-icons/gi'
+import { FaAddressCard } from 'react-icons/fa'
 
 export const dynamic = 'force-dynamic'
 
@@ -132,7 +132,7 @@ export default async function CustomerDetailPage({
             <div>
               <p className="text-gray-400 text-xs mb-0.5">ボトル本数</p>
               <p className="text-gray-900 font-medium flex items-center gap-1">
-                <BottleWine className="h-3.5 w-3.5 text-gray-400" />
+                <GiBrandyBottle size={14} className="text-gray-400" />
                 {bottles.length} 本
               </p>
             </div>
@@ -168,7 +168,7 @@ export default async function CustomerDetailPage({
         {/* キープボトル一覧 */}
         <div>
           <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-            <BottleWine className="h-4 w-4" />
+            <GiBrandyBottle size={16} />
             ボトルキープ ({bottles.length})
           </h3>
           {bottles.length === 0 ? (
@@ -201,7 +201,7 @@ export default async function CustomerDetailPage({
         {linkedCustomers.length > 0 && (
           <div>
             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-              <Users className="h-4 w-4" />
+              <FaAddressCard size={16} />
               同伴者・グループ
             </h3>
             <div className="space-y-2">

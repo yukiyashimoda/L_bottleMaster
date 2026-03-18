@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Calendar, User, BottleWine, AlertTriangle, X, Edit, Trash2, ChevronRight } from 'lucide-react'
+import { Calendar, User, AlertTriangle, X, Edit, Trash2, ChevronRight } from 'lucide-react'
+import { GiBrandyBottle } from 'react-icons/gi'
 import { formatDate } from '@/lib/utils'
 import type { VisitRecord, Cast, Bottle } from '@/types'
 import { updateVisitAction, deleteVisitAction } from '@/lib/visit-actions'
@@ -140,14 +141,14 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
         {openedBottles.length > 0 && (
           <div className="text-sm flex items-center gap-1.5" style={whiteStyle}>
-            <BottleWine className="h-3.5 w-3.5" />
+            <GiBrandyBottle size={14} />
             <span className={isAlert ? '' : 'text-gray-400'}>開封:</span>
             <span>{openedBottles.map((b) => b.name).join(', ')}</span>
           </div>
         )}
         {usedBottles.length > 0 && (
           <div className="text-sm flex items-center gap-1.5" style={whiteStyle}>
-            <BottleWine className="h-3.5 w-3.5 opacity-60" />
+            <GiBrandyBottle size={14} style={{ opacity: 0.6 }} />
             <span className={isAlert ? '' : 'text-gray-400'}>使用:</span>
             <span>{usedBottles.map((b) => b.name).join(', ')}</span>
           </div>

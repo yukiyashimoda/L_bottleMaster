@@ -5,7 +5,7 @@ import { HiraganaIndex } from '@/components/hiragana-index'
 import { CastSearch } from './cast-search'
 import { NewCastFab } from './new-cast-fab'
 import { isAuthenticated } from '@/lib/auth'
-import { Star } from 'lucide-react'
+import { GiAmpleDress } from 'react-icons/gi'
 
 export const dynamic = 'force-dynamic'
 
@@ -75,7 +75,7 @@ export default async function CastListPage() {
                       </div>
                     </div>
                     <div className="flex items-center gap-1 text-gray-500 text-sm shrink-0">
-                      <Star className="h-3.5 w-3.5 text-gray-400" />
+                      <GiAmpleDress size={14} className="text-gray-400" />
                       <span>{visitCounts.get(cast.id) ?? 0} 指名</span>
                     </div>
                   </Link>

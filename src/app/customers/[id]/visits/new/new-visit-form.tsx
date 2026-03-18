@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Search, X, Plus, BottleWine, AlertTriangle } from 'lucide-react'
+import { Search, X, Plus, AlertTriangle } from 'lucide-react'
+import { GiBrandyBottle } from 'react-icons/gi'
 import { createVisitAction } from './actions'
 import type { Cast, Bottle, Customer } from '@/types'
 
@@ -263,7 +264,7 @@ export function NewVisitForm({
           {bottles.map((bottle) => (
             <div key={bottle.id} className="rounded-lg border border-stone-200 bg-stone-50 p-3 space-y-3">
               <div className="flex items-center gap-2">
-                <BottleWine className="h-4 w-4 text-gray-500 shrink-0" />
+                <GiBrandyBottle size={16} className="text-gray-500 shrink-0" />
                 {bottle.isNew ? (
                   <Input
                     value={bottle.name}

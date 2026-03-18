@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Search, X, Star } from 'lucide-react'
+import { Search, X } from 'lucide-react'
+import { GiAmpleDress } from 'react-icons/gi'
 import { Input } from '@/components/ui/input'
 import type { Cast } from '@/types'
 
@@ -60,7 +61,7 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
                   <div className="font-semibold text-gray-900">{cast.name}</div>
                 </div>
                 <div className="flex items-center gap-1 text-gray-500 text-sm">
-                  <Star className="h-3.5 w-3.5 text-gray-400" />
+                  <GiAmpleDress size={14} className="text-gray-400" />
                   <span>{visitCounts[cast.id] ?? 0} 指名</span>
                 </div>
               </Link>

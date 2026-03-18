@@ -1,4 +1,4 @@
-import { BottleWine } from 'lucide-react'
+import { GiBrandyBottle } from 'react-icons/gi'
 import { formatDate } from '@/lib/utils'
 import type { Bottle } from '@/types'
 
@@ -24,7 +24,7 @@ export function BottleCard({ bottle }: BottleCardProps) {
       }}
     >
       <div className="flex items-center justify-center shrink-0" style={{ mixBlendMode: 'difference' }}>
-        <BottleWine className="h-5 w-5 text-white" />
+        <GiBrandyBottle size={20} color="white" />
       </div>
       <div className="flex-1 min-w-0" style={{ mixBlendMode: 'difference' }}>
         <div className="font-medium text-white text-sm truncate">{bottle.name}</div>

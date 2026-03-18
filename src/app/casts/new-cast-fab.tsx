@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, X, Star } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
+import { GiAmpleDress } from 'react-icons/gi'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -65,7 +66,7 @@ export function NewCastFab() {
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-stone-200">
               <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-gray-500" />
+                <GiAmpleDress size={16} className="text-gray-500" />
                 <h2 className="font-bold text-gray-900">キャストを追加</h2>
               </div>
               <button

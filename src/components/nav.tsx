@@ -2,7 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Users, Star, BottleWine, LogIn, LogOut } from 'lucide-react'
+import { LogIn, LogOut } from 'lucide-react'
+import { FaAddressCard } from 'react-icons/fa'
+import { GiAmpleDress } from 'react-icons/gi'
 import { cn } from '@/lib/utils'
 import { logoutAction } from '@/app/login/actions'
 
@@ -15,8 +17,8 @@ export function Nav({ isLoggedIn }: NavProps) {
   const router = useRouter()
 
   const links = [
-    { href: '/', label: '顧客', icon: Users },
-    { href: '/casts', label: 'キャスト', icon: Star },
+    { href: '/', label: '顧客', Icon: FaAddressCard },
+    { href: '/casts', label: 'キャスト', Icon: GiAmpleDress },
   ]
 
   const handleLogout = async () => {
@@ -31,7 +33,6 @@ export function Nav({ isLoggedIn }: NavProps) {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-stone-200 h-14 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <BottleWine className="h-5 w-5 text-gray-700" />
             <div className="flex flex-col leading-none gap-0.5">
               <span className="text-[9px] font-medium text-gray-400 tracking-widest uppercase">Neo Snack L</span>
               <span className="text-gray-900 text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
@@ -39,7 +40,7 @@ export function Nav({ isLoggedIn }: NavProps) {
           </Link>
           <div className="flex items-center gap-1">
             {/* PC: 顧客・キャストをヘッダーに表示 */}
-            {links.map(({ href, label, icon: Icon }) => (
+            {links.map(({ href, label, Icon }) => (
               <Link
                 key={href}
                 href={href}
@@ -50,7 +51,7 @@ export function Nav({ isLoggedIn }: NavProps) {
                     : 'text-gray-500 hover:text-gray-900 hover:bg-stone-100'
                 )}
               >
-                <Icon className="h-4 w-4" />
+                <Icon size={16} />
                 {label}
               </Link>
             ))}
@@ -79,7 +80,7 @@ export function Nav({ isLoggedIn }: NavProps) {
       {/* スマホ: 下部固定ナビ */}
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-stone-200 shadow-lg">
         <div className="flex">
-          {links.map(({ href, label, icon: Icon }) => {
+          {links.map(({ href, label, Icon }) => {
             const active = pathname === href || (href !== '/' && pathname.startsWith(href))
             return (
               <Link
@@ -90,7 +91,7 @@ export function Nav({ isLoggedIn }: NavProps) {
                   active ? 'text-gray-900' : 'text-gray-400'
                 )}
               >
-                <Icon className={cn('h-5 w-5', active ? 'text-gray-900' : 'text-gray-400')} />
+                <Icon size={20} />
                 {label}
               </Link>
             )

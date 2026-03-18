@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { BottleWine } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -36,7 +36,6 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-8">
-          <BottleWine className="h-6 w-6 text-gray-700" />
           <div className="flex flex-col leading-none gap-0.5">
             <span className="text-[9px] font-medium text-gray-400 tracking-widest uppercase">Neo Snack L</span>
             <span className="text-gray-900 text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>

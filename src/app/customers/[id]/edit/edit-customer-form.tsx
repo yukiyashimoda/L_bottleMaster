@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Search, X, Plus, BottleWine } from 'lucide-react'
+import { Search, X, Plus } from 'lucide-react'
+import { GiBrandyBottle } from 'react-icons/gi'
 import { updateCustomerAction } from './actions'
 import type { Cast, Customer, Bottle } from '@/types'
 
@@ -315,7 +316,7 @@ export function EditCustomerForm({
           {visibleBottles.map((bottle) => (
             <div key={bottle.id} className="rounded-lg border border-stone-200 bg-stone-50 p-3 space-y-3">
               <div className="flex items-center gap-2">
-                <BottleWine className="h-4 w-4 text-gray-500 shrink-0" />
+                <GiBrandyBottle size={16} className="text-gray-500 shrink-0" />
                 <Input
                   value={bottle.name}
                   onChange={(e) => updateBottleField(bottle.id, 'name', e.target.value)}

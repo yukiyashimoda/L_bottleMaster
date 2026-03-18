@@ -7,7 +7,7 @@ import { isAuthenticated } from '@/lib/auth'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Bottle Master β',
+  title: 'ネオスナックエル ボトル管理アプリ',
   description: 'ネオスナックエル ボトル管理アプリ',
 }
 

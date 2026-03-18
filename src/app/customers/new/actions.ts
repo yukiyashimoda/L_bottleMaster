@@ -1,6 +1,6 @@
 'use server'
 
-import { createCustomer, createBottle } from '@/lib/kv'
+import { createCustomer, createBottle, createVisitRecord } from '@/lib/kv'
 import { getSessionUser } from '@/lib/auth'
 import type { Customer } from '@/types'
 
@@ -17,7 +17,8 @@ export async function createCustomerAction(
   try {
     const updatedBy = (await getSessionUser()) ?? ''
     const customer = await createCustomer({ ...data, updatedBy })
-    await Promise.all(
+
+    const createdBottles = await Promise.all(
       bottles.map((b) =>
         createBottle({
           customerId: customer.id,
@@ -27,6 +28,20 @@ export async function createCustomerAction(
         })
       )
     )
+
+    // 本指名キャスト＋最初の来店日があれば来店記録を自動作成
+    if (customer.designatedCastIds.length > 0 && customer.lastVisitDate) {
+      await createVisitRecord({
+        customerId: customer.id,
+        visitDate: customer.lastVisitDate,
+        designatedCastIds: customer.designatedCastIds,
+        inStoreCastIds: [],
+        bottlesOpened: createdBottles.map((b) => b.id),
+        bottlesUsed: [],
+        memo: '',
+      })
+    }
+
     return { success: true, id: customer.id }
   } catch (e) {
     return { success: false, error: '登録に失敗しました' }

@@ -9,5 +9,6 @@ export async function GET() {
   await sql`ALTER TABLE customers ADD COLUMN IF NOT EXISTS is_favorite BOOLEAN NOT NULL DEFAULT false`
   await sql`ALTER TABLE customers ADD COLUMN IF NOT EXISTS has_glass BOOLEAN NOT NULL DEFAULT false`
   await sql`ALTER TABLE customers ADD COLUMN IF NOT EXISTS glass_memo TEXT NOT NULL DEFAULT ''`
+  await sql`ALTER TABLE customers ADD COLUMN IF NOT EXISTS receipt_names TEXT[] NOT NULL DEFAULT '{}'`
   return Response.json({ ok: true, message: 'Migration complete' })
 }

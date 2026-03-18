@@ -121,6 +121,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   const [alertReason, setAlertReason] = useState('')
   const [hasGlass, setHasGlass] = useState(false)
   const [glassMemo, setGlassMemo] = useState('')
+  const [receiptNames, setReceiptNames] = useState<string[]>([])
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>([])
   const [linkedIds, setLinkedIds] = useState<string[]>([])
   const [linkedQuery, setLinkedQuery] = useState('')
@@ -171,6 +172,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         isFavorite: false,
         hasGlass,
         glassMemo: hasGlass ? glassMemo : '',
+        receiptNames: receiptNames.filter((n) => n.trim()),
         lastVisitDate: firstVisitDate ? new Date(firstVisitDate).toISOString() : null,
       },
       bottles
@@ -228,6 +230,42 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         selectedIds={designatedCastIds}
         onChange={setDesignatedCastIds}
       />
+
+      {/* 領収書名 */}
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between">
+          <Label className="text-brand-plum">領収書名</Label>
+          <button
+            type="button"
+            onClick={() => setReceiptNames((prev) => [...prev, ''])}
+            className="flex items-center gap-1 text-sm text-brand-plum hover:text-brand-plum font-medium"
+          >
+            <Plus className="h-4 w-4" />
+            追加
+          </button>
+        </div>
+        {receiptNames.length === 0 && (
+          <p className="text-xs text-brand-plum/50">「追加」を押して領収書名を入力してください</p>
+        )}
+        <div className="space-y-2">
+          {receiptNames.map((name, idx) => (
+            <div key={idx} className="flex items-center gap-2">
+              <Input
+                value={name}
+                onChange={(e) => setReceiptNames((prev) => prev.map((n, i) => i === idx ? e.target.value : n))}
+                placeholder="例：株式会社〇〇"
+              />
+              <button
+                type="button"
+                onClick={() => setReceiptNames((prev) => prev.filter((_, i) => i !== idx))}
+                className="text-brand-plum/50 hover:text-brand-coral shrink-0"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="space-y-1.5">
         <Label className="text-brand-plum">特記事項・メモ</Label>

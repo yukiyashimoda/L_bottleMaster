@@ -42,6 +42,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -59,6 +60,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -76,6 +78,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -93,6 +96,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -110,6 +114,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -127,6 +132,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -144,6 +150,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -161,6 +168,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -178,6 +186,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -195,6 +204,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -212,6 +222,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -229,6 +240,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -246,6 +258,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -263,6 +276,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -280,6 +294,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -297,6 +312,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -314,6 +330,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -331,6 +348,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -348,6 +366,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -365,6 +384,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -382,6 +402,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -399,6 +420,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -416,6 +438,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -433,6 +456,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -450,6 +474,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
   {
@@ -467,6 +492,7 @@ export const mockCustomers: Customer[] = [
     isFavorite: false,
     hasGlass: false,
     glassMemo: '',
+    receiptNames: [],
     updatedBy: '',
   },
 ]

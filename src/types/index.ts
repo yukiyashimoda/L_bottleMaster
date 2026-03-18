@@ -11,6 +11,7 @@ export interface Customer {
   isFavorite: boolean
   hasGlass: boolean
   glassMemo: string
+  receiptNames: string[]
   lastVisitDate: string | null
   updatedAt: string
   updatedBy: string

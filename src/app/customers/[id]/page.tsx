@@ -154,6 +154,22 @@ export default async function CustomerDetailPage({
             </>
           )}
 
+          {customer.receiptNames && customer.receiptNames.length > 0 && (
+            <>
+              <Separator className="my-4" />
+              <div>
+                <p className="text-brand-plum/50 text-xs mb-2">領収書名</p>
+                <div className="flex flex-wrap gap-2">
+                  {customer.receiptNames.map((name, idx) => (
+                    <span key={idx} className="text-sm px-3 py-1 rounded-lg bg-brand-beige/50 border border-brand-beige text-brand-plum">
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
           {customer.updatedBy && (
             <p className="text-xs text-brand-plum/50 mt-3 text-right">
               {formatEditedBy(customer.updatedBy, customer.updatedAt)}

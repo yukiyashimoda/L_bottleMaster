@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { BottleCard } from '@/components/bottle-card'
 
 interface VisitCardProps {
   visit: VisitRecord
@@ -259,6 +260,19 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                       <span className="text-brand-plum whitespace-pre-wrap">{visit.memo}</span>
                     </div>
                   )}
+
+                  {/* ボトル残量 */}
+                  {(openedBottles.length > 0 || usedBottles.length > 0) && (
+                    <div className="pt-1 space-y-2">
+                      <span className="text-xs text-brand-plum/50">ボトル残量</span>
+                      <div className="space-y-2">
+                        {[...new Map([...openedBottles, ...usedBottles].map(b => [b.id, b])).values()].map((bottle) => (
+                          <BottleCard key={bottle.id} bottle={bottle} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {!loggedIn && (
                     <p className="text-xs text-brand-plum/50 pt-2 text-center">編集・削除にはログインが必要です</p>
                   )}

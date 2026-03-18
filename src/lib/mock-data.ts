@@ -39,6 +39,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: ['customer-4'],
     lastVisitDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -53,6 +54,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -67,6 +69,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 400 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -81,6 +84,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: ['customer-1'],
     lastVisitDate: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -95,6 +99,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -109,6 +114,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -123,6 +129,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -137,6 +144,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: ['customer-9'],
     lastVisitDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -151,6 +159,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: ['customer-8'],
     lastVisitDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -165,6 +174,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -179,6 +189,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -193,6 +204,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -207,6 +219,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -221,6 +234,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 120 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -235,6 +249,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -249,6 +264,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -263,6 +279,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 50 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -277,6 +294,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -291,6 +309,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: ['customer-20'],
     lastVisitDate: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -305,6 +324,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: ['customer-19'],
     lastVisitDate: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -319,6 +339,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 35 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -333,6 +354,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -347,6 +369,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -361,6 +384,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 200 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -375,6 +399,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
   {
@@ -389,6 +414,7 @@ export const mockCustomers: Customer[] = [
     linkedCustomerIds: [],
     lastVisitDate: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date().toISOString(),
+    isFavorite: false,
     updatedBy: '',
   },
 ]

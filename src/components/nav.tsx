@@ -30,12 +30,12 @@ export function Nav({ isLoggedIn }: NavProps) {
   return (
     <>
       {/* トップヘッダー */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-stone-200 h-14 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-brand-beige h-14 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex flex-col leading-none gap-0.5">
-              <span className="text-[9px] font-medium text-gray-400 tracking-widest uppercase">Neo Snack L</span>
-              <span className="text-gray-900 text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
+              <span className="text-[9px] font-medium text-brand-plum/50 tracking-widest uppercase">Neo Snack L</span>
+              <span className="text-brand-plum text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
             </div>
           </Link>
           <div className="flex items-center gap-1">
@@ -47,8 +47,8 @@ export function Nav({ isLoggedIn }: NavProps) {
                 className={cn(
                   'hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   pathname === href || (href !== '/' && pathname.startsWith(href))
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-500 hover:text-gray-900 hover:bg-stone-100'
+                    ? 'bg-brand-beige text-brand-plum'
+                    : 'text-brand-plum/60 hover:text-brand-plum hover:bg-brand-beige'
                 )}
               >
                 <Icon size={16} />
@@ -59,7 +59,7 @@ export function Nav({ isLoggedIn }: NavProps) {
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-stone-100 transition-colors ml-1"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-brand-plum/60 hover:text-brand-plum hover:bg-brand-beige transition-colors ml-1"
               >
                 <LogOut className="h-4 w-4" />
                 <span className="hidden sm:inline">ログアウト</span>
@@ -67,7 +67,7 @@ export function Nav({ isLoggedIn }: NavProps) {
             ) : (
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-stone-100 transition-colors ml-1"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-brand-plum/60 hover:text-brand-plum hover:bg-brand-beige transition-colors ml-1"
               >
                 <LogIn className="h-4 w-4" />
                 <span className="hidden sm:inline">ログイン</span>
@@ -78,7 +78,7 @@ export function Nav({ isLoggedIn }: NavProps) {
       </nav>
 
       {/* スマホ: 下部固定ナビ */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-stone-200 shadow-lg">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-beige shadow-lg">
         <div className="flex">
           {links.map(({ href, label, Icon }) => {
             const active = pathname === href || (href !== '/' && pathname.startsWith(href))
@@ -88,7 +88,7 @@ export function Nav({ isLoggedIn }: NavProps) {
                 href={href}
                 className={cn(
                   'flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs font-medium transition-colors',
-                  active ? 'text-gray-900' : 'text-gray-400'
+                  active ? 'text-brand-plum' : 'text-brand-plum/50'
                 )}
               >
                 <Icon size={20} />

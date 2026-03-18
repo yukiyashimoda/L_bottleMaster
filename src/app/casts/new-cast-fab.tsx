@@ -46,7 +46,7 @@ export function NewCastFab() {
       {/* FAB */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-20 sm:bottom-6 right-6 z-30 w-14 h-14 rounded-full bg-gray-900 text-white shadow-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
+        className="fixed bottom-20 sm:bottom-6 right-6 z-30 w-14 h-14 rounded-full bg-brand-plum text-white shadow-lg flex items-center justify-center hover:bg-brand-plum/90 transition-colors"
         aria-label="キャストを追加"
       >
         <Plus className="h-6 w-6" />
@@ -64,14 +64,14 @@ export function NewCastFab() {
           {/* Modal */}
           <div className="relative z-50 w-full max-w-lg bg-white rounded-t-2xl sm:rounded-2xl shadow-xl">
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-stone-200">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-brand-beige">
               <div className="flex items-center gap-2">
-                <GiAmpleDress size={16} className="text-gray-500" />
-                <h2 className="font-bold text-gray-900">キャストを追加</h2>
+                <GiAmpleDress size={16} className="text-brand-plum/60" />
+                <h2 className="font-bold text-brand-plum">キャストを追加</h2>
               </div>
               <button
                 onClick={handleClose}
-                className="text-gray-400 hover:text-gray-700 p-1"
+                className="text-brand-plum/50 hover:text-brand-plum p-1"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -80,14 +80,14 @@ export function NewCastFab() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="px-5 py-5 space-y-4">
               {error && (
-                <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+                <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
                   {error}
                 </div>
               )}
 
               <div className="space-y-1.5">
-                <Label className="text-gray-700">
-                  源氏名<span className="text-red-500 ml-0.5">*</span>
+                <Label className="text-brand-plum">
+                  源氏名<span className="text-brand-coral ml-0.5">*</span>
                 </Label>
                 <Input
                   value={name}
@@ -98,8 +98,8 @@ export function NewCastFab() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-gray-700">
-                  ふりがな<span className="text-red-500 ml-0.5">*</span>
+                <Label className="text-brand-plum">
+                  ふりがな<span className="text-brand-coral ml-0.5">*</span>
                 </Label>
                 <Input
                   value={ruby}
@@ -110,7 +110,7 @@ export function NewCastFab() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-gray-700">メモ</Label>
+                <Label className="text-brand-plum">メモ</Label>
                 <Textarea
                   value={memo}
                   onChange={(e) => setMemo(e.target.value)}
@@ -122,7 +122,7 @@ export function NewCastFab() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold h-11"
+                className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
               >
                 {loading ? '登録中...' : 'キャストを登録する'}
               </Button>

@@ -25,10 +25,10 @@ interface BottleInput {
 const today = new Date().toISOString().split('T')[0]
 
 function remainingColor(v: number): string {
-  if (v === 0) return 'text-red-500'
-  if (v <= 30) return 'text-gray-400'
-  if (v <= 60) return 'text-gray-600'
-  return 'text-gray-900'
+  if (v === 0) return 'text-brand-coral'
+  if (v <= 30) return 'text-brand-plum/50'
+  if (v <= 60) return 'text-brand-plum/80'
+  return 'text-brand-plum'
 }
 
 function CastMultiSelect({
@@ -58,17 +58,17 @@ function CastMultiSelect({
 
   return (
     <div className="space-y-1.5">
-      <Label className="text-gray-700">{label}</Label>
-      <div className="rounded-lg border border-stone-200 bg-stone-50 overflow-hidden">
+      <Label className="text-brand-plum">{label}</Label>
+      <div className="rounded-lg border border-brand-beige bg-brand-beige overflow-hidden">
         {selectedIds.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-stone-200">
+          <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-brand-beige">
             {selectedIds.map((id) => {
               const c = casts.find((x) => x.id === id)
               if (!c) return null
               return (
-                <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-200 text-xs text-gray-800">
+                <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-beige text-xs text-brand-plum">
                   {c.name}
-                  <button type="button" onClick={() => toggle(id)} className="text-gray-500 hover:text-gray-900">
+                  <button type="button" onClick={() => toggle(id)} className="text-brand-plum/60 hover:text-brand-plum">
                     <X className="h-3 w-3" />
                   </button>
                 </span>
@@ -77,33 +77,33 @@ function CastMultiSelect({
           </div>
         )}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="名前・ふりがなで検索"
-            className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-gray-900 placeholder:text-gray-400"
+            className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-brand-plum placeholder:text-brand-plum/50"
           />
         </div>
-        <div className="max-h-36 overflow-y-auto border-t border-stone-200">
+        <div className="max-h-36 overflow-y-auto border-t border-brand-beige">
           {filtered.length === 0 ? (
-            <p className="px-3 py-2 text-xs text-gray-400">該当するキャストがいません</p>
+            <p className="px-3 py-2 text-xs text-brand-plum/50">該当するキャストがいません</p>
           ) : (
             filtered.map((cast) => (
               <label
                 key={cast.id}
                 className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors
-                  ${selectedIds.includes(cast.id) ? 'bg-gray-100' : 'hover:bg-stone-100'}`}
+                  ${selectedIds.includes(cast.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}
               >
                 <input
                   type="checkbox"
                   checked={selectedIds.includes(cast.id)}
                   onChange={() => toggle(cast.id)}
-                  className="accent-gray-800"
+                  className="accent-brand-plum"
                 />
-                <span className="text-sm text-gray-800">{cast.name}</span>
-                <span className="text-xs text-gray-400">（{cast.ruby}）</span>
+                <span className="text-sm text-brand-plum">{cast.name}</span>
+                <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
               </label>
             ))
           )}
@@ -188,28 +188,28 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {error && (
-        <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
           {error}
         </div>
       )}
 
       <div className="space-y-1.5">
-        <Label className="text-gray-700">氏名（漢字）<span className="text-red-500 ml-0.5">*</span></Label>
+        <Label className="text-brand-plum">氏名（漢字）<span className="text-brand-coral ml-0.5">*</span></Label>
         <Input name="name" required placeholder="田中 一郎" />
       </div>
 
       <div className="space-y-1.5">
-        <Label className="text-gray-700">ふりがな<span className="text-red-500 ml-0.5">*</span></Label>
+        <Label className="text-brand-plum">ふりがな<span className="text-brand-coral ml-0.5">*</span></Label>
         <Input name="ruby" required placeholder="たなか いちろう" />
       </div>
 
       <div className="space-y-1.5">
-        <Label className="text-gray-700">ニックネーム</Label>
+        <Label className="text-brand-plum">ニックネーム</Label>
         <Input name="nickname" placeholder="たなちゃん" />
       </div>
 
       <div className="space-y-1.5">
-        <Label className="text-gray-700">最初の来店日</Label>
+        <Label className="text-brand-plum">最初の来店日</Label>
         <Input
           type="date"
           value={firstVisitDate}
@@ -225,23 +225,23 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
       />
 
       <div className="space-y-1.5">
-        <Label className="text-gray-700">特記事項・メモ</Label>
+        <Label className="text-brand-plum">特記事項・メモ</Label>
         <Textarea name="memo" placeholder="アレルギー、好みのお酒、誕生日など" rows={3} />
       </div>
 
       {/* Alert toggle */}
-      <div className={`rounded-lg border transition-colors ${isAlert ? 'border-red-200 bg-red-50' : 'border-stone-200 bg-stone-50'}`}>
+      <div className={`rounded-lg border transition-colors ${isAlert ? 'border-brand-coral/40 bg-brand-coral/10' : 'border-brand-beige bg-brand-beige'}`}>
         <div className="flex items-center gap-3 p-3">
           <button
             type="button"
             onClick={() => setIsAlert(!isAlert)}
-            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-red-500' : 'bg-stone-300'}`}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-brand-beige'}`}
           >
             <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${isAlert ? 'translate-x-5' : 'translate-x-0'}`} />
           </button>
-          <Label className="text-gray-700 cursor-pointer" onClick={() => setIsAlert(!isAlert)}>
+          <Label className="text-brand-plum cursor-pointer" onClick={() => setIsAlert(!isAlert)}>
             要注意フラグ
-            {isAlert && <span className="ml-2 text-red-500 text-xs font-normal">（要確認バッジが表示されます）</span>}
+            {isAlert && <span className="ml-2 text-brand-coral text-xs font-normal">（要確認バッジが表示されます）</span>}
           </Label>
         </div>
         {isAlert && (
@@ -251,7 +251,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
               onChange={(e) => setAlertReason(e.target.value)}
               placeholder="要注意の理由を入力（例：無断キャンセル、支払いトラブルなど）"
               rows={3}
-              className="w-full text-sm rounded-md border border-red-200 bg-white px-3 py-2 text-gray-900 placeholder:text-gray-400 outline-none focus:ring-1 focus:ring-red-300 resize-none"
+              className="w-full text-sm rounded-md border border-brand-coral/40 bg-white px-3 py-2 text-brand-plum placeholder:text-brand-plum/50 outline-none focus:ring-1 focus:ring-brand-coral/40 resize-none"
             />
           </div>
         )}
@@ -260,16 +260,16 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
       {/* キープボトル */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label className="text-gray-700">
+          <Label className="text-brand-plum">
             キープボトル
             {bottles.length > 0 && (
-              <span className="ml-2 text-xs text-gray-500">{bottles.length}本</span>
+              <span className="ml-2 text-xs text-brand-plum/60">{bottles.length}本</span>
             )}
           </Label>
           <button
             type="button"
             onClick={addBottle}
-            className="flex items-center gap-1 text-sm text-gray-700 hover:text-gray-900 font-medium"
+            className="flex items-center gap-1 text-sm text-brand-plum hover:text-brand-plum font-medium"
           >
             <Plus className="h-4 w-4" />
             追加
@@ -277,21 +277,21 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         </div>
 
         {bottles.length === 0 && (
-          <p className="text-xs text-gray-400 py-1">ボトルを追加する場合は「追加」を押してください</p>
+          <p className="text-xs text-brand-plum/50 py-1">ボトルを追加する場合は「追加」を押してください</p>
         )}
 
         <div className="space-y-3">
           {bottles.map((bottle, idx) => (
-            <div key={idx} className="rounded-lg border border-stone-200 bg-stone-50 p-3 space-y-3">
+            <div key={idx} className="rounded-lg border border-brand-beige bg-brand-beige p-3 space-y-3">
               <div className="flex items-center gap-2">
-                <GiBrandyBottle size={16} className="text-gray-500 shrink-0" />
+                <GiBrandyBottle size={16} className="text-brand-plum/60 shrink-0" />
                 <Input
                   value={bottle.name}
                   onChange={(e) => updateBottle(idx, 'name', e.target.value)}
                   placeholder="ボトル名（例：山崎12年）"
                   className="flex-1 h-8 text-sm"
                 />
-                <button type="button" onClick={() => removeBottle(idx)} className="text-gray-400 hover:text-red-500 shrink-0">
+                <button type="button" onClick={() => removeBottle(idx)} className="text-brand-plum/50 hover:text-brand-coral shrink-0">
                   <X className="h-4 w-4" />
                 </button>
               </div>
@@ -299,7 +299,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
               {/* 残量スライダー */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">残量</span>
+                  <span className="text-xs text-brand-plum/60">残量</span>
                   <span className={`text-sm font-bold tabular-nums ${remainingColor(bottle.remaining)}`}>
                     {bottle.remaining}%
                   </span>
@@ -312,22 +312,22 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
                     step={5}
                     value={bottle.remaining}
                     onChange={(e) => updateBottle(idx, 'remaining', Number(e.target.value))}
-                    className="w-full h-2 rounded-full appearance-none cursor-pointer accent-gray-800 bg-stone-200"
+                    className="w-full h-2 rounded-full appearance-none cursor-pointer accent-brand-plum bg-brand-beige"
                     style={{
-                      background: `linear-gradient(to right, #1f2937 0%, #1f2937 ${bottle.remaining}%, #e7e5e4 ${bottle.remaining}%, #e7e5e4 100%)`
+                      background: `linear-gradient(to right, #4B3C52 0%, #4B3C52 ${bottle.remaining}%, #E8E2D9 ${bottle.remaining}%, #E8E2D9 100%)`
                     }}
                   />
                   <div className="flex justify-between mt-1">
-                    <span className="text-[10px] text-gray-400">0%</span>
-                    <span className="text-[10px] text-gray-400">50%</span>
-                    <span className="text-[10px] text-gray-400">100%</span>
+                    <span className="text-[10px] text-brand-plum/50">0%</span>
+                    <span className="text-[10px] text-brand-plum/50">50%</span>
+                    <span className="text-[10px] text-brand-plum/50">100%</span>
                   </div>
                 </div>
               </div>
 
               {/* 開封日 */}
               <div className="space-y-1">
-                <span className="text-xs text-gray-500">開封日</span>
+                <span className="text-xs text-brand-plum/60">開封日</span>
                 <Input
                   type="date"
                   value={bottle.openedDate}
@@ -343,22 +343,22 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
       {/* 同伴者・グループ客 */}
       {customers.length > 0 && (
         <div className="space-y-1.5">
-          <Label className="text-gray-700">
+          <Label className="text-brand-plum">
             同伴者・グループ客
             {linkedIds.length > 0 && (
-              <span className="ml-2 text-xs text-gray-500">{linkedIds.length}名選択中</span>
+              <span className="ml-2 text-xs text-brand-plum/60">{linkedIds.length}名選択中</span>
             )}
           </Label>
-          <div className="rounded-lg border border-stone-200 bg-stone-50 overflow-hidden">
+          <div className="rounded-lg border border-brand-beige bg-brand-beige overflow-hidden">
             {linkedIds.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-stone-200">
+              <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-brand-beige">
                 {linkedIds.map((id) => {
                   const c = customers.find((x) => x.id === id)
                   if (!c) return null
                   return (
-                    <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-200 text-xs text-gray-800">
+                    <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-beige text-xs text-brand-plum">
                       {c.name}
-                      <button type="button" onClick={() => toggleLinked(id)} className="text-gray-500 hover:text-gray-900">
+                      <button type="button" onClick={() => toggleLinked(id)} className="text-brand-plum/60 hover:text-brand-plum">
                         <X className="h-3 w-3" />
                       </button>
                     </span>
@@ -367,28 +367,28 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
               </div>
             )}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
               <input
                 type="text"
                 value={linkedQuery}
                 onChange={(e) => setLinkedQuery(e.target.value)}
                 placeholder="名前・ふりがな・ニックネームで検索"
-                className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-gray-900 placeholder:text-gray-400"
+                className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-brand-plum placeholder:text-brand-plum/50"
               />
             </div>
-            <div className="max-h-40 overflow-y-auto border-t border-stone-200">
+            <div className="max-h-40 overflow-y-auto border-t border-brand-beige">
               {filteredCustomers.length === 0 ? (
-                <p className="px-3 py-2 text-xs text-gray-400">該当する顧客がいません</p>
+                <p className="px-3 py-2 text-xs text-brand-plum/50">該当する顧客がいません</p>
               ) : (
                 filteredCustomers.map((c) => (
                   <label
                     key={c.id}
                     className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors
-                      ${linkedIds.includes(c.id) ? 'bg-gray-100' : 'hover:bg-stone-100'}`}
+                      ${linkedIds.includes(c.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}
                   >
-                    <input type="checkbox" checked={linkedIds.includes(c.id)} onChange={() => toggleLinked(c.id)} className="accent-gray-800" />
-                    <span className="text-sm text-gray-800">{c.name}</span>
-                    <span className="text-xs text-gray-400">({c.ruby})</span>
+                    <input type="checkbox" checked={linkedIds.includes(c.id)} onChange={() => toggleLinked(c.id)} className="accent-brand-plum" />
+                    <span className="text-sm text-brand-plum">{c.name}</span>
+                    <span className="text-xs text-brand-plum/50">({c.ruby})</span>
                   </label>
                 ))
               )}
@@ -400,7 +400,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
       <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold h-11"
+        className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
       >
         {loading ? '登録中...' : '顧客を登録する'}
       </Button>

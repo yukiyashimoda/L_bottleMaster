@@ -24,17 +24,17 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
   return (
     <div>
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="名前・ふりがなで検索"
-          className="pl-9 pr-9 bg-stone-50 border-stone-200"
+          className="pl-9 pr-9 bg-brand-beige border-brand-beige"
         />
         {query && (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-plum/50 hover:text-brand-plum"
           >
             <X className="h-4 w-4" />
           </button>
@@ -42,9 +42,9 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
       </div>
 
       {filtered && (
-        <div className="mt-2 rounded-lg border border-stone-200 bg-white overflow-hidden shadow-sm">
+        <div className="mt-2 rounded-lg border border-brand-beige bg-white overflow-hidden shadow-sm">
           {filtered.length === 0 ? (
-            <p className="text-center text-gray-400 py-4 text-sm">
+            <p className="text-center text-brand-plum/50 py-4 text-sm">
               該当するキャストが見つかりません
             </p>
           ) : (
@@ -52,16 +52,16 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
               <Link
                 key={cast.id}
                 href={`/casts/${cast.id}`}
-                className="flex items-center gap-3 px-4 py-3 border-b border-stone-200 last:border-b-0 hover:bg-stone-100 transition-colors"
+                className="flex items-center gap-3 px-4 py-3 border-b border-brand-beige last:border-b-0 hover:bg-brand-beige transition-colors"
               >
-                <div className="w-10 h-10 rounded-full bg-gray-700 text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
+                <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
                   {cast.ruby}
                 </div>
                 <div className="flex-1">
-                  <div className="font-semibold text-gray-900">{cast.name}</div>
+                  <div className="font-semibold text-brand-plum">{cast.name}</div>
                 </div>
-                <div className="flex items-center gap-1 text-gray-500 text-sm">
-                  <GiAmpleDress size={14} className="text-gray-400" />
+                <div className="flex items-center gap-1 text-brand-plum/60 text-sm">
+                  <GiAmpleDress size={14} className="text-brand-plum/50" />
                   <span>{visitCounts[cast.id] ?? 0} 指名</span>
                 </div>
               </Link>

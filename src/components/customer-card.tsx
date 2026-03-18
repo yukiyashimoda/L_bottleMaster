@@ -19,14 +19,14 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
     <Link href={`/customers/${customer.id}`}>
       <div
         className={cn(
-          'flex items-center gap-3 px-4 py-3 border-b border-stone-200 transition-colors hover:bg-stone-100',
-          old && 'bg-stone-100 hover:bg-stone-200'
+          'flex items-center gap-3 px-4 py-3 border-b border-brand-beige transition-colors hover:bg-brand-beige',
+          old && 'bg-brand-gold/20 hover:bg-brand-gold/30'
         )}
       >
         {/* Avatar */}
         <div className={cn(
           'w-10 h-10 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden',
-          customer.isAlert ? 'bg-red-100 text-red-600' : designatedCastRuby ? 'bg-gray-700 text-white' : 'bg-green-600 text-white'
+          customer.isAlert ? 'bg-brand-coral/20 text-brand-coral' : designatedCastRuby ? 'bg-brand-plum text-white' : 'bg-brand-gold text-brand-plum'
         )}>
           {avatarLabel}
         </div>
@@ -34,23 +34,23 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-gray-900 truncate">
+            <span className="font-semibold text-brand-plum truncate">
               {customer.name}
             </span>
             {customer.nickname && (
-              <span className="text-xs text-gray-400 truncate">
+              <span className="text-xs text-brand-plum/50 truncate">
                 ({customer.nickname})
               </span>
             )}
           </div>
-          <div className="text-xs text-gray-400">{customer.ruby}</div>
+          <div className="text-xs text-brand-plum/50">{customer.ruby}</div>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <Calendar className={cn('h-3 w-3', old ? 'text-orange-400' : 'text-gray-400')} />
+            <Calendar className={cn('h-3 w-3', old ? 'text-brand-gold' : 'text-brand-plum/50')} />
             <span className={cn(
               'text-xs rounded px-1',
               old
-                ? 'text-orange-700 font-bold bg-orange-100'
-                : 'text-gray-500'
+                ? 'text-brand-coral font-bold bg-brand-coral/10'
+                : 'text-brand-plum/60'
             )}>
               最終来店: {formatDate(customer.lastVisitDate)}
             </span>
@@ -66,7 +66,7 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
             </Badge>
           )}
           {bottles.length > 0 && (
-            <div className="flex items-center gap-1 text-xs text-gray-500">
+            <div className="flex items-center gap-1 text-xs text-brand-plum/60">
               <GiBrandyBottle size={12} />
               <span>{bottles.length}</span>
             </div>

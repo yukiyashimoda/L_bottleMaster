@@ -21,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <html lang="ja">
-      <body className={`${kiwiMaru.className} ${kiwiMaru.variable} ${audiowide.variable} bg-stone-50 text-gray-900 min-h-screen`}>
+      <body className={`${kiwiMaru.className} ${kiwiMaru.variable} ${audiowide.variable} bg-brand-beige text-brand-plum min-h-screen`}>
         <Nav isLoggedIn={loggedIn} />
         <main className="pt-14 pb-16 sm:pb-0 max-w-2xl mx-auto">
           {children}

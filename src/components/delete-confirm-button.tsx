@@ -48,7 +48,7 @@ export function DeleteConfirmButton({ action, redirectTo, itemName }: DeleteConf
         variant="outline"
         size="sm"
         onClick={() => setOpen(true)}
-        className="border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600"
+        className="border-brand-coral/40 text-brand-coral hover:bg-brand-coral/10 hover:text-brand-coral"
       >
         <Trash2 className="h-3.5 w-3.5 mr-1" />
         削除
@@ -59,23 +59,23 @@ export function DeleteConfirmButton({ action, redirectTo, itemName }: DeleteConf
           <div className="absolute inset-0 bg-black/40" onClick={handleClose} />
           <div className="relative z-50 w-full max-w-sm bg-white rounded-2xl shadow-xl p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-red-600">
+              <div className="flex items-center gap-2 text-brand-coral">
                 <AlertTriangle className="h-5 w-5" />
-                <h2 className="font-bold text-gray-900">削除の確認</h2>
+                <h2 className="font-bold text-brand-plum">削除の確認</h2>
               </div>
-              <button onClick={handleClose} className="text-gray-400 hover:text-gray-700">
+              <button onClick={handleClose} className="text-brand-plum/50 hover:text-brand-plum">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <p className="text-sm text-gray-600">
-              <span className="font-semibold text-gray-900">「{itemName}」</span> を削除します。
+            <p className="text-sm text-brand-plum/80">
+              <span className="font-semibold text-brand-plum">「{itemName}」</span> を削除します。
               この操作は取り消せません。
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-3">
               <div className="space-y-1.5">
-                <Label className="text-gray-700">
+                <Label className="text-brand-plum">
                   パスワードを入力して確認
                 </Label>
                 <Input
@@ -89,7 +89,7 @@ export function DeleteConfirmButton({ action, redirectTo, itemName }: DeleteConf
               </div>
 
               {error && (
-                <p className="text-sm text-red-500">{error}</p>
+                <p className="text-sm text-brand-coral">{error}</p>
               )}
 
               <div className="flex gap-2 pt-1">
@@ -104,7 +104,7 @@ export function DeleteConfirmButton({ action, redirectTo, itemName }: DeleteConf
                 <Button
                   type="submit"
                   disabled={loading || !password}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                  className="flex-1 bg-brand-coral hover:bg-brand-coral text-white"
                 >
                   {loading ? '削除中...' : '削除する'}
                 </Button>

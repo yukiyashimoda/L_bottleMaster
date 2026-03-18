@@ -18,9 +18,9 @@ export function BottleCard({ bottle }: BottleCardProps) {
 
   return (
     <div
-      className="relative flex items-center gap-3 p-3 rounded-lg border border-stone-200 overflow-hidden"
+      className="relative flex items-center gap-3 p-3 rounded-lg border border-brand-beige overflow-hidden"
       style={{
-        background: `linear-gradient(to right, #374151 0%, #374151 ${pct}%, #fafaf9 ${pct}%, #fafaf9 100%)`,
+        background: `linear-gradient(to right, #4B3C52 0%, #4B3C52 ${pct}%, #fafaf9 ${pct}%, #fafaf9 100%)`,
       }}
     >
       <div className="flex items-center justify-center shrink-0" style={{ mixBlendMode: 'difference' }}>

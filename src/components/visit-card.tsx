@@ -110,7 +110,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
       <div
         onClick={openModal}
         className={`rounded-xl border p-4 space-y-3 shadow-sm cursor-pointer hover:opacity-90 transition-opacity ${
-          isAlert ? 'border-red-800 bg-red-700' : 'border-stone-200 bg-white'
+          isAlert ? 'border-brand-coral bg-brand-coral' : 'border-brand-beige bg-white'
         }`}
       >
         <div className="flex items-center gap-2 font-semibold" style={whiteStyle}>
@@ -125,14 +125,14 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
             {designatedCasts.length > 0 && (
               <div className="flex items-center gap-1">
                 <User className="h-3.5 w-3.5" />
-                <span className={isAlert ? '' : 'text-gray-400'}>本指名:</span>
+                <span className={isAlert ? '' : 'text-brand-plum/50'}>本指名:</span>
                 <span className="font-medium">{designatedCasts.map((c) => c!.name).join('・')}</span>
               </div>
             )}
             {inStoreCasts.length > 0 && (
               <div className="flex items-center gap-1">
                 <User className="h-3.5 w-3.5 opacity-60" />
-                <span className={isAlert ? '' : 'text-gray-400'}>場内:</span>
+                <span className={isAlert ? '' : 'text-brand-plum/50'}>場内:</span>
                 <span>{inStoreCasts.map((c) => c!.name).join('・')}</span>
               </div>
             )}
@@ -142,21 +142,21 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
         {openedBottles.length > 0 && (
           <div className="text-sm flex items-center gap-1.5" style={whiteStyle}>
             <GiBrandyBottle size={14} />
-            <span className={isAlert ? '' : 'text-gray-400'}>開封:</span>
+            <span className={isAlert ? '' : 'text-brand-plum/50'}>開封:</span>
             <span>{openedBottles.map((b) => b.name).join(', ')}</span>
           </div>
         )}
         {usedBottles.length > 0 && (
           <div className="text-sm flex items-center gap-1.5" style={whiteStyle}>
             <GiBrandyBottle size={14} style={{ opacity: 0.6 }} />
-            <span className={isAlert ? '' : 'text-gray-400'}>使用:</span>
+            <span className={isAlert ? '' : 'text-brand-plum/50'}>使用:</span>
             <span>{usedBottles.map((b) => b.name).join(', ')}</span>
           </div>
         )}
 
         {visit.memo && (
           <p
-            className={`text-sm border-t pt-2 ${isAlert ? 'border-red-600' : 'border-stone-100 text-gray-500'}`}
+            className={`text-sm border-t pt-2 ${isAlert ? 'border-brand-coral' : 'border-brand-beige text-brand-plum/60'}`}
             style={whiteStyle}
           >
             {visit.memo}
@@ -172,47 +172,47 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 bg-white border-b border-stone-200 px-4 py-3 flex items-center gap-2">
+            <div className="sticky top-0 bg-white border-b border-brand-beige px-4 py-3 flex items-center gap-2">
               {mode === 'view' && (
                 <>
-                  <div className="flex items-center gap-2 font-semibold text-gray-900 flex-1 min-w-0">
-                    <Calendar className="h-4 w-4 text-gray-500 shrink-0" />
+                  <div className="flex items-center gap-2 font-semibold text-brand-plum flex-1 min-w-0">
+                    <Calendar className="h-4 w-4 text-brand-plum/60 shrink-0" />
                     <span className="truncate">{formatDate(visit.visitDate)}</span>
-                    {isAlert && <AlertTriangle className="h-4 w-4 text-orange-500 shrink-0" />}
+                    {isAlert && <AlertTriangle className="h-4 w-4 text-brand-coral shrink-0" />}
                   </div>
                   {loggedIn && (
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => setMode('edit')}
-                        className="p-1.5 rounded-lg hover:bg-stone-100 text-gray-600"
+                        className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/80"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => setMode('delete')}
-                        className="p-1.5 rounded-lg hover:bg-red-50 text-red-500"
+                        className="p-1.5 rounded-lg hover:bg-brand-coral/10 text-brand-coral"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
                   )}
-                  <button onClick={closeModal} className="p-1.5 rounded-lg hover:bg-stone-100 text-gray-500">
+                  <button onClick={closeModal} className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/60">
                     <X className="h-4 w-4" />
                   </button>
                 </>
               )}
               {mode === 'edit' && (
                 <>
-                  <span className="font-semibold text-gray-900 flex-1">来店記録を編集</span>
-                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-stone-100 text-gray-500">
+                  <span className="font-semibold text-brand-plum flex-1">来店記録を編集</span>
+                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/60">
                     <X className="h-4 w-4" />
                   </button>
                 </>
               )}
               {mode === 'delete' && (
                 <>
-                  <span className="font-semibold text-red-600 flex-1">来店記録を削除</span>
-                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-stone-100 text-gray-500">
+                  <span className="font-semibold text-brand-coral flex-1">来店記録を削除</span>
+                  <button onClick={() => { setMode('view'); setError('') }} className="p-1.5 rounded-lg hover:bg-brand-beige text-brand-plum/60">
                     <X className="h-4 w-4" />
                   </button>
                 </>
@@ -224,43 +224,43 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
               {mode === 'view' && (
                 <div className="space-y-3 text-sm">
                   {isAlert && (
-                    <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-orange-50 border border-orange-200 text-orange-700">
+                    <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral">
                       <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
                       <span className="whitespace-pre-wrap">{visit.alertReason ? visit.alertReason : '要注意フラグあり'}</span>
                     </div>
                   )}
                   {designatedCasts.length > 0 && (
                     <div className="flex items-start gap-2">
-                      <span className="text-gray-400 w-16 shrink-0">本指名</span>
-                      <span className="text-gray-900">{designatedCasts.map((c) => c!.name).join('・')}</span>
+                      <span className="text-brand-plum/50 w-16 shrink-0">本指名</span>
+                      <span className="text-brand-plum">{designatedCasts.map((c) => c!.name).join('・')}</span>
                     </div>
                   )}
                   {inStoreCasts.length > 0 && (
                     <div className="flex items-start gap-2">
-                      <span className="text-gray-400 w-16 shrink-0">場内</span>
-                      <span className="text-gray-900">{inStoreCasts.map((c) => c!.name).join('・')}</span>
+                      <span className="text-brand-plum/50 w-16 shrink-0">場内</span>
+                      <span className="text-brand-plum">{inStoreCasts.map((c) => c!.name).join('・')}</span>
                     </div>
                   )}
                   {openedBottles.length > 0 && (
                     <div className="flex items-start gap-2">
-                      <span className="text-gray-400 w-16 shrink-0">開封</span>
-                      <span className="text-gray-900">{openedBottles.map((b) => b.name).join(', ')}</span>
+                      <span className="text-brand-plum/50 w-16 shrink-0">開封</span>
+                      <span className="text-brand-plum">{openedBottles.map((b) => b.name).join(', ')}</span>
                     </div>
                   )}
                   {usedBottles.length > 0 && (
                     <div className="flex items-start gap-2">
-                      <span className="text-gray-400 w-16 shrink-0">使用</span>
-                      <span className="text-gray-900">{usedBottles.map((b) => b.name).join(', ')}</span>
+                      <span className="text-brand-plum/50 w-16 shrink-0">使用</span>
+                      <span className="text-brand-plum">{usedBottles.map((b) => b.name).join(', ')}</span>
                     </div>
                   )}
                   {visit.memo && (
                     <div className="flex items-start gap-2">
-                      <span className="text-gray-400 w-16 shrink-0">メモ</span>
-                      <span className="text-gray-900 whitespace-pre-wrap">{visit.memo}</span>
+                      <span className="text-brand-plum/50 w-16 shrink-0">メモ</span>
+                      <span className="text-brand-plum whitespace-pre-wrap">{visit.memo}</span>
                     </div>
                   )}
                   {!loggedIn && (
-                    <p className="text-xs text-gray-400 pt-2 text-center">編集・削除にはログインが必要です</p>
+                    <p className="text-xs text-brand-plum/50 pt-2 text-center">編集・削除にはログインが必要です</p>
                   )}
                 </div>
               )}
@@ -269,7 +269,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
               {mode === 'edit' && (
                 <form onSubmit={handleEdit} className="space-y-4">
                   {error && (
-                    <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">{error}</div>
+                    <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">{error}</div>
                   )}
                   <div className="space-y-1.5">
                     <Label>来店日</Label>
@@ -278,12 +278,12 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
                   <div className="space-y-1.5">
                     <Label>本指名キャスト</Label>
-                    <div className="rounded-lg border border-stone-200 bg-stone-50 max-h-36 overflow-y-auto">
+                    <div className="rounded-lg border border-brand-beige bg-brand-beige max-h-36 overflow-y-auto">
                       {casts.map((cast) => (
-                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editDesignatedCastIds.includes(cast.id) ? 'bg-gray-100' : 'hover:bg-stone-100'}`}>
-                          <input type="checkbox" checked={editDesignatedCastIds.includes(cast.id)} onChange={() => toggleCast(cast.id, 'designated')} className="accent-gray-800" />
-                          <span className="text-sm text-gray-800">{cast.name}</span>
-                          <span className="text-xs text-gray-400">（{cast.ruby}）</span>
+                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editDesignatedCastIds.includes(cast.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}>
+                          <input type="checkbox" checked={editDesignatedCastIds.includes(cast.id)} onChange={() => toggleCast(cast.id, 'designated')} className="accent-brand-plum" />
+                          <span className="text-sm text-brand-plum">{cast.name}</span>
+                          <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
                         </label>
                       ))}
                     </div>
@@ -291,29 +291,29 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
                   <div className="space-y-1.5">
                     <Label>場内指名キャスト</Label>
-                    <div className="rounded-lg border border-stone-200 bg-stone-50 max-h-36 overflow-y-auto">
+                    <div className="rounded-lg border border-brand-beige bg-brand-beige max-h-36 overflow-y-auto">
                       {casts.map((cast) => (
-                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editInStoreCastIds.includes(cast.id) ? 'bg-gray-100' : 'hover:bg-stone-100'}`}>
-                          <input type="checkbox" checked={editInStoreCastIds.includes(cast.id)} onChange={() => toggleCast(cast.id, 'inStore')} className="accent-gray-800" />
-                          <span className="text-sm text-gray-800">{cast.name}</span>
-                          <span className="text-xs text-gray-400">（{cast.ruby}）</span>
+                        <label key={cast.id} className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${editInStoreCastIds.includes(cast.id) ? 'bg-brand-beige' : 'hover:bg-brand-beige'}`}>
+                          <input type="checkbox" checked={editInStoreCastIds.includes(cast.id)} onChange={() => toggleCast(cast.id, 'inStore')} className="accent-brand-plum" />
+                          <span className="text-sm text-brand-plum">{cast.name}</span>
+                          <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
                         </label>
                       ))}
                     </div>
                   </div>
 
-                  <div className={`rounded-lg border transition-colors ${editIsAlert ? 'border-orange-200 bg-orange-50' : 'border-stone-200 bg-stone-50'}`}>
+                  <div className={`rounded-lg border transition-colors ${editIsAlert ? 'border-brand-coral/40 bg-brand-coral/10' : 'border-brand-beige bg-brand-beige'}`}>
                     <div className="flex items-center gap-3 p-3">
                       <button
                         type="button"
                         onClick={() => setEditIsAlert((v) => !v)}
-                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${editIsAlert ? 'bg-orange-400' : 'bg-stone-300'}`}
+                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${editIsAlert ? 'bg-brand-coral' : 'bg-brand-beige'}`}
                       >
                         <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${editIsAlert ? 'translate-x-5' : 'translate-x-0'}`} />
                       </button>
-                      <Label className="text-gray-700 cursor-pointer" onClick={() => setEditIsAlert((v) => !v)}>
+                      <Label className="text-brand-plum cursor-pointer" onClick={() => setEditIsAlert((v) => !v)}>
                         要注意フラグ
-                        {editIsAlert && <span className="ml-2 text-orange-500 text-xs font-normal">（要注意バッジが表示されます）</span>}
+                        {editIsAlert && <span className="ml-2 text-brand-coral text-xs font-normal">（要注意バッジが表示されます）</span>}
                       </Label>
                     </div>
                     {editIsAlert && (
@@ -323,7 +323,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                           onChange={(e) => setEditAlertReason(e.target.value)}
                           placeholder="要注意の理由を入力（例：無断キャンセル、支払いトラブルなど）"
                           rows={3}
-                          className="w-full text-sm rounded-md border border-orange-200 bg-white px-3 py-2 text-gray-900 placeholder:text-gray-400 outline-none focus:ring-1 focus:ring-orange-300 resize-none"
+                          className="w-full text-sm rounded-md border border-brand-coral/40 bg-white px-3 py-2 text-brand-plum placeholder:text-brand-plum/50 outline-none focus:ring-1 focus:ring-brand-coral/40 resize-none"
                         />
                       </div>
                     )}
@@ -334,7 +334,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     <Textarea value={editMemo} onChange={(e) => setEditMemo(e.target.value)} rows={3} />
                   </div>
 
-                  <Button type="submit" disabled={loading} className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold h-11">
+                  <Button type="submit" disabled={loading} className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11">
                     {loading ? '更新中...' : '更新する'}
                   </Button>
                 </form>
@@ -344,9 +344,9 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
               {mode === 'delete' && (
                 <div className="space-y-4">
                   {error && (
-                    <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">{error}</div>
+                    <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">{error}</div>
                   )}
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-brand-plum">
                     <span className="font-semibold">{formatDate(visit.visitDate)}</span> の来店記録を削除しますか？この操作は元に戻せません。
                   </p>
                   <div className="space-y-1.5">
@@ -365,7 +365,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     <Button
                       onClick={handleDelete}
                       disabled={loading || !password}
-                      className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                      className="flex-1 bg-brand-coral hover:bg-brand-coral text-white"
                     >
                       {loading ? '削除中...' : '削除する'}
                     </Button>

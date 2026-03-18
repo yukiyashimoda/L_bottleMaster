@@ -37,35 +37,35 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-8">
           <div className="flex flex-col leading-none gap-0.5">
-            <span className="text-[9px] font-medium text-gray-400 tracking-widest uppercase">Neo Snack L</span>
-            <span className="text-gray-900 text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
+            <span className="text-[9px] font-medium text-brand-plum/50 tracking-widest uppercase">Neo Snack L</span>
+            <span className="text-brand-plum text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-stone-200 shadow-sm p-6">
-          <h1 className="text-lg font-bold text-gray-900 mb-5">ログイン</h1>
+        <div className="bg-white rounded-xl border border-brand-beige shadow-sm p-6">
+          <h1 className="text-lg font-bold text-brand-plum mb-5">ログイン</h1>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+              <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
                 {error}
               </div>
             )}
 
             <div className="space-y-1.5">
-              <Label className="text-gray-700">ID</Label>
+              <Label className="text-brand-plum">ID</Label>
               <Input name="id_field" required placeholder="ID を入力" autoComplete="username" />
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-gray-700">パスワード</Label>
+              <Label className="text-brand-plum">パスワード</Label>
               <Input name="pass_field" type="password" required placeholder="パスワードを入力" autoComplete="current-password" />
             </div>
 
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold h-11"
+              className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
             >
               {loading ? 'ログイン中...' : 'ログイン'}
             </Button>

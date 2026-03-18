@@ -32,17 +32,17 @@ export default async function CastDetailPage({
 
   return (
     <div className="min-h-screen pb-10">
-      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-stone-200 px-4 py-3 flex items-center gap-3">
+      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-brand-beige px-4 py-3 flex items-center gap-3">
         <Link href="/casts">
-          <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-500">
+          <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-plum/60">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
-        <h1 className="font-bold text-gray-900 flex-1">{cast.name}</h1>
+        <h1 className="font-bold text-brand-plum flex-1">{cast.name}</h1>
         {loggedIn && (
           <div className="flex items-center gap-2">
             <Link href={`/casts/${id}/edit`}>
-              <Button variant="outline" size="sm" className="border-stone-200 text-gray-600 hover:text-gray-900">
+              <Button variant="outline" size="sm" className="border-brand-beige text-brand-plum/80 hover:text-brand-plum">
                 <Edit className="h-3.5 w-3.5 mr-1" />
                 編集
               </Button>
@@ -58,36 +58,36 @@ export default async function CastDetailPage({
 
       <div className="px-4 py-5 space-y-6">
         {/* Profile */}
-        <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm space-y-4">
+        <div className="rounded-xl border border-brand-beige bg-white p-5 shadow-sm space-y-4">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-gray-700 text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
+            <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
               {cast.ruby}
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">{cast.name}</h2>
+              <h2 className="text-2xl font-bold text-brand-plum">{cast.name}</h2>
             </div>
           </div>
 
           {/* メモ */}
-          <div className="rounded-lg border border-stone-200 bg-stone-50 p-3">
-            <p className="text-xs text-gray-400 mb-1">メモ</p>
+          <div className="rounded-lg border border-brand-beige bg-brand-beige p-3">
+            <p className="text-xs text-brand-plum/50 mb-1">メモ</p>
             {cast.memo ? (
-              <p className="text-sm text-gray-700 whitespace-pre-wrap">{cast.memo}</p>
+              <p className="text-sm text-brand-plum whitespace-pre-wrap">{cast.memo}</p>
             ) : (
-              <p className="text-sm text-gray-400">なし</p>
+              <p className="text-sm text-brand-plum/50">なし</p>
             )}
           </div>
 
           {/* 担当顧客数 */}
-          <div className="rounded-lg bg-stone-50 border border-stone-200 p-3 text-center">
-            <p className="text-2xl font-bold text-gray-700">
+          <div className="rounded-lg bg-brand-beige border border-brand-beige p-3 text-center">
+            <p className="text-2xl font-bold text-brand-plum">
               {new Set(visits.map((v) => v.customerId)).size}
             </p>
-            <p className="text-xs text-gray-500 mt-0.5">担当顧客数</p>
+            <p className="text-xs text-brand-plum/60 mt-0.5">担当顧客数</p>
           </div>
 
           {cast.updatedBy && (
-            <p className="text-xs text-gray-400 text-right">
+            <p className="text-xs text-brand-plum/50 text-right">
               {formatEditedBy(cast.updatedBy, cast.updatedAt)}
             </p>
           )}
@@ -95,12 +95,12 @@ export default async function CastDetailPage({
 
         {/* Visit Records */}
         <div>
-          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-brand-plum/60 uppercase tracking-wider mb-3 flex items-center gap-2">
             <Calendar className="h-4 w-4" />
             指名履歴 ({visits.length})
           </h3>
           {visits.length === 0 ? (
-            <p className="text-gray-400 text-sm">指名履歴はありません</p>
+            <p className="text-brand-plum/50 text-sm">指名履歴はありません</p>
           ) : (
             <div className="space-y-4">
               {visits.map((visit) => {
@@ -110,11 +110,11 @@ export default async function CastDetailPage({
                     {customer && (
                       <Link
                         href={`/customers/${customer.id}`}
-                        className="flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+                        className="flex items-center gap-2 text-sm text-brand-plum hover:text-brand-plum font-medium"
                       >
-                        <User className="h-3.5 w-3.5 text-gray-400" />
+                        <User className="h-3.5 w-3.5 text-brand-plum/50" />
                         {customer.name}
-                        <span className="text-gray-400 text-xs font-normal">
+                        <span className="text-brand-plum/50 text-xs font-normal">
                           ({customer.ruby})
                         </span>
                       </Link>

@@ -27,17 +27,17 @@ export function CustomerSearch({ customers, bottlesMap, castMap }: CustomerSearc
   return (
     <div>
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="名前・ふりがな・ニックネームで検索"
-          className="pl-9 pr-9 bg-stone-50 border-stone-200"
+          className="pl-9 pr-9 bg-brand-beige border-brand-beige"
         />
         {query && (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-plum/50 hover:text-brand-plum"
           >
             <X className="h-4 w-4" />
           </button>
@@ -45,9 +45,9 @@ export function CustomerSearch({ customers, bottlesMap, castMap }: CustomerSearc
       </div>
 
       {filtered && (
-        <div className="mt-2 rounded-lg border border-stone-200 bg-white overflow-hidden shadow-sm">
+        <div className="mt-2 rounded-lg border border-brand-beige bg-white overflow-hidden shadow-sm">
           {filtered.length === 0 ? (
-            <p className="text-center text-gray-400 py-4 text-sm">
+            <p className="text-center text-brand-plum/50 py-4 text-sm">
               該当する顧客が見つかりません
             </p>
           ) : (

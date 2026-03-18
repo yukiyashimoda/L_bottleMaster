@@ -34,7 +34,7 @@ export function Nav({ isLoggedIn }: NavProps) {
             <BottleWine className="h-5 w-5 text-gray-700" />
             <div className="flex flex-col leading-none gap-0.5">
               <span className="text-[9px] font-medium text-gray-400 tracking-widest uppercase">Neo Snack L</span>
-              <span className="font-bold text-gray-900 text-base tracking-wide">Bottle Master β</span>
+              <span className="text-gray-900 text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
             </div>
           </Link>
           <div className="flex items-center gap-1">

@@ -119,6 +119,8 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   const [error, setError] = useState('')
   const [isAlert, setIsAlert] = useState(false)
   const [alertReason, setAlertReason] = useState('')
+  const [hasGlass, setHasGlass] = useState(false)
+  const [glassMemo, setGlassMemo] = useState('')
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>([])
   const [linkedIds, setLinkedIds] = useState<string[]>([])
   const [linkedQuery, setLinkedQuery] = useState('')
@@ -167,8 +169,8 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         memo: data.get('memo') as string,
         linkedCustomerIds: linkedIds,
         isFavorite: false,
-        hasGlass: false,
-        glassMemo: '',
+        hasGlass,
+        glassMemo: hasGlass ? glassMemo : '',
         lastVisitDate: firstVisitDate ? new Date(firstVisitDate).toISOString() : null,
       },
       bottles
@@ -189,7 +191,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5 pb-24">
       {error && (
         <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
           {error}
@@ -238,7 +240,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
           <button
             type="button"
             onClick={() => setIsAlert(!isAlert)}
-            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-white'}`}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-gray-200'}`}
           >
             <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${isAlert ? 'translate-x-5' : 'translate-x-0'}`} />
           </button>
@@ -255,6 +257,34 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
               placeholder="要注意の理由を入力（例：無断キャンセル、支払いトラブルなど）"
               rows={3}
               className="w-full text-sm rounded-md border border-brand-coral/40 bg-white px-3 py-2 text-brand-plum placeholder:text-brand-plum/50 outline-none focus:ring-1 focus:ring-brand-coral/40 resize-none"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* グラス預かり */}
+      <div className={`rounded-lg border transition-colors ${hasGlass ? 'border-brand-gold/60 bg-brand-gold/10' : 'border-brand-beige bg-white'}`}>
+        <div className="flex items-center gap-3 p-3">
+          <button
+            type="button"
+            onClick={() => setHasGlass(!hasGlass)}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${hasGlass ? 'bg-brand-gold' : 'bg-gray-200'}`}
+          >
+            <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${hasGlass ? 'translate-x-5' : 'translate-x-0'}`} />
+          </button>
+          <Label className="text-brand-plum cursor-pointer" onClick={() => setHasGlass(!hasGlass)}>
+            グラス預かり
+            {hasGlass && <span className="ml-2 text-brand-gold text-xs font-normal">（グラスタグが表示されます）</span>}
+          </Label>
+        </div>
+        {hasGlass && (
+          <div className="px-3 pb-3">
+            <textarea
+              value={glassMemo}
+              onChange={(e) => setGlassMemo(e.target.value)}
+              placeholder="グラスの詳細を入力（例：マイグラス・棚番号3など）"
+              rows={2}
+              className="w-full text-sm rounded-md border border-brand-gold/40 bg-white px-3 py-2 text-brand-plum placeholder:text-brand-plum/50 outline-none focus:ring-1 focus:ring-brand-gold/40 resize-none"
             />
           </div>
         )}
@@ -400,13 +430,15 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         </div>
       )}
 
-      <Button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
-      >
-        {loading ? '登録中...' : '顧客を登録する'}
-      </Button>
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
+        <Button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
+        >
+          {loading ? '登録中...' : '顧客を登録する'}
+        </Button>
+      </div>
     </form>
   )
 }

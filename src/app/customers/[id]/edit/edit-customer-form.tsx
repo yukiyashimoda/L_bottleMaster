@@ -135,6 +135,7 @@ export function EditCustomerForm({
   const [isAlert, setIsAlert] = useState(customer.isAlert)
   const [alertReason, setAlertReason] = useState(customer.alertReason ?? '')
   const [hasGlass, setHasGlass] = useState(customer.hasGlass ?? false)
+  const [glassMemo, setGlassMemo] = useState(customer.glassMemo ?? '')
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>(
     customer.designatedCastIds ?? []
   )
@@ -204,6 +205,7 @@ export function EditCustomerForm({
         isAlert,
         alertReason: isAlert ? alertReason : '',
         hasGlass,
+        glassMemo: hasGlass ? glassMemo : '',
         memo: data.get('memo') as string,
         linkedCustomerIds: linkedIds,
       },
@@ -306,6 +308,17 @@ export function EditCustomerForm({
             {hasGlass && <span className="ml-2 text-brand-gold text-xs font-normal">（グラスタグが表示されます）</span>}
           </Label>
         </div>
+        {hasGlass && (
+          <div className="px-3 pb-3">
+            <textarea
+              value={glassMemo}
+              onChange={(e) => setGlassMemo(e.target.value)}
+              placeholder="グラスの詳細を入力（例：マイグラス・棚番号3など）"
+              rows={2}
+              className="w-full text-sm rounded-md border border-brand-gold/40 bg-white px-3 py-2 text-brand-plum placeholder:text-brand-plum/50 outline-none focus:ring-1 focus:ring-brand-gold/40 resize-none"
+            />
+          </div>
+        )}
       </div>
 
       {/* キープボトル */}

@@ -114,6 +114,12 @@ export default async function CustomerDetailPage({
                   <span className="whitespace-pre-wrap">{customer.alertReason}</span>
                 </div>
               )}
+              {customer.hasGlass && (
+                <div className="mt-2 flex items-start gap-1.5 text-sm text-brand-plum/80 bg-brand-gold/10 border border-brand-gold/40 rounded-md px-3 py-2">
+                  <span className="text-xs font-semibold text-brand-gold shrink-0 mt-0.5">グラス</span>
+                  <span className="whitespace-pre-wrap">{customer.glassMemo || 'グラス預かりあり'}</span>
+                </div>
+              )}
             </div>
           </div>
 

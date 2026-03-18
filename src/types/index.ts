@@ -10,6 +10,7 @@ export interface Customer {
   linkedCustomerIds: string[]
   isFavorite: boolean
   hasGlass: boolean
+  glassMemo: string
   lastVisitDate: string | null
   updatedAt: string
   updatedBy: string

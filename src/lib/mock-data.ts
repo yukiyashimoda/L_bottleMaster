@@ -41,6 +41,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -57,6 +58,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -73,6 +75,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -89,6 +92,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -105,6 +109,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -121,6 +126,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -137,6 +143,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -153,6 +160,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -169,6 +177,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -185,6 +194,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -201,6 +211,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -217,6 +228,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -233,6 +245,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -249,6 +262,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -265,6 +279,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -281,6 +296,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -297,6 +313,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -313,6 +330,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -329,6 +347,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -345,6 +364,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -361,6 +381,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -377,6 +398,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -393,6 +415,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -409,6 +432,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -425,6 +449,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
   {
@@ -441,6 +466,7 @@ export const mockCustomers: Customer[] = [
     updatedAt: new Date().toISOString(),
     isFavorite: false,
     hasGlass: false,
+    glassMemo: '',
     updatedBy: '',
   },
 ]

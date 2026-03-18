@@ -38,8 +38,8 @@ export default async function CustomerListPage() {
   return (
     <div className="relative min-h-screen">
       {/* Header */}
-      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-stone-200 px-4 py-3">
-        <h1 className="text-xl font-bold text-gray-900 mb-3">顧客一覧</h1>
+      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-brand-beige px-4 py-3">
+        <h1 className="text-xl font-bold text-brand-plum mb-3">顧客一覧</h1>
         <CustomerSearch
           customers={customers}
           bottlesMap={Object.fromEntries(bottlesMap)}
@@ -53,7 +53,7 @@ export default async function CustomerListPage() {
       {/* Customer List */}
       <div className="pb-24 pr-8">
         {activeGroups.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+          <div className="flex flex-col items-center justify-center py-20 text-brand-plum/50">
             <p className="text-lg">顧客が登録されていません</p>
             <p className="text-sm mt-1">右下のボタンから追加してください</p>
           </div>
@@ -63,8 +63,8 @@ export default async function CustomerListPage() {
             return (
               <div key={group} id={`group-${group}`}>
                 {/* Group Header */}
-                <div className="sticky top-[calc(3.5rem+4.5rem)] z-10 bg-stone-50/90 backdrop-blur px-4 py-1.5">
-                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <div className="sticky top-[calc(3.5rem+4.5rem)] z-10 bg-white/90 backdrop-blur px-4 py-1.5">
+                  <span className="text-xs font-semibold text-brand-plum/60 uppercase tracking-wider">
                     {group}
                   </span>
                 </div>

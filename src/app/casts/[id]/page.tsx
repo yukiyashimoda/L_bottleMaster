@@ -123,6 +123,7 @@ export default async function CastDetailPage({
                       visit={visit}
                       casts={allCasts}
                       bottles={bottles}
+                      loggedIn={loggedIn}
                     />
                   </div>
                 )

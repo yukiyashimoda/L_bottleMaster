@@ -22,6 +22,7 @@ interface CreateVisitInput {
   newBottles: NewBottleInput[]
   memo: string
   linkedCustomerIds: string[]
+  isAlert?: boolean
 }
 
 export async function createVisitAction(
@@ -55,6 +56,7 @@ export async function createVisitAction(
       bottlesOpened: openedBottleIds,
       bottlesUsed: data.bottleUpdates.map((b) => b.id),
       memo: data.memo,
+      isAlert: data.isAlert ?? false,
     })
 
     // 本指名キャストを顧客のdesignatedCastIdsにマージ

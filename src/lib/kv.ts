@@ -80,6 +80,7 @@ function toVisitRecord(r: any): VisitRecord {
     bottlesOpened: r.bottles_opened ?? [],
     bottlesUsed: r.bottles_used ?? [],
     memo: r.memo,
+    isAlert: r.is_alert ?? false,
   }
 }
 
@@ -343,8 +344,8 @@ export async function createVisitRecord(data: Omit<VisitRecord, 'id'>): Promise<
   }
   const sql = getSQL()
   const rows = await sql`
-    INSERT INTO visit_records (id, customer_id, visit_date, designated_cast_ids, in_store_cast_ids, bottles_opened, bottles_used, memo)
-    VALUES (${id}, ${data.customerId}, ${data.visitDate}, ${data.designatedCastIds}, ${data.inStoreCastIds}, ${data.bottlesOpened}, ${data.bottlesUsed}, ${data.memo})
+    INSERT INTO visit_records (id, customer_id, visit_date, designated_cast_ids, in_store_cast_ids, bottles_opened, bottles_used, memo, is_alert)
+    VALUES (${id}, ${data.customerId}, ${data.visitDate}, ${data.designatedCastIds}, ${data.inStoreCastIds}, ${data.bottlesOpened}, ${data.bottlesUsed}, ${data.memo}, ${data.isAlert ?? false})
     RETURNING *
   `
   // Update customer lastVisitDate
@@ -353,4 +354,42 @@ export async function createVisitRecord(data: Omit<VisitRecord, 'id'>): Promise<
     WHERE id = ${data.customerId}
   `
   return toVisitRecord(rows[0])
+}
+
+export async function getVisitRecord(id: string): Promise<VisitRecord | null> {
+  if (!useDB) return store.visitRecords.get(id) ?? null
+  const sql = getSQL()
+  const rows = await sql`SELECT * FROM visit_records WHERE id = ${id}`
+  return rows[0] ? toVisitRecord(rows[0]) : null
+}
+
+export async function updateVisitRecord(
+  id: string,
+  data: Partial<Omit<VisitRecord, 'id'>>
+): Promise<VisitRecord | null> {
+  if (!useDB) {
+    const existing = store.visitRecords.get(id)
+    if (!existing) return null
+    const updated: VisitRecord = { ...existing, ...data, id }
+    store.visitRecords.set(id, updated)
+    return updated
+  }
+  const existing = await getVisitRecord(id)
+  if (!existing) return null
+  const m = { ...existing, ...data }
+  const sql = getSQL()
+  const rows = await sql`
+    UPDATE visit_records SET
+      visit_date = ${m.visitDate}, designated_cast_ids = ${m.designatedCastIds},
+      in_store_cast_ids = ${m.inStoreCastIds}, memo = ${m.memo}, is_alert = ${m.isAlert ?? false}
+    WHERE id = ${id} RETURNING *
+  `
+  return rows[0] ? toVisitRecord(rows[0]) : null
+}
+
+export async function deleteVisitRecord(id: string): Promise<boolean> {
+  if (!useDB) return store.visitRecords.delete(id)
+  const sql = getSQL()
+  await sql`DELETE FROM visit_records WHERE id = ${id}`
+  return true
 }

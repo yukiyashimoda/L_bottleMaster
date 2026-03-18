@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Search, X, Plus, BottleWine } from 'lucide-react'
+import { Search, X, Plus, BottleWine, AlertTriangle } from 'lucide-react'
 import { createVisitAction } from './actions'
 import type { Cast, Bottle, Customer } from '@/types'
 
@@ -143,6 +143,7 @@ export function NewVisitForm({
   const [inStoreCastIds, setInStoreCastIds] = useState<string[]>([])
   const [linkedCustomerIds, setLinkedCustomerIds] = useState<string[]>(defaultLinkedCustomerIds)
   const [linkedQuery, setLinkedQuery] = useState('')
+  const [isAlert, setIsAlert] = useState(false)
   const [bottles, setBottles] = useState<BottleRow[]>(
     existingBottles.map((b) => ({
       id: b.id,
@@ -193,6 +194,7 @@ export function NewVisitForm({
         })),
       memo: formData.get('memo') as string,
       linkedCustomerIds,
+      isAlert,
     })
 
     setLoading(false)
@@ -408,6 +410,18 @@ export function NewVisitForm({
           </div>
         </div>
       )}
+
+      <div className="flex items-center gap-3 p-3 rounded-lg border border-stone-200 bg-stone-50">
+        <AlertTriangle className={`h-4 w-4 ${isAlert ? 'text-orange-500' : 'text-gray-400'}`} />
+        <span className="text-sm text-gray-700 flex-1">要注意フラグ</span>
+        <button
+          type="button"
+          onClick={() => setIsAlert((v) => !v)}
+          className={`w-12 h-6 rounded-full transition-colors relative ${isAlert ? 'bg-orange-400' : 'bg-stone-300'}`}
+        >
+          <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${isAlert ? 'translate-x-6' : 'translate-x-0.5'}`} />
+        </button>
+      </div>
 
       <div className="space-y-1.5">
         <Label className="text-gray-700">メモ</Label>

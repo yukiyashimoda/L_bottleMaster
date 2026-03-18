@@ -39,4 +39,5 @@ export interface VisitRecord {
   bottlesOpened: string[]
   bottlesUsed: string[]
   memo: string
+  isAlert?: boolean
 }

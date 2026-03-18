@@ -230,6 +230,7 @@ export default async function CustomerDetailPage({
                   visit={visit}
                   casts={casts}
                   bottles={bottles}
+                  loggedIn={loggedIn}
                 />
               ))}
             </div>

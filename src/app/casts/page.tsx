@@ -40,9 +40,7 @@ export default async function CastListPage() {
         />
       </div>
 
-      <HiraganaIndex activeGroups={activeGroups} />
-
-      <div className="pb-24 pr-8">
+      <div className="pb-24">
         {activeGroups.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-brand-plum/50">
             <p className="text-lg">キャストが登録されていません</p>

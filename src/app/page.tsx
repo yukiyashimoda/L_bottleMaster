@@ -48,10 +48,8 @@ export default async function CustomerListPage() {
       </div>
 
       {/* Hiragana Index Sidebar */}
-      <HiraganaIndex activeGroups={activeGroups} />
-
       {/* Customer List */}
-      <div className="pb-24 pr-8">
+      <div className="pb-24">
         {activeGroups.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-brand-plum/50">
             <p className="text-lg">顧客が登録されていません</p>

@@ -10,6 +10,12 @@ const audiowide = Audiowide({ subsets: ['latin'], weight: '400', variable: '--fo
 export const metadata: Metadata = {
   title: 'ネオスナックエル ボトル管理アプリ',
   description: 'ネオスナックエル ボトル管理アプリ',
+  openGraph: {
+    title: 'ネオスナックエル ボトル管理アプリ',
+    description: 'ネオスナックエル ボトル管理アプリ',
+    type: 'website',
+    locale: 'ja_JP',
+  },
 }
 
 export default async function RootLayout({

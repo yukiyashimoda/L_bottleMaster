@@ -157,7 +157,7 @@ export default async function CustomerDetailPage({
 
         {/* 来店を記録するボタン */}
         {loggedIn && (
-          <Link href={`/customers/${id}/visits/new`}>
+          <Link href={`/customers/${id}/visits/new`} className="block mt-2">
             <Button className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold h-11">
               <Plus className="h-4 w-4 mr-2" />
               来店を記録する

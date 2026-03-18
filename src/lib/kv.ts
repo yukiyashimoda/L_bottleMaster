@@ -81,6 +81,7 @@ function toVisitRecord(r: any): VisitRecord {
     bottlesUsed: r.bottles_used ?? [],
     memo: r.memo,
     isAlert: r.is_alert ?? false,
+    alertReason: r.alert_reason ?? '',
   }
 }
 
@@ -344,8 +345,8 @@ export async function createVisitRecord(data: Omit<VisitRecord, 'id'>): Promise<
   }
   const sql = getSQL()
   const rows = await sql`
-    INSERT INTO visit_records (id, customer_id, visit_date, designated_cast_ids, in_store_cast_ids, bottles_opened, bottles_used, memo, is_alert)
-    VALUES (${id}, ${data.customerId}, ${data.visitDate}, ${data.designatedCastIds}, ${data.inStoreCastIds}, ${data.bottlesOpened}, ${data.bottlesUsed}, ${data.memo}, ${data.isAlert ?? false})
+    INSERT INTO visit_records (id, customer_id, visit_date, designated_cast_ids, in_store_cast_ids, bottles_opened, bottles_used, memo, is_alert, alert_reason)
+    VALUES (${id}, ${data.customerId}, ${data.visitDate}, ${data.designatedCastIds}, ${data.inStoreCastIds}, ${data.bottlesOpened}, ${data.bottlesUsed}, ${data.memo}, ${data.isAlert ?? false}, ${data.alertReason ?? ''})
     RETURNING *
   `
   // Update customer lastVisitDate
@@ -381,7 +382,8 @@ export async function updateVisitRecord(
   const rows = await sql`
     UPDATE visit_records SET
       visit_date = ${m.visitDate}, designated_cast_ids = ${m.designatedCastIds},
-      in_store_cast_ids = ${m.inStoreCastIds}, memo = ${m.memo}, is_alert = ${m.isAlert ?? false}
+      in_store_cast_ids = ${m.inStoreCastIds}, memo = ${m.memo}, is_alert = ${m.isAlert ?? false},
+      alert_reason = ${m.alertReason ?? ''}
     WHERE id = ${id} RETURNING *
   `
   return rows[0] ? toVisitRecord(rows[0]) : null

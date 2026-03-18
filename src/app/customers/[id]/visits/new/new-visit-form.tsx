@@ -144,6 +144,7 @@ export function NewVisitForm({
   const [linkedCustomerIds, setLinkedCustomerIds] = useState<string[]>(defaultLinkedCustomerIds)
   const [linkedQuery, setLinkedQuery] = useState('')
   const [isAlert, setIsAlert] = useState(false)
+  const [alertReason, setAlertReason] = useState('')
   const [bottles, setBottles] = useState<BottleRow[]>(
     existingBottles.map((b) => ({
       id: b.id,
@@ -195,6 +196,7 @@ export function NewVisitForm({
       memo: formData.get('memo') as string,
       linkedCustomerIds,
       isAlert,
+      alertReason: isAlert ? alertReason : '',
     })
 
     setLoading(false)
@@ -411,16 +413,31 @@ export function NewVisitForm({
         </div>
       )}
 
-      <div className="flex items-center gap-3 p-3 rounded-lg border border-stone-200 bg-stone-50">
-        <AlertTriangle className={`h-4 w-4 ${isAlert ? 'text-orange-500' : 'text-gray-400'}`} />
-        <span className="text-sm text-gray-700 flex-1">要注意フラグ</span>
-        <button
-          type="button"
-          onClick={() => setIsAlert((v) => !v)}
-          className={`w-12 h-6 rounded-full transition-colors relative ${isAlert ? 'bg-orange-400' : 'bg-stone-300'}`}
-        >
-          <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${isAlert ? 'translate-x-6' : 'translate-x-0.5'}`} />
-        </button>
+      <div className={`rounded-lg border transition-colors ${isAlert ? 'border-orange-200 bg-orange-50' : 'border-stone-200 bg-stone-50'}`}>
+        <div className="flex items-center gap-3 p-3">
+          <button
+            type="button"
+            onClick={() => setIsAlert((v) => !v)}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-orange-400' : 'bg-stone-300'}`}
+          >
+            <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${isAlert ? 'translate-x-5' : 'translate-x-0'}`} />
+          </button>
+          <Label className="text-gray-700 cursor-pointer" onClick={() => setIsAlert((v) => !v)}>
+            要注意フラグ
+            {isAlert && <span className="ml-2 text-orange-500 text-xs font-normal">（要注意バッジが表示されます）</span>}
+          </Label>
+        </div>
+        {isAlert && (
+          <div className="px-3 pb-3">
+            <textarea
+              value={alertReason}
+              onChange={(e) => setAlertReason(e.target.value)}
+              placeholder="要注意の理由を入力（例：無断キャンセル、支払いトラブルなど）"
+              rows={3}
+              className="w-full text-sm rounded-md border border-orange-200 bg-white px-3 py-2 text-gray-900 placeholder:text-gray-400 outline-none focus:ring-1 focus:ring-orange-300 resize-none"
+            />
+          </div>
+        )}
       </div>
 
       <div className="space-y-1.5">

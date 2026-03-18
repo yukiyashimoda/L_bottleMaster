@@ -31,6 +31,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
   const [editDate, setEditDate] = useState(visit.visitDate.split('T')[0])
   const [editMemo, setEditMemo] = useState(visit.memo)
   const [editIsAlert, setEditIsAlert] = useState(visit.isAlert ?? false)
+  const [editAlertReason, setEditAlertReason] = useState(visit.alertReason ?? '')
   const [editDesignatedCastIds, setEditDesignatedCastIds] = useState<string[]>(visit.designatedCastIds)
   const [editInStoreCastIds, setEditInStoreCastIds] = useState<string[]>(visit.inStoreCastIds)
 
@@ -65,6 +66,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
       visitDate: new Date(editDate).toISOString(),
       memo: editMemo,
       isAlert: editIsAlert,
+      alertReason: editIsAlert ? editAlertReason : '',
       designatedCastIds: editDesignatedCastIds,
       inStoreCastIds: editInStoreCastIds,
     })
@@ -221,9 +223,9 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
               {mode === 'view' && (
                 <div className="space-y-3 text-sm">
                   {isAlert && (
-                    <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-orange-50 border border-orange-200 text-orange-700">
-                      <AlertTriangle className="h-4 w-4 shrink-0" />
-                      要注意フラグあり
+                    <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-orange-50 border border-orange-200 text-orange-700">
+                      <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
+                      <span className="whitespace-pre-wrap">{visit.alertReason ? visit.alertReason : '要注意フラグあり'}</span>
                     </div>
                   )}
                   {designatedCasts.length > 0 && (
@@ -299,16 +301,31 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3 rounded-lg border border-stone-200 bg-stone-50">
-                    <AlertTriangle className={`h-4 w-4 ${editIsAlert ? 'text-orange-500' : 'text-gray-400'}`} />
-                    <span className="text-sm text-gray-700 flex-1">要注意フラグ</span>
-                    <button
-                      type="button"
-                      onClick={() => setEditIsAlert((v) => !v)}
-                      className={`w-12 h-6 rounded-full transition-colors relative ${editIsAlert ? 'bg-orange-400' : 'bg-stone-300'}`}
-                    >
-                      <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${editIsAlert ? 'translate-x-6' : 'translate-x-0.5'}`} />
-                    </button>
+                  <div className={`rounded-lg border transition-colors ${editIsAlert ? 'border-orange-200 bg-orange-50' : 'border-stone-200 bg-stone-50'}`}>
+                    <div className="flex items-center gap-3 p-3">
+                      <button
+                        type="button"
+                        onClick={() => setEditIsAlert((v) => !v)}
+                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${editIsAlert ? 'bg-orange-400' : 'bg-stone-300'}`}
+                      >
+                        <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${editIsAlert ? 'translate-x-5' : 'translate-x-0'}`} />
+                      </button>
+                      <Label className="text-gray-700 cursor-pointer" onClick={() => setEditIsAlert((v) => !v)}>
+                        要注意フラグ
+                        {editIsAlert && <span className="ml-2 text-orange-500 text-xs font-normal">（要注意バッジが表示されます）</span>}
+                      </Label>
+                    </div>
+                    {editIsAlert && (
+                      <div className="px-3 pb-3">
+                        <textarea
+                          value={editAlertReason}
+                          onChange={(e) => setEditAlertReason(e.target.value)}
+                          placeholder="要注意の理由を入力（例：無断キャンセル、支払いトラブルなど）"
+                          rows={3}
+                          className="w-full text-sm rounded-md border border-orange-200 bg-white px-3 py-2 text-gray-900 placeholder:text-gray-400 outline-none focus:ring-1 focus:ring-orange-300 resize-none"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div className="space-y-1.5">

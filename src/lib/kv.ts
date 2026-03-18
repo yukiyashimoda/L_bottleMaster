@@ -41,6 +41,7 @@ function toCustomer(r: any): Customer {
     memo: r.memo,
     linkedCustomerIds: r.linked_customer_ids ?? [],
     isFavorite: r.is_favorite ?? false,
+    hasGlass: r.has_glass ?? false,
     lastVisitDate: r.last_visit_date ?? null,
     updatedAt: r.updated_at,
     updatedBy: r.updated_by,
@@ -118,8 +119,8 @@ export async function createCustomer(
   }
   const sql = getSQL()
   const rows = await sql`
-    INSERT INTO customers (id, name, ruby, nickname, designated_cast_ids, is_alert, alert_reason, memo, linked_customer_ids, is_favorite, last_visit_date, updated_at, updated_by)
-    VALUES (${id}, ${data.name}, ${data.ruby}, ${data.nickname}, ${data.designatedCastIds}, ${data.isAlert}, ${data.alertReason}, ${data.memo}, ${data.linkedCustomerIds}, ${data.isFavorite ?? false}, ${data.lastVisitDate}, ${updatedAt}, ${data.updatedBy})
+    INSERT INTO customers (id, name, ruby, nickname, designated_cast_ids, is_alert, alert_reason, memo, linked_customer_ids, is_favorite, has_glass, last_visit_date, updated_at, updated_by)
+    VALUES (${id}, ${data.name}, ${data.ruby}, ${data.nickname}, ${data.designatedCastIds}, ${data.isAlert}, ${data.alertReason}, ${data.memo}, ${data.linkedCustomerIds}, ${data.isFavorite ?? false}, ${data.hasGlass ?? false}, ${data.lastVisitDate}, ${updatedAt}, ${data.updatedBy})
     RETURNING *
   `
   return toCustomer(rows[0])
@@ -146,7 +147,7 @@ export async function updateCustomer(
       designated_cast_ids = ${m.designatedCastIds}, is_alert = ${m.isAlert},
       alert_reason = ${m.alertReason}, memo = ${m.memo},
       linked_customer_ids = ${m.linkedCustomerIds}, is_favorite = ${m.isFavorite ?? false},
-      last_visit_date = ${m.lastVisitDate},
+      has_glass = ${m.hasGlass ?? false}, last_visit_date = ${m.lastVisitDate},
       updated_at = ${m.updatedAt}, updated_by = ${m.updatedBy}
     WHERE id = ${id} RETURNING *
   `

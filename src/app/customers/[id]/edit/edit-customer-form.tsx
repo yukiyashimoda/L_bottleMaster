@@ -134,6 +134,7 @@ export function EditCustomerForm({
   const [error, setError] = useState('')
   const [isAlert, setIsAlert] = useState(customer.isAlert)
   const [alertReason, setAlertReason] = useState(customer.alertReason ?? '')
+  const [hasGlass, setHasGlass] = useState(customer.hasGlass ?? false)
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>(
     customer.designatedCastIds ?? []
   )
@@ -202,6 +203,7 @@ export function EditCustomerForm({
         designatedCastIds,
         isAlert,
         alertReason: isAlert ? alertReason : '',
+        hasGlass,
         memo: data.get('memo') as string,
         linkedCustomerIds: linkedIds,
       },
@@ -267,7 +269,7 @@ export function EditCustomerForm({
           <button
             type="button"
             onClick={() => setIsAlert(!isAlert)}
-            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-white'}`}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${isAlert ? 'bg-brand-coral' : 'bg-gray-200'}`}
           >
             <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${isAlert ? 'translate-x-5' : 'translate-x-0'}`} />
           </button>
@@ -287,6 +289,23 @@ export function EditCustomerForm({
             />
           </div>
         )}
+      </div>
+
+      {/* グラス預かり */}
+      <div className={`rounded-lg border transition-colors ${hasGlass ? 'border-brand-gold/60 bg-brand-gold/10' : 'border-brand-beige bg-white'}`}>
+        <div className="flex items-center gap-3 p-3">
+          <button
+            type="button"
+            onClick={() => setHasGlass(!hasGlass)}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${hasGlass ? 'bg-brand-gold' : 'bg-gray-200'}`}
+          >
+            <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow-sm ${hasGlass ? 'translate-x-5' : 'translate-x-0'}`} />
+          </button>
+          <Label className="text-brand-plum cursor-pointer" onClick={() => setHasGlass(!hasGlass)}>
+            グラス預かり
+            {hasGlass && <span className="ml-2 text-brand-gold text-xs font-normal">（グラスタグが表示されます）</span>}
+          </Label>
+        </div>
       </div>
 
       {/* キープボトル */}

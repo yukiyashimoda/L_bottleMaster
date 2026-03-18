@@ -68,6 +68,11 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
               要確認
             </Badge>
           )}
+          {customer.hasGlass && (
+            <span className="text-xs px-1.5 py-0.5 rounded-md bg-brand-gold/20 text-brand-plum/70 border border-brand-gold/40">
+              グラス
+            </span>
+          )}
           {bottles.length > 0 && (
             <div className="flex items-center gap-1 text-xs text-brand-plum/60">
               <GiBrandyBottle size={12} />

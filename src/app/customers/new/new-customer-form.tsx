@@ -167,6 +167,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         memo: data.get('memo') as string,
         linkedCustomerIds: linkedIds,
         isFavorite: false,
+        hasGlass: false,
         lastVisitDate: firstVisitDate ? new Date(firstVisitDate).toISOString() : null,
       },
       bottles

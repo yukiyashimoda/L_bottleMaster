@@ -9,6 +9,7 @@ export interface Customer {
   memo: string
   linkedCustomerIds: string[]
   isFavorite: boolean
+  hasGlass: boolean
   lastVisitDate: string | null
   updatedAt: string
   updatedBy: string

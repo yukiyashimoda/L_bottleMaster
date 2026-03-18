@@ -231,7 +231,7 @@ export function EditCustomerForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5 pb-24">
       {error && (
         <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
           {error}
@@ -470,13 +470,15 @@ export function EditCustomerForm({
         </div>
       )}
 
-      <Button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
-      >
-        {loading ? '更新中...' : '更新する'}
-      </Button>
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
+        <Button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
+        >
+          {loading ? '更新中...' : '更新する'}
+        </Button>
+      </div>
     </form>
   )
 }

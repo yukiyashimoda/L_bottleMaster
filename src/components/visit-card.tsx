@@ -267,7 +267,8 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
               {/* Edit */}
               {mode === 'edit' && (
-                <form onSubmit={handleEdit} className="space-y-4">
+                <>
+                <form id="visit-edit-form" onSubmit={handleEdit} className="space-y-4 pb-24">
                   {error && (
                     <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">{error}</div>
                   )}
@@ -334,10 +335,13 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
                     <Textarea value={editMemo} onChange={(e) => setEditMemo(e.target.value)} rows={3} />
                   </div>
 
-                  <Button type="submit" disabled={loading} className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11">
+                </form>
+                <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
+                  <Button type="submit" form="visit-edit-form" disabled={loading} className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11">
                     {loading ? '更新中...' : '更新する'}
                   </Button>
-                </form>
+                </div>
+                </>
               )}
 
               {/* Delete */}

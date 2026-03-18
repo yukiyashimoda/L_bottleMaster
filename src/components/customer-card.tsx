@@ -19,8 +19,10 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
     <Link href={`/customers/${customer.id}`}>
       <div
         className={cn(
-          'flex items-center gap-3 px-4 py-3 border-b border-brand-beige transition-colors hover:bg-white',
-          old && 'bg-brand-gold/20 hover:bg-brand-gold/30'
+          'flex items-center gap-3 px-4 py-3 mx-3 my-2 rounded-2xl bg-white transition-all',
+          'shadow-[3px_3px_8px_rgba(75,60,82,0.12),-2px_-2px_6px_rgba(255,255,255,0.95)]',
+          'hover:shadow-[4px_4px_12px_rgba(75,60,82,0.16),-2px_-2px_8px_rgba(255,255,255,1)]',
+          old && 'bg-amber-50'
         )}
       >
         {/* Avatar */}
@@ -34,7 +36,7 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-brand-plum truncate">
+            <span className="font-normal text-brand-plum truncate">
               {customer.name}
             </span>
             {customer.nickname && (

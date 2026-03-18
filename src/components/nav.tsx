@@ -30,7 +30,7 @@ export function Nav({ isLoggedIn }: NavProps) {
   return (
     <>
       {/* トップヘッダー */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-brand-beige h-14 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-brand-beige h-16 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex flex-col leading-none gap-0.5">
@@ -87,7 +87,7 @@ export function Nav({ isLoggedIn }: NavProps) {
                 key={href}
                 href={href}
                 className={cn(
-                  'flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs font-medium transition-colors',
+                  'flex-1 flex flex-col items-center justify-center py-3 gap-1 text-xs font-medium transition-colors',
                   active ? 'text-brand-plum' : 'text-brand-plum/50'
                 )}
               >

@@ -23,7 +23,7 @@ export default async function RootLayout({
     <html lang="ja">
       <body className={`${kiwiMaru.className} ${kiwiMaru.variable} ${audiowide.variable} bg-white text-brand-plum min-h-screen`}>
         <Nav isLoggedIn={loggedIn} />
-        <main className="pt-14 pb-16 sm:pb-0 max-w-2xl mx-auto">
+        <main className="pt-16 pb-20 sm:pb-0 max-w-2xl mx-auto">
           {children}
         </main>
       </body>

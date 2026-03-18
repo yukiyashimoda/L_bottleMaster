@@ -31,8 +31,8 @@ export default async function CastListPage() {
   const activeGroups = Array.from(grouped.keys())
 
   return (
-    <div className="relative min-h-screen">
-      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-brand-beige px-4 py-3">
+    <div className="relative min-h-screen bg-[#F5F1EE]">
+      <div className="sticky top-16 z-20 bg-[#F5F1EE]/95 backdrop-blur border-b border-brand-beige/50 px-4 py-3">
         <h1 className="text-xl font-bold text-brand-plum mb-3">キャスト一覧</h1>
         <CastSearch
           casts={casts}
@@ -52,7 +52,7 @@ export default async function CastListPage() {
             const groupCasts = grouped.get(group)!
             return (
               <div key={group} id={`group-${group}`}>
-                <div className="sticky top-[calc(3.5rem+4.5rem)] z-10 bg-white/90 backdrop-blur px-4 py-1.5">
+                <div className="sticky top-[calc(4rem+4.5rem)] z-10 bg-[#F5F1EE]/90 backdrop-blur px-4 py-1.5">
                   <span className="text-xs font-semibold text-brand-plum/60 uppercase tracking-wider">
                     {group}
                   </span>
@@ -61,14 +61,14 @@ export default async function CastListPage() {
                   <Link
                     key={cast.id}
                     href={`/casts/${cast.id}`}
-                    className="flex items-center gap-3 px-4 py-3 border-b border-brand-beige hover:bg-white transition-colors"
+                    className="flex items-center gap-3 px-4 py-3 mx-3 my-2 rounded-2xl bg-white transition-all shadow-[3px_3px_8px_rgba(75,60,82,0.12),-2px_-2px_6px_rgba(255,255,255,0.95)] hover:shadow-[4px_4px_12px_rgba(75,60,82,0.16),-2px_-2px_8px_rgba(255,255,255,1)]"
                   >
                     <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
                       {cast.ruby}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-semibold text-brand-plum">{cast.name}</span>
+                        <span className="font-normal text-brand-plum">{cast.name}</span>
                         {cast.memo && (
                           <span className="text-xs text-brand-plum/50 truncate">{cast.memo}</span>
                         )}

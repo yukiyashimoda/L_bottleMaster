@@ -27,8 +27,8 @@ export function HiraganaIndex({ activeGroups }: HiraganaIndexProps) {
             className={cn(
               'w-7 h-7 text-xs rounded-md font-medium transition-colors',
               isActive
-                ? 'text-gray-700 hover:bg-gray-100 cursor-pointer'
-                : 'text-gray-300 cursor-default'
+                ? 'text-brand-plum hover:bg-white cursor-pointer'
+                : 'text-brand-plum/20 cursor-default'
             )}
           >
             {groupLabels[group]}

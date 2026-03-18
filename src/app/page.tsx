@@ -36,9 +36,9 @@ export default async function CustomerListPage() {
   const activeGroups = Array.from(grouped.keys())
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-[#F5F1EE]">
       {/* Header */}
-      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-brand-beige px-4 py-3">
+      <div className="sticky top-16 z-20 bg-[#F5F1EE]/95 backdrop-blur border-b border-brand-beige/50 px-4 py-3">
         <h1 className="text-xl font-bold text-brand-plum mb-3">顧客一覧</h1>
         <CustomerSearch
           customers={customers}
@@ -63,7 +63,7 @@ export default async function CustomerListPage() {
             return (
               <div key={group} id={`group-${group}`}>
                 {/* Group Header */}
-                <div className="sticky top-[calc(3.5rem+4.5rem)] z-10 bg-white/90 backdrop-blur px-4 py-1.5">
+                <div className="sticky top-[calc(4rem+4.5rem)] z-10 bg-[#F5F1EE]/90 backdrop-blur px-4 py-1.5">
                   <span className="text-xs font-semibold text-brand-plum/60 uppercase tracking-wider">
                     {group}
                   </span>

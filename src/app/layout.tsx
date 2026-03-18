@@ -22,7 +22,7 @@ export default async function RootLayout({
     <html lang="ja">
       <body className={`${inter.className} bg-stone-50 text-gray-900 min-h-screen`}>
         <Nav isLoggedIn={loggedIn} />
-        <main className="pt-14 max-w-2xl mx-auto">
+        <main className="pt-14 pb-16 sm:pb-0 max-w-2xl mx-auto">
           {children}
         </main>
       </body>

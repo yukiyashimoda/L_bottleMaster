@@ -54,9 +54,8 @@ export default async function CustomerDetailPage({
     .map((cid) => customerMap.get(cid))
     .filter(Boolean)
 
-  const avatarLabel = designatedCasts[0]
-    ? designatedCasts[0]!.name.charAt(0)
-    : customer.name.charAt(0)
+  const designatedCastRuby = designatedCasts[0]?.ruby
+  const avatarLabel = designatedCastRuby ?? 'FREE'
 
   return (
     <div className="min-h-screen pb-24">
@@ -90,7 +89,7 @@ export default async function CustomerDetailPage({
         <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
           {/* 名前・ニックネーム */}
           <div className="flex items-start gap-4">
-            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shrink-0 ${customer.isAlert ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-700'}`}>
+            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 overflow-hidden ${customer.isAlert ? 'bg-red-100 text-red-600' : designatedCastRuby ? 'bg-gray-700 text-white' : 'bg-green-600 text-white'}`}>
               {avatarLabel}
             </div>
             <div className="flex-1 min-w-0">

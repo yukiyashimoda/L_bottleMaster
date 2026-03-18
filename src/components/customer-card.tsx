@@ -7,12 +7,14 @@ import type { Customer, Bottle } from '@/types'
 interface CustomerCardProps {
   customer: Customer
   bottles: Bottle[]
-  designatedCastName?: string
+  designatedCastRuby?: string
 }
 
-export function CustomerCard({ customer, bottles, designatedCastName }: CustomerCardProps) {
+export function CustomerCard({ customer, bottles, designatedCastRuby }: CustomerCardProps) {
   const old = isOldVisit(customer.lastVisitDate)
-  const avatarLabel = customer.ruby.charAt(0)
+  const avatarLabel = designatedCastRuby
+    ? designatedCastRuby.charAt(0)
+    : customer.ruby.charAt(0)
 
   return (
     <Link href={`/customers/${customer.id}`}>

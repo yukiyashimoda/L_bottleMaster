@@ -74,9 +74,9 @@ export default async function CustomerListPage() {
                     key={customer.id}
                     customer={customer}
                     bottles={bottlesMap.get(customer.id) ?? []}
-                    designatedCastName={
+                    designatedCastRuby={
                       customer.designatedCastIds[0]
-                        ? castMap.get(customer.designatedCastIds[0])?.name
+                        ? castMap.get(customer.designatedCastIds[0])?.ruby
                         : undefined
                     }
                   />

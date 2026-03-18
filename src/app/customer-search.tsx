@@ -56,9 +56,9 @@ export function CustomerSearch({ customers, bottlesMap, castMap }: CustomerSearc
                 key={customer.id}
                 customer={customer}
                 bottles={bottlesMap[customer.id] ?? []}
-                designatedCastName={
+                designatedCastRuby={
                   customer.designatedCastIds[0]
-                    ? castMap[customer.designatedCastIds[0]]?.name
+                    ? castMap[customer.designatedCastIds[0]]?.ruby
                     : undefined
                 }
               />

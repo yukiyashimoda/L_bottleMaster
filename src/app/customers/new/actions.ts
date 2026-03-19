@@ -30,8 +30,8 @@ export async function createCustomerAction(
       )
     )
 
-    // 本指名または場内指名＋最初の来店日があれば来店記録を自動作成
-    if ((customer.designatedCastIds.length > 0 || inStoreCastIds.length > 0) && customer.lastVisitDate) {
+    // 最初の来店日があれば来店記録を自動作成
+    if (customer.lastVisitDate) {
       await createVisitRecord({
         customerId: customer.id,
         visitDate: customer.lastVisitDate,

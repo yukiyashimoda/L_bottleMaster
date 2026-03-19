@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Edit } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { getCast, getVisitRecordsByCast, getCustomers, getBottles, getCasts } from '@/lib/kv'
+import { getCast, getVisitRecordsByCast, getVisitRecordsByInStoreCast, getCustomers, getBottles, getCasts } from '@/lib/kv'
 import { CastVisitGroup } from '@/components/cast-visit-group'
 import { CustomerCard } from '@/components/customer-card'
 import { isAuthenticated } from '@/lib/auth'
@@ -18,9 +18,10 @@ export default async function CastDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const [cast, visits, customers, allCasts, bottles, loggedIn] = await Promise.all([
+  const [cast, visits, inStoreVisits, customers, allCasts, bottles, loggedIn] = await Promise.all([
     getCast(id),
     getVisitRecordsByCast(id),
+    getVisitRecordsByInStoreCast(id),
     getCustomers(),
     getCasts(),
     getBottles(),
@@ -30,6 +31,20 @@ export default async function CastDetailPage({
   if (!cast) notFound()
 
   const customerMap = new Map(customers.map((c) => [c.id, c]))
+
+  // 場内指名時の本指名キャスト上位5名
+  const coDesignatedCount = new Map<string, number>()
+  for (const v of inStoreVisits) {
+    for (const cid of v.designatedCastIds) {
+      coDesignatedCount.set(cid, (coDesignatedCount.get(cid) ?? 0) + 1)
+    }
+  }
+  const top5CoDesignated = Array.from(coDesignatedCount.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([castId, count]) => ({ cast: allCasts.find((c) => c.id === castId), count }))
+    .filter((x) => x.cast)
+  const maxCoCount = top5CoDesignated[0]?.count ?? 1
 
   // 本指名キャストに登録された顧客（designatedCastIds ベース）
   const designatedCustomers = customers
@@ -102,13 +117,40 @@ export default async function CastDetailPage({
             )}
           </div>
 
-          {/* 担当顧客数 */}
-          <div className="rounded-lg bg-white border border-brand-beige p-3 text-center">
-            <p className="text-2xl font-bold text-brand-plum">
-              {designatedCustomers.length}
-            </p>
-            <p className="text-xs text-brand-plum/60 mt-0.5">担当顧客数</p>
+          {/* 担当顧客数 / 場内指名本数 */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-lg bg-white border border-brand-beige p-3 text-center">
+              <p className="text-2xl font-bold text-brand-plum">{designatedCustomers.length}</p>
+              <p className="text-xs text-brand-plum/60 mt-0.5">担当顧客数</p>
+            </div>
+            <div className="rounded-lg bg-white border border-brand-beige p-3 text-center">
+              <p className="text-2xl font-bold text-brand-plum">{inStoreVisits.length}</p>
+              <p className="text-xs text-brand-plum/60 mt-0.5">場内指名本数</p>
+            </div>
           </div>
+
+          {/* 場内指名時の本指名キャスト上位5 */}
+          {top5CoDesignated.length > 0 && (
+            <div className="rounded-lg bg-white border border-brand-beige p-4 space-y-3">
+              <p className="text-xs font-semibold text-brand-plum/60 uppercase tracking-wider">場内指名時の本指名キャスト TOP5</p>
+              <div className="space-y-2.5">
+                {top5CoDesignated.map(({ cast: c, count }) => (
+                  <div key={c!.id} className="space-y-1">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-brand-plum font-medium truncate">{c!.name}</span>
+                      <span className="text-brand-plum/60 tabular-nums ml-2 shrink-0">{count}回</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-brand-beige overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-brand-coral transition-all"
+                        style={{ width: `${Math.round((count / maxCoCount) * 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {cast.updatedBy && (
             <p className="text-xs text-brand-plum/50 text-right">

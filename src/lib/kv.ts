@@ -334,6 +334,17 @@ export async function getVisitRecordsByCast(castId: string): Promise<VisitRecord
   return rows.map(toVisitRecord)
 }
 
+export async function getVisitRecordsByInStoreCast(castId: string): Promise<VisitRecord[]> {
+  if (!useDB) {
+    return Array.from(store.visitRecords.values())
+      .filter((v) => v.inStoreCastIds.includes(castId))
+      .sort((a, b) => new Date(b.visitDate).getTime() - new Date(a.visitDate).getTime())
+  }
+  const sql = getSQL()
+  const rows = await sql`SELECT * FROM visit_records WHERE ${castId} = ANY(in_store_cast_ids) ORDER BY visit_date DESC`
+  return rows.map(toVisitRecord)
+}
+
 export async function createVisitRecord(data: Omit<VisitRecord, 'id'>): Promise<VisitRecord> {
   const id = generateId()
   if (!useDB) {

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getCasts, getVisitRecordsByCast } from '@/lib/kv'
+import { getCasts, getCustomers } from '@/lib/kv'
 import { getHiraganaGroup, hiraganaGroups } from '@/lib/utils'
 import { HiraganaIndex } from '@/components/hiragana-index'
 import { CastSearch } from './cast-search'
@@ -10,15 +10,12 @@ import { GiAmpleDress } from 'react-icons/gi'
 export const dynamic = 'force-dynamic'
 
 export default async function CastListPage() {
-  const [casts, loggedIn] = await Promise.all([getCasts(), isAuthenticated()])
+  const [casts, customers, loggedIn] = await Promise.all([getCasts(), getCustomers(), isAuthenticated()])
 
   const customerCounts = new Map<string, number>()
-  await Promise.all(
-    casts.map(async (c) => {
-      const visits = await getVisitRecordsByCast(c.id)
-      customerCounts.set(c.id, new Set(visits.map((v) => v.customerId)).size)
-    })
-  )
+  for (const cast of casts) {
+    customerCounts.set(cast.id, customers.filter((c) => c.designatedCastIds.includes(cast.id)).length)
+  }
 
   const grouped = new Map<string, typeof casts>()
   for (const group of hiraganaGroups) {

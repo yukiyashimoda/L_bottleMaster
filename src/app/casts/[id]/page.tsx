@@ -31,7 +31,16 @@ export default async function CastDetailPage({
 
   const customerMap = new Map(customers.map((c) => [c.id, c]))
 
-  // 顧客ごとにグループ化
+  // 本指名キャストに登録された顧客（designatedCastIds ベース）
+  const designatedCustomers = customers
+    .filter((c) => c.designatedCastIds.includes(id))
+    .sort((a, b) => {
+      const dateA = a.lastVisitDate ? new Date(a.lastVisitDate).getTime() : 0
+      const dateB = b.lastVisitDate ? new Date(b.lastVisitDate).getTime() : 0
+      return dateB - dateA
+    })
+
+  // 指名履歴（visit records）顧客ごとにグループ化
   const visitsByCustomer = new Map<string, typeof visits>()
   for (const visit of visits) {
     const arr = visitsByCustomer.get(visit.customerId) ?? []
@@ -96,7 +105,7 @@ export default async function CastDetailPage({
           {/* 担当顧客数 */}
           <div className="rounded-lg bg-white border border-brand-beige p-3 text-center">
             <p className="text-2xl font-bold text-brand-plum">
-              {new Set(visits.map((v) => v.customerId)).size}
+              {designatedCustomers.length}
             </p>
             <p className="text-xs text-brand-plum/60 mt-0.5">担当顧客数</p>
           </div>
@@ -109,22 +118,20 @@ export default async function CastDetailPage({
         </div>
 
         {/* 指名客一覧 */}
-        {sortedCustomerIds.length > 0 && (
+        {designatedCustomers.length > 0 && (
           <div>
             <h3 className="text-sm font-semibold text-brand-plum/60 uppercase tracking-wider mb-1 flex items-center gap-2">
-              指名客 ({sortedCustomerIds.length})
+              指名客 ({designatedCustomers.length})
             </h3>
             <div>
-              {sortedCustomerIds.map((customerId) => {
-                const customer = customerMap.get(customerId)
-                if (!customer) return null
-                const customerBottles = bottles.filter((b) => b.customerId === customerId)
+              {designatedCustomers.map((customer) => {
+                const customerBottles = bottles.filter((b) => b.customerId === customer.id)
                 const designatedCastRuby = customer.designatedCastIds[0]
                   ? allCasts.find((c) => c.id === customer.designatedCastIds[0])?.ruby
                   : undefined
                 return (
                   <CustomerCard
-                    key={customerId}
+                    key={customer.id}
                     customer={customer}
                     bottles={customerBottles}
                     designatedCastRuby={designatedCastRuby}

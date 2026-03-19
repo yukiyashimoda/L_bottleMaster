@@ -123,6 +123,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   const [glassMemo, setGlassMemo] = useState('')
   const [receiptNames, setReceiptNames] = useState<string[]>([])
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>([])
+  const [inStoreCastIds, setInStoreCastIds] = useState<string[]>([])
   const [linkedIds, setLinkedIds] = useState<string[]>([])
   const [linkedQuery, setLinkedQuery] = useState('')
   const [bottles, setBottles] = useState<BottleInput[]>([])
@@ -181,7 +182,8 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
           name: b.name,
           remaining: `${b.remaining}%`,
           openedDate: new Date(b.openedDate).toISOString(),
-        }))
+        })),
+      inStoreCastIds
     )
 
     setLoading(false)
@@ -229,6 +231,13 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         casts={casts}
         selectedIds={designatedCastIds}
         onChange={setDesignatedCastIds}
+      />
+
+      <CastMultiSelect
+        label="場内指名キャスト"
+        casts={casts}
+        selectedIds={inStoreCastIds}
+        onChange={setInStoreCastIds}
       />
 
       {/* 領収書名 */}

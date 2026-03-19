@@ -55,6 +55,19 @@ export default async function CastDetailPage({
       return dateB - dateA
     })
 
+  // 場内指名客（visit records ベース）最新来店日でソート
+  const inStoreCustomerLatest = new Map<string, number>()
+  for (const v of inStoreVisits) {
+    const t = new Date(v.visitDate).getTime()
+    if (!inStoreCustomerLatest.has(v.customerId) || inStoreCustomerLatest.get(v.customerId)! < t) {
+      inStoreCustomerLatest.set(v.customerId, t)
+    }
+  }
+  const inStoreCustomers = Array.from(inStoreCustomerLatest.keys())
+    .sort((a, b) => inStoreCustomerLatest.get(b)! - inStoreCustomerLatest.get(a)!)
+    .map((cid) => customerMap.get(cid))
+    .filter(Boolean) as typeof customers
+
   // 指名履歴（visit records）顧客ごとにグループ化
   const visitsByCustomer = new Map<string, typeof visits>()
   for (const visit of visits) {
@@ -167,6 +180,31 @@ export default async function CastDetailPage({
             </h3>
             <div>
               {designatedCustomers.map((customer) => {
+                const customerBottles = bottles.filter((b) => b.customerId === customer.id)
+                const designatedCastRuby = customer.designatedCastIds[0]
+                  ? allCasts.find((c) => c.id === customer.designatedCastIds[0])?.ruby
+                  : undefined
+                return (
+                  <CustomerCard
+                    key={customer.id}
+                    customer={customer}
+                    bottles={customerBottles}
+                    designatedCastRuby={designatedCastRuby}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 場内指名客一覧 */}
+        {inStoreCustomers.length > 0 && (
+          <div>
+            <h3 className="text-sm font-semibold text-brand-plum/60 uppercase tracking-wider mb-1 flex items-center gap-2">
+              場内指名客 ({inStoreCustomers.length})
+            </h3>
+            <div>
+              {inStoreCustomers.map((customer) => {
                 const customerBottles = bottles.filter((b) => b.customerId === customer.id)
                 const designatedCastRuby = customer.designatedCastIds[0]
                   ? allCasts.find((c) => c.id === customer.designatedCastIds[0])?.ruby

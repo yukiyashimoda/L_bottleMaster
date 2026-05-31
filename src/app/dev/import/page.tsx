@@ -7,7 +7,7 @@ type Bottle = {
 }
 type StaffLink = { name: string; role: string; is_current: boolean }
 type Customer = {
-  name: string; aliases: string[]; tag?: string | null
+  name: string; aliases: string[]; tags?: string[] | null
   company?: string | null; appearance?: string | null
   location?: string | null; note?: string | null; updated_at: string
   bottles: Bottle[]; staff: StaffLink[]

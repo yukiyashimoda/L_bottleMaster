@@ -57,7 +57,7 @@ export function Nav({ isLoggedIn }: NavProps) {
                   isActive(href) ? 'text-white' : 'hover:opacity-80'
                 )}
                 style={isActive(href)
-                  ? { background: 'var(--accent)', color: '#fff' }
+                  ? { background: 'var(--accent)', color: 'var(--text)' }
                   : { color: 'var(--text-sub)' }
                 }
               >

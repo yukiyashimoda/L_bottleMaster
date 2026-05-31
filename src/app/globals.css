@@ -2,29 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ══════════════════════════════════════════════════════════════
+   THEME — ここを変えるとアプリ全体の色が一括変更されます
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --accent:        #E8715A;   /* メインアクセント（ボタン・アイコン等） */
+  --accent2:       #6C63FF;   /* サブアクセント（バッジ等）             */
+  --gold:          #C9A96E;   /* ゴールド（ボトル・グラスバッジ等）     */
+}
+/* ══════════════════════════════════════════════════════════════ */
+
 @layer base {
   :root {
-    /* ── Light ── */
-    --bg:           #F7F7FA;
-    --bg-surface:   #FFFFFF;
-    --bg-elevated:  #F0F0F5;
-    --border:       rgba(0,0,0,0.07);
-    --text:         #1A1A2E;
-    --text-sub:     #6B7280;
-    --text-muted:   #9CA3AF;
-    --accent:       #E8715A;
-    --accent-bg:    rgba(232,113,90,0.1);
-    --accent2:      #6C63FF;
-    --accent2-bg:   rgba(108,99,255,0.1);
-    --gold:         #C9A96E;
-    --gold-bg:      rgba(201,169,110,0.1);
-    --green:        #22C55E;
-    --green-bg:     rgba(34,197,94,0.1);
-    --shadow-sm:    0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow:       0 4px 16px rgba(0,0,0,0.08);
-    --radius:       0.75rem;
+    /* ── Light mode ── */
+    --bg:            #F7F7FA;
+    --bg-surface:    #FFFFFF;
+    --bg-elevated:   #EFEFF4;
+    --border:        rgba(0,0,0,0.07);
+    --text:          #1A1A2E;
+    --text-sub:      #6B7280;
+    --text-muted:    #9CA3AF;
+    --accent-bg:     color-mix(in srgb, var(--accent) 12%, transparent);
+    --accent2-bg:    color-mix(in srgb, var(--accent2) 12%, transparent);
+    --gold-bg:       color-mix(in srgb, var(--gold) 12%, transparent);
+    --green:         #22C55E;
+    --green-bg:      rgba(34,197,94,0.1);
+    --shadow-sm:     0 1px 4px rgba(0,0,0,0.06);
+    --shadow:        0 4px 16px rgba(0,0,0,0.08);
+    --radius:        0.75rem;
 
-    /* shadcn */
+    /* shadcn compat */
     --background:        240 10% 97%;
     --foreground:        240 20% 14%;
     --card:              0 0% 100%;
@@ -47,26 +54,23 @@
   }
 
   .dark {
-    /* ── Dark ── */
-    --bg:           #14142B;
-    --bg-surface:   #1F2040;
-    --bg-elevated:  #252548;
-    --border:       rgba(255,255,255,0.07);
-    --text:         #F0F0FF;
-    --text-sub:     rgba(240,240,255,0.5);
-    --text-muted:   rgba(240,240,255,0.28);
-    --accent:       #E8715A;
-    --accent-bg:    rgba(232,113,90,0.15);
-    --accent2:      #7C75FF;
-    --accent2-bg:   rgba(124,117,255,0.15);
-    --gold:         #C9A96E;
-    --gold-bg:      rgba(201,169,110,0.15);
-    --green:        #4ADE80;
-    --green-bg:     rgba(74,222,128,0.12);
-    --shadow-sm:    0 1px 3px rgba(0,0,0,0.3);
-    --shadow:       0 4px 20px rgba(0,0,0,0.4);
+    /* ── Dark mode ── */
+    --bg:            #14142B;
+    --bg-surface:    #1F2040;
+    --bg-elevated:   #252548;
+    --border:        rgba(255,255,255,0.07);
+    --text:          #F0F0FF;
+    --text-sub:      rgba(240,240,255,0.5);
+    --text-muted:    rgba(240,240,255,0.28);
+    --accent-bg:     color-mix(in srgb, var(--accent) 18%, transparent);
+    --accent2-bg:    color-mix(in srgb, var(--accent2) 18%, transparent);
+    --gold-bg:       color-mix(in srgb, var(--gold) 18%, transparent);
+    --green:         #4ADE80;
+    --green-bg:      rgba(74,222,128,0.12);
+    --shadow-sm:     0 1px 4px rgba(0,0,0,0.3);
+    --shadow:        0 4px 20px rgba(0,0,0,0.4);
 
-    /* shadcn */
+    /* shadcn compat */
     --background:        240 20% 12%;
     --foreground:        240 20% 96%;
     --card:              240 18% 17%;

@@ -4,10 +4,11 @@ import type { Cast, Customer, Bottle } from '@/types'
 import { CustomerCard } from '@/components/customer-card'
 import { getHiraganaGroup, hiraganaGroups } from '@/lib/utils'
 
+// キャストアバターの色サイクル（THEME変数で統一する場合はここを変更）
 const CAST_COLORS = [
-  '#E8715A','#6C63FF','#22C55E','#F59E0B',
-  '#EC4899','#14B8A6','#3B82F6','#A855F7',
-  '#F97316','#06B6D4','#84CC16','#EF4444',
+  'var(--accent)', 'var(--accent2)', '#22C55E', '#F59E0B',
+  '#EC4899',       '#14B8A6',        '#3B82F6', '#A855F7',
+  '#F97316',       '#06B6D4',        '#84CC16', '#EF4444',
 ]
 
 interface Props {

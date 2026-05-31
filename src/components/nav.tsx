@@ -46,7 +46,7 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 70,
           width: 260,
           background: 'var(--bg-surface)',
-          borderLeft: '1px solid var(--border)',
+          borderLeft: '1px solid hsl(var(--border))',
           boxShadow: open ? '-8px 0 32px rgba(0,0,0,0.2)' : 'none',
           display: 'flex', flexDirection: 'column',
           padding: '16px 16px 32px',
@@ -132,7 +132,7 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40,
           height: 64,
           background: 'var(--bg-surface)',
-          borderTop: '1px solid var(--border)',
+          borderTop: '1px solid hsl(var(--border))',
           display: 'flex', alignItems: 'center',
         }}
       >

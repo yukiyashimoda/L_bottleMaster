@@ -29,7 +29,7 @@ export default async function CastListPage() {
 
   return (
     <div className="relative min-h-screen bg-[#F5F1EE]">
-      <div className="sticky top-0 z-20 px-4 py-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}>
+      <div className="sticky top-0 z-20 px-4 py-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}>
         <h1 className="text-xl font-bold text-brand-plum mb-3">キャスト一覧</h1>
         <CastSearch
           casts={casts}

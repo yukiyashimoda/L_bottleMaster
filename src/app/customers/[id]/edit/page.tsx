@@ -26,7 +26,7 @@ export default async function EditCustomerPage({
 
   return (
     <div className="min-h-screen pb-10">
-      <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}>
+      <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}>
         <Link href={`/customers/${id}`}>
           <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-500">
             <ArrowLeft className="h-4 w-4" />

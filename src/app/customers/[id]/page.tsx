@@ -60,7 +60,7 @@ export default async function CustomerDetailPage({
   return (
     <div className="min-h-screen pb-24">
       {/* Header */}
-      <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}>
+      <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}>
         <Link href="/">
           <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-plum/60">
             <ArrowLeft className="h-4 w-4" />

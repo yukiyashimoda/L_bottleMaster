@@ -65,7 +65,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
       {/* ── 固定ヘッダー ── */}
       <div
         className="sticky top-0 z-30"
-        style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}
+        style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}
       >
         {/* アプリアイコン行 */}
         <div className="flex justify-end px-4 pt-3 pb-1">
@@ -237,7 +237,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
           position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 70,
           width: 260,
           background: 'var(--bg-surface)',
-          borderLeft: '1px solid var(--border)',
+          borderLeft: '1px solid hsl(var(--border))',
           boxShadow: sidebarOpen ? '-8px 0 32px rgba(0,0,0,0.2)' : 'none',
           display: 'flex', flexDirection: 'column',
           padding: '16px 16px 32px',

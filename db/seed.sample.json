@@ -1,0 +1,73 @@
+[
+  {
+    "name": "佐藤恵一",
+    "aliases": ["けーいち", "けいいち"],
+    "tag": "けーちゃん",
+    "company": "合同会社ティエムティ",
+    "location": "カウンター棚3",
+    "note": "白樫様連れ別でボトルあり",
+    "updatedAt": "2026-05-23",
+    "staff": [{ "name": "みれん", "role": "指名", "isCurrent": true }],
+    "bottles": [
+      { "brand": "きんみや", "number": 22, "remaining": 0.7, "status": "active" },
+      { "brand": "ダイヤメ", "remaining": 0.3, "status": "active" },
+      { "brand": "シーバスミズナラ18y", "remaining": 0.7, "status": "active" }
+    ],
+    "relationships": [{ "partnerName": "白樫", "type": "同伴", "note": "別でボトルあり" }]
+  },
+  {
+    "name": "よしろう",
+    "tag": "よしりん",
+    "note": "棚5のキンミヤに吉四六とハーパー8yのタグ掛けて保管",
+    "updatedAt": "2026-01-26",
+    "staff": [{ "name": "あい", "role": "指名", "isCurrent": true }],
+    "bottles": [
+      { "brand": "キンミヤ", "number": 12, "remaining": 0.6, "status": "active", "location": "棚5" },
+      { "brand": "吉四六", "number": 96, "remaining": 0.4, "status": "active" },
+      { "brand": "ハーパー8y", "number": 24, "remaining": 0.8, "status": "active" },
+      { "brand": "響JH", "status": "finished" },
+      { "brand": "ラフロイグ10y", "status": "finished" }
+    ]
+  },
+  {
+    "name": "やすし",
+    "aliases": ["やす"],
+    "tag": "やっくん",
+    "note": "お連れ様 あんな・あい。みのり指名→まな指名へ(推定)",
+    "updatedAt": "2024-01-10",
+    "staff": [
+      { "name": "まな", "role": "指名", "isCurrent": true },
+      { "name": "みのり", "role": "元指名", "isCurrent": false },
+      { "name": "あんな", "role": "場内", "isCurrent": true },
+      { "name": "あい", "role": "場内", "isCurrent": true }
+    ],
+    "bottles": [
+      { "brand": "鏡月", "number": 11, "remaining": 0.8, "status": "active" }
+    ]
+  },
+  {
+    "name": "入江",
+    "aliases": ["いりえくん", "けいじろう"],
+    "appearance": "メガネかけた見た目オラオラな若い人",
+    "updatedAt": "2025-12-22",
+    "staff": [{ "name": "あい", "role": "指名", "isCurrent": true }],
+    "bottles": [
+      { "brand": "チャミスル", "number": 55, "remaining": 0.1, "status": "active" },
+      { "brand": "白州SM", "number": 24, "status": "finished" }
+    ]
+  },
+  {
+    "name": "山岸",
+    "aliases": ["新ちゃん", "しんちゃん"],
+    "tag": "NEOGROW",
+    "location": "カウンター棚2",
+    "note": "カウンター棚2に3本保管。お連れ苗村さんとボトル共有",
+    "updatedAt": "2026-05-27",
+    "bottles": [
+      { "brand": "山崎12y", "remaining": 0.5, "status": "active", "location": "カウンター棚2" },
+      { "brand": "魔王", "remaining": 0.7, "status": "active", "location": "カウンター棚2" },
+      { "brand": "白州12y", "remaining": 0.7, "status": "active", "location": "カウンター棚2" }
+    ],
+    "relationships": [{ "partnerName": "苗村", "type": "ボトル共有" }]
+  }
+]

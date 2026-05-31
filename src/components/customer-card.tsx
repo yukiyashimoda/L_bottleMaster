@@ -81,7 +81,8 @@ export function CustomerCard({ customer, bottles, designatedCastRuby }: Customer
           )}
         </div>
 
-        {/* Favorite */}
+        {/* Favo
+        rite */}
         <FavoriteButton customerId={customer.id} isFavorite={customer.isFavorite} />
       </div>
     </Link>

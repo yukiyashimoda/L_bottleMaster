@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Kiwi_Maru, Audiowide } from 'next/font/google'
+import { Noto_Sans_JP, Audiowide } from 'next/font/google'
 import './globals.css'
 import { Nav } from '@/components/nav'
 import { isAuthenticated } from '@/lib/auth'
 import { PWARegister } from '@/components/pwa-register'
 
-const kiwiMaru = Kiwi_Maru({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-kiwi-maru' })
+const notoSansJP = Noto_Sans_JP({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-noto' })
 const audiowide = Audiowide({ subsets: ['latin'], weight: '400', variable: '--font-audiowide' })
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={`${kiwiMaru.className} ${kiwiMaru.variable} ${audiowide.variable} bg-white text-brand-plum min-h-screen`}>
+      <body className={`${notoSansJP.className} ${notoSansJP.variable} ${audiowide.variable} min-h-screen`}>
         <PWARegister />
         <Nav isLoggedIn={loggedIn} />
         <main className="pt-16 pb-20 sm:pb-0 max-w-2xl mx-auto">

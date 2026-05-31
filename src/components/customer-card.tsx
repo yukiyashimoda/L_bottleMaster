@@ -1,89 +1,124 @@
 import Link from 'next/link'
-import { AlertTriangle, Calendar } from 'lucide-react'
+import { AlertTriangle, Clock } from 'lucide-react'
 import { GiBrandyBottle } from 'react-icons/gi'
-import { Badge } from '@/components/ui/badge'
 import { FavoriteButton } from '@/components/favorite-button'
-import { cn, formatDate, isOldVisit } from '@/lib/utils'
+import { formatDate, isOldVisit } from '@/lib/utils'
 import type { Customer, Bottle } from '@/types'
 
 interface CustomerCardProps {
   customer: Customer
   bottles: Bottle[]
   designatedCastRuby?: string
+  accentColor?: string
 }
 
-export function CustomerCard({ customer, bottles, designatedCastRuby }: CustomerCardProps) {
+export function CustomerCard({ customer, bottles, designatedCastRuby, accentColor }: CustomerCardProps) {
   const old = isOldVisit(customer.lastVisitDate)
-  const avatarLabel = designatedCastRuby ?? 'FREE'
+  const activeBottles = bottles.filter(b => b.remaining && parseInt(b.remaining) > 0)
+  const accent = accentColor ?? (old ? '#E8715A' : 'var(--border)')
 
   return (
     <Link href={`/customers/${customer.id}`}>
       <div
-        className={cn(
-          'flex items-center gap-3 px-4 py-3 mx-3 my-2 rounded-2xl bg-white transition-all',
-          'shadow-[3px_3px_8px_rgba(75,60,82,0.12),-2px_-2px_6px_rgba(255,255,255,0.95)]',
-          'hover:shadow-[4px_4px_12px_rgba(75,60,82,0.16),-2px_-2px_8px_rgba(255,255,255,1)]',
-          old && 'bg-amber-50'
-        )}
+        className="relative flex items-center gap-3 mx-3 my-1.5 rounded-2xl overflow-hidden transition-all duration-150 active:scale-[0.98]"
+        style={{
+          background: 'var(--bg-surface)',
+          boxShadow: 'var(--shadow-sm)',
+        }}
       >
-        {/* Avatar */}
-        <div className={cn(
-          'w-10 h-10 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden',
-          customer.isAlert ? 'bg-brand-coral/20 text-brand-coral' : designatedCastRuby ? 'bg-brand-coral text-white' : 'bg-brand-gold text-brand-plum'
-        )}>
-          {avatarLabel}
-        </div>
+        {/* 左アクセントバー */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+          style={{ background: accentColor ?? (old ? '#E8715A' : 'transparent') }}
+        />
 
-        {/* Info */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="font-normal text-brand-plum truncate">
-              {customer.name}
-            </span>
-            {customer.nickname && (
-              <span className="text-xs text-brand-plum/50 truncate">
-                ({customer.nickname})
+        <div className="flex items-center gap-3 w-full pl-4 pr-3 py-3.5">
+          {/* アバター */}
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold shrink-0"
+            style={{
+              background: accentColor ? `${accentColor}20` : 'var(--bg-elevated)',
+              color: accentColor ?? 'var(--text-muted)',
+              border: `1.5px solid ${accentColor ? `${accentColor}40` : 'transparent'}`,
+            }}
+          >
+            {designatedCastRuby?.charAt(0) ?? '?'}
+          </div>
+
+          {/* 情報 */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-baseline gap-2">
+              <span className="font-semibold text-[15px] truncate" style={{ color: 'var(--text)' }}>
+                {customer.name}
+              </span>
+              {customer.nickname && (
+                <span className="text-xs truncate shrink-0" style={{ color: 'var(--text-muted)' }}>
+                  {customer.nickname}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3 mt-1">
+              <div className="flex items-center gap-1">
+                <Clock className="h-3 w-3" style={{ color: old ? '#E8715A' : 'var(--text-muted)' }} />
+                <span className="text-[11px]" style={{ color: old ? '#E8715A' : 'var(--text-muted)' }}>
+                  {formatDate(customer.lastVisitDate)}
+                </span>
+              </div>
+
+              {activeBottles.length > 0 && (
+                <div className="flex items-center gap-1.5">
+                  <GiBrandyBottle size={11} style={{ color: 'var(--gold)' }} />
+                  <div className="flex gap-0.5 items-end h-3">
+                    {activeBottles.slice(0, 4).map((b, i) => {
+                      const pct = parseInt(b.remaining) || 0
+                      return (
+                        <div
+                          key={i}
+                          className="w-1.5 rounded-full overflow-hidden"
+                          style={{ height: '100%', background: 'var(--bg-elevated)' }}
+                        >
+                          <div
+                            className="w-full rounded-full"
+                            style={{
+                              height: `${pct}%`,
+                              marginTop: `${100 - pct}%`,
+                              background: pct > 50 ? 'var(--gold)' : pct > 20 ? '#F97316' : '#E8715A',
+                            }}
+                          />
+                        </div>
+                      )
+                    })}
+                    {activeBottles.length > 4 && (
+                      <span className="text-[9px] ml-0.5" style={{ color: 'var(--text-muted)' }}>
+                        +{activeBottles.length - 4}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* 右側 */}
+          <div className="flex flex-col items-end gap-1 shrink-0">
+            {customer.isAlert && (
+              <div
+                className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}
+              >
+                <AlertTriangle className="h-2.5 w-2.5" />要確認
+              </div>
+            )}
+            {customer.hasGlass && (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ background: 'var(--gold-bg)', color: 'var(--gold)' }}>
+                グラス
               </span>
             )}
           </div>
-          <div className="text-xs text-brand-plum/50">{customer.ruby}</div>
-          <div className="flex items-center gap-1.5 mt-0.5">
-            <Calendar className={cn('h-3 w-3', old ? 'text-brand-gold' : 'text-brand-plum/50')} />
-            <span className={cn(
-              'text-xs rounded px-1',
-              old
-                ? 'text-brand-coral font-bold bg-brand-coral/10'
-                : 'text-brand-plum/60'
-            )}>
-              最終来店: {formatDate(customer.lastVisitDate)}
-            </span>
-          </div>
-        </div>
 
-        {/* Badges */}
-        <div className="flex flex-col items-end gap-1 shrink-0">
-          {customer.isAlert && (
-            <Badge variant="danger" className="flex items-center gap-1 text-xs">
-              <AlertTriangle className="h-3 w-3" />
-              要確認
-            </Badge>
-          )}
-          {customer.hasGlass && (
-            <span className="text-xs px-1.5 py-0.5 rounded-md bg-brand-gold/20 text-brand-plum/70 border border-brand-gold/40">
-              グラス
-            </span>
-          )}
-          {bottles.length > 0 && (
-            <div className="flex items-center gap-1 text-xs text-brand-plum/60">
-              <GiBrandyBottle size={12} />
-              <span>{bottles.length}</span>
-            </div>
-          )}
+          <FavoriteButton customerId={customer.id} isFavorite={customer.isFavorite} />
         </div>
-
-        {/* Favo
-        rite */}
-        <FavoriteButton customerId={customer.id} isFavorite={customer.isFavorite} />
       </div>
     </Link>
   )

@@ -6,7 +6,7 @@ type BottleInput = {
   status: 'active' | 'finished'; location?: string | null; bottle_tag?: string | null
 }
 type CustomerInput = {
-  name: string; aliases: string[]; tag?: string | null
+  name: string; aliases: string[]; tags?: string[] | null
   company?: string | null; appearance?: string | null
   location?: string | null; note?: string | null; updated_at: string
   bottles: BottleInput[]
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         await sql`
           UPDATE public.customers SET
             aliases    = ${c.aliases},
-            tag        = ${c.tag ?? null},
+            tags       = ${c.tags ?? []},
             company    = ${c.company ?? null},
             appearance = ${c.appearance ?? null},
             memo       = ${c.note ?? ''},
@@ -63,11 +63,11 @@ export async function POST(req: NextRequest) {
              last_visit_date, updated_at, updated_by,
              aliases, tag, company, appearance)
           VALUES
-            (${genId()}, ${c.name}, '', ${c.tag ?? ''},
+            (${genId()}, ${c.name}, '', '',
              '{}', false, '', ${c.note ?? ''},
              '{}', false, false, '', '{}',
              ${c.updated_at}, ${c.updated_at}, '',
-             ${c.aliases}, ${c.tag ?? null}, ${c.company ?? null}, ${c.appearance ?? null})
+             ${c.aliases}, ${c.tags ?? []}, ${c.company ?? null}, ${c.appearance ?? null})
           RETURNING id
         `
         customerId = rows[0].id as string

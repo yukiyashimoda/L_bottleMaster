@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS core.customers (
   id           SERIAL PRIMARY KEY,
   name         TEXT NOT NULL,            -- 正式名   例: 佐藤恵一
   aliases      TEXT[] NOT NULL DEFAULT '{}',  -- 別名/表記ゆれ
-  tag          TEXT,                     -- 呼び名タグ 例: けーちゃん
+  tags         TEXT[] NOT NULL DEFAULT '{}',  -- 呼び名タグ複数可 例: {"けーちゃん","6000様"}
   company      TEXT,
   appearance   TEXT,                     -- 見た目・特徴メモ
   location     TEXT,                     -- 顧客単位の保管場所
@@ -144,6 +144,12 @@ CREATE INDEX IF NOT EXISTS idx_resv_status   ON reservation.reservations (status
 -- ============================================================
 -- 既存DBへのマイグレーション用 ALTER TABLE（初回適用時は不要）
 -- ============================================================
+-- ALTER TABLE core.customers ALTER COLUMN tag DROP DEFAULT;
+-- ALTER TABLE core.customers RENAME COLUMN tag TO tags;
+-- ALTER TABLE core.customers ALTER COLUMN tags TYPE TEXT[] USING ARRAY[tags]::TEXT[];
+-- ALTER TABLE core.customers ALTER COLUMN tags SET DEFAULT '{}';
+-- ALTER TABLE core.customers ALTER COLUMN tags SET NOT NULL;
+
 -- ALTER TABLE core.staff ADD COLUMN IF NOT EXISTS display_name TEXT;
 -- ALTER TABLE core.staff ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'staff' CHECK (role IN ('staff','admin'));
 -- ALTER TABLE core.staff ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;

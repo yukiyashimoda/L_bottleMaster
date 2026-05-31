@@ -207,7 +207,7 @@ export default function DevImportPage() {
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                       <span style={{ fontWeight: 700, fontSize: 15 }}>{c.name}</span>
-                      {c.tag && <span style={{ fontSize: 11, padding: '2px 8px', background: 'rgba(201,169,110,0.15)', color: '#c9a96e', borderRadius: 20 }}>{c.tag}</span>}
+                      {c.tags?.map((t: string) => <span key={t} style={{ fontSize: 11, padding: '2px 8px', background: 'rgba(201,169,110,0.15)', color: '#c9a96e', borderRadius: 20 }}>{t}</span>)}
                       {isDuplicate && <span style={{ fontSize: 11, padding: '2px 8px', background: 'rgba(201,169,110,0.15)', color: '#c9a96e', borderRadius: 20 }}>既存</span>}
                     </div>
 

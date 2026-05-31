@@ -3,6 +3,7 @@ import { Kiwi_Maru, Audiowide } from 'next/font/google'
 import './globals.css'
 import { Nav } from '@/components/nav'
 import { isAuthenticated } from '@/lib/auth'
+import { PWARegister } from '@/components/pwa-register'
 
 const kiwiMaru = Kiwi_Maru({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-kiwi-maru' })
 const audiowide = Audiowide({ subsets: ['latin'], weight: '400', variable: '--font-audiowide' })
@@ -10,7 +11,6 @@ const audiowide = Audiowide({ subsets: ['latin'], weight: '400', variable: '--fo
 export const metadata: Metadata = {
   title: 'L BOTTLE MASTER',
   description: 'NEO SNACK L ボトルキープ管理',
-  manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
@@ -22,12 +22,6 @@ export const metadata: Metadata = {
       { url: '/icon-192.png',   sizes: '192x192', type: 'image/png' },
     ],
     apple: '/apple-touch-icon.png',
-  },
-  openGraph: {
-    title: 'L BOTTLE MASTER',
-    description: 'NEO SNACK L ボトルキープ管理',
-    type: 'website',
-    locale: 'ja_JP',
   },
 }
 
@@ -48,6 +42,7 @@ export default async function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${kiwiMaru.className} ${kiwiMaru.variable} ${audiowide.variable} bg-white text-brand-plum min-h-screen`}>
+        <PWARegister />
         <Nav isLoggedIn={loggedIn} />
         <main className="pt-16 pb-20 sm:pb-0 max-w-2xl mx-auto">
           {children}

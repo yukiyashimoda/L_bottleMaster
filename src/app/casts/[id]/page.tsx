@@ -84,7 +84,7 @@ export default async function CastDetailPage({
 
   return (
     <div className="min-h-screen pb-10">
-      <div className="sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-brand-beige px-4 py-3 flex items-center gap-3">
+      <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}>
         <Link href="/casts">
           <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-plum/60">
             <ArrowLeft className="h-4 w-4" />

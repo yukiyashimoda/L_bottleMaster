@@ -29,7 +29,7 @@ export default async function CastListPage() {
 
   return (
     <div className="relative min-h-screen bg-[#F5F1EE]">
-      <div className="sticky top-16 z-20 bg-[#F5F1EE]/95 backdrop-blur border-b border-brand-beige/50 px-4 py-3">
+      <div className="sticky top-0 z-20 px-4 py-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}>
         <h1 className="text-xl font-bold text-brand-plum mb-3">キャスト一覧</h1>
         <CastSearch
           casts={casts}
@@ -47,7 +47,7 @@ export default async function CastListPage() {
             const groupCasts = grouped.get(group)!
             return (
               <div key={group} id={`group-${group}`}>
-                <div className="sticky top-[calc(4rem+4.5rem)] z-10 bg-[#F5F1EE]/90 backdrop-blur px-4 py-1.5">
+                <div className="px-4 py-1.5 pt-4">
                   <span className="text-xs font-semibold text-brand-plum/60 uppercase tracking-wider">
                     {group}
                   </span>

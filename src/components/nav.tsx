@@ -28,22 +28,6 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
 
   return (
     <>
-      {/* ── 右上 丸型アイコンボタン ── */}
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="メニューを開く"
-        style={{
-          position: 'fixed', top: 12, right: 12, zIndex: 50,
-          width: 40, height: 40, borderRadius: '50%',
-          overflow: 'hidden', padding: 0, cursor: 'pointer',
-          border: '2px solid var(--border)',
-          boxShadow: 'var(--shadow)',
-          background: 'var(--bg-surface)',
-        }}
-      >
-        <img src="/apple-touch-icon.png" alt="app" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-      </button>
-
       {/* ── サイドバーオーバーレイ ── */}
       <div
         onClick={() => setOpen(false)}
@@ -63,7 +47,7 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           width: 260,
           background: 'var(--bg-surface)',
           borderLeft: '1px solid var(--border)',
-          boxShadow: '-8px 0 32px rgba(0,0,0,0.2)',
+          boxShadow: open ? '-8px 0 32px rgba(0,0,0,0.2)' : 'none',
           display: 'flex', flexDirection: 'column',
           padding: '16px 16px 32px',
           transform: open ? 'translateX(0)' : 'translateX(100%)',

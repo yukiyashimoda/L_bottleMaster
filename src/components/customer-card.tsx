@@ -28,14 +28,14 @@ export function CustomerCard({ customer, bottles, designatedCastRuby, accentColo
         <div className="flex items-center gap-3 w-full px-4 py-3.5">
           {/* アバター */}
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold shrink-0"
+            className="w-10 h-10 rounded-xl flex items-center justify-center text-[9px] font-bold shrink-0 text-center leading-tight"
             style={{
               background: accentColor ? `${accentColor}20` : 'var(--bg-elevated)',
               color: accentColor ?? 'var(--text-muted)',
               border: `1.5px solid ${accentColor ? `${accentColor}40` : 'transparent'}`,
             }}
           >
-            {designatedCastRuby?.charAt(0) ?? '?'}
+            {designatedCastRuby ?? 'FREE'}
           </div>
 
           {/* 情報 */}

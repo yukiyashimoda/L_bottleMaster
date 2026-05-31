@@ -1,109 +1,192 @@
 'use client'
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LogIn, LogOut } from 'lucide-react'
-import { FaAddressCard, FaStar } from 'react-icons/fa'
-import { GiAmpleDress } from 'react-icons/gi'
-import { cn } from '@/lib/utils'
+import { Users, Sparkles, Star, LogOut, X } from 'lucide-react'
 import { logoutAction } from '@/app/login/actions'
 
-interface NavProps { isLoggedIn: boolean }
+const LINKS = [
+  { href: '/',           label: '顧客',      Icon: Users    },
+  { href: '/casts',      label: 'キャスト',  Icon: Sparkles },
+  { href: '/favorites',  label: 'お気に入り', Icon: Star     },
+]
 
-export function Nav({ isLoggedIn }: NavProps) {
+export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const pathname = usePathname()
   const router = useRouter()
+  const [open, setOpen] = useState(false)
 
-  const links = [
-    { href: '/',         label: '顧客',      Icon: FaAddressCard },
-    { href: '/casts',    label: 'キャスト',  Icon: GiAmpleDress  },
-    { href: '/favorites',label: 'お気に入り', Icon: FaStar       },
-  ]
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   const handleLogout = async () => {
     await logoutAction()
     router.push('/')
     router.refresh()
+    setOpen(false)
   }
-
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
     <>
-      {/* ヘッダー */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-40 h-14"
-        style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}
+      {/* ── 右上 丸型アイコンボタン ── */}
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="メニューを開く"
+        style={{
+          position: 'fixed', top: 12, right: 12, zIndex: 50,
+          width: 40, height: 40, borderRadius: '50%',
+          overflow: 'hidden', padding: 0, cursor: 'pointer',
+          border: '2px solid var(--border)',
+          boxShadow: 'var(--shadow)',
+          background: 'var(--bg-surface)',
+        }}
       >
-        <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
-          <Link href="/">
-            <div>
-              <div className="text-[8px] tracking-[0.3em] uppercase font-medium" style={{ color: 'var(--accent)' }}>
-                Neo Snack L
-              </div>
-              <div className="text-sm font-semibold tracking-wide" style={{ color: 'var(--text)', fontFamily: 'var(--font-audiowide)' }}>
-                Bottle Master
-              </div>
-            </div>
-          </Link>
+        <img src="/apple-touch-icon.png" alt="app" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </button>
 
-          <div className="flex items-center gap-1">
-            {links.map(({ href, label, Icon }) => (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  'hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all',
-                  isActive(href) ? 'text-white' : 'hover:opacity-80'
-                )}
-                style={isActive(href)
-                  ? { background: 'var(--accent)', color: 'var(--text)' }
-                  : { color: 'var(--text-sub)' }
-                }
-              >
-                <Icon size={13} />{label}
-              </Link>
-            ))}
-            {isLoggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-1 px-2 py-2 rounded-xl text-xs transition-all"
-                style={{ color: 'var(--text-sub)' }}
-              >
-                <LogOut className="h-4 w-4" />
-                <span className="hidden sm:inline ml-0.5">ログアウト</span>
-              </button>
-            ) : (
-              <Link href="/login" className="flex items-center gap-1 px-2 py-2 rounded-xl text-xs" style={{ color: 'var(--text-sub)' }}>
-                <LogIn className="h-4 w-4" />
-                <span className="hidden sm:inline ml-0.5">ログイン</span>
-              </Link>
-            )}
+      {/* ── サイドバーオーバーレイ ── */}
+      <div
+        onClick={() => setOpen(false)}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 60,
+          background: 'rgba(0,0,0,0.4)',
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? 'auto' : 'none',
+          transition: 'opacity 0.2s',
+        }}
+      />
+
+      {/* ── サイドバーパネル ── */}
+      <aside
+        style={{
+          position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 70,
+          width: 260,
+          background: 'var(--bg-surface)',
+          borderLeft: '1px solid var(--border)',
+          boxShadow: '-8px 0 32px rgba(0,0,0,0.2)',
+          display: 'flex', flexDirection: 'column',
+          padding: '16px 16px 32px',
+          transform: open ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 0.25s cubic-bezier(0.4,0,0.2,1)',
+        }}
+      >
+        {/* 閉じるボタン */}
+        <button
+          onClick={() => setOpen(false)}
+          style={{
+            alignSelf: 'flex-end', background: 'none', border: 'none',
+            cursor: 'pointer', padding: 8, borderRadius: 8,
+            color: 'var(--text-muted)',
+          }}
+        >
+          <X size={18} />
+        </button>
+
+        {/* アプリアイコン + 名前 */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '16px 0 28px' }}>
+          <img
+            src="/apple-touch-icon.png"
+            alt="L Bottle Master"
+            style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid var(--border)' }}
+          />
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: 2 }}>
+              Neo Snack L
+            </div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--font-audiowide)' }}>
+              Bottle Master
+            </div>
           </div>
         </div>
-      </nav>
 
-      {/* スマホ下部ナビ */}
-      <nav
-        className="sm:hidden fixed bottom-0 left-0 right-0 z-40 h-16"
-        style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)' }}
-      >
-        <div className="flex h-full">
-          {links.map(({ href, label, Icon }) => {
+        {/* ナビリンク */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
+          {LINKS.map(({ href, label, Icon }) => {
             const active = isActive(href)
             return (
               <Link
                 key={href}
                 href={href}
-                className="flex-1 flex flex-col items-center justify-center gap-1 text-[10px] font-medium transition-all"
-                style={{ color: active ? 'var(--accent)' : 'var(--text-muted)' }}
+                onClick={() => setOpen(false)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 12,
+                  padding: '12px 16px', borderRadius: 12,
+                  background: active ? 'var(--accent)' : 'transparent',
+                  color: active ? '#fff' : 'var(--accent)',
+                  textDecoration: 'none', fontSize: 15, fontWeight: 500,
+                  transition: 'all 0.15s',
+                }}
               >
-                <Icon size={19} />
+                <Icon size={18} strokeWidth={active ? 0 : 2} fill={active ? '#fff' : 'none'} style={{ flexShrink: 0 }} />
                 {label}
               </Link>
             )
           })}
         </div>
+
+        {/* ログアウト */}
+        {isLoggedIn && (
+          <button
+            onClick={handleLogout}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '12px 16px', borderRadius: 12,
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'var(--text-muted)', fontSize: 15, fontWeight: 500,
+            }}
+          >
+            <LogOut size={18} style={{ stroke: 'var(--text-muted)', fill: 'none', strokeWidth: 2 }} />
+            ログアウト
+          </button>
+        )}
+      </aside>
+
+      {/* ── 下部ナビ（スマホ） ── */}
+      <nav
+        className="sm:hidden"
+        style={{
+          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40,
+          height: 64,
+          background: 'var(--bg-surface)',
+          borderTop: '1px solid var(--border)',
+          display: 'flex', alignItems: 'center',
+        }}
+      >
+        {LINKS.map(({ href, label, Icon }) => {
+          const active = isActive(href)
+          return (
+            <Link
+              key={href}
+              href={href}
+              style={{
+                flex: 1, display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center',
+                textDecoration: 'none',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  gap: 3,
+                  padding: active ? '5px 18px' : '5px 8px',
+                  borderRadius: 20,
+                  background: active ? 'var(--accent)' : 'transparent',
+                  transition: 'all 0.15s',
+                }}
+              >
+                <Icon
+                  size={19}
+                  strokeWidth={active ? 0 : 2}
+                  fill={active ? '#fff' : 'none'}
+                  style={{ stroke: active ? 'none' : 'var(--accent)' }}
+                />
+                <span style={{ fontSize: 10, fontWeight: 600, color: active ? '#fff' : 'var(--accent)', lineHeight: 1 }}>
+                  {label}
+                </span>
+              </div>
+            </Link>
+          )
+        })}
       </nav>
     </>
   )

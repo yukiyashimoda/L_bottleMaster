@@ -36,7 +36,7 @@ export function CastFilterRow({ casts, customers, bottlesMap }: Props) {
       <div
         className="sticky z-20 px-4 py-3 overflow-x-auto"
         style={{
-          top: 56,
+          top: 60,
           background: 'var(--bg)',
           borderBottom: '1px solid var(--border)',
           scrollbarWidth: 'none',

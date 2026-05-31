@@ -29,7 +29,7 @@ export default async function CustomerListPage() {
       <div
         className="sticky z-30 px-4 py-3"
         style={{
-          top: 56,
+          top: 0,
           background: 'var(--bg)',
           borderBottom: '1px solid var(--border)',
         }}

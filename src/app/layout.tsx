@@ -44,7 +44,7 @@ export default async function RootLayout({
       <body className={`${notoSansJP.className} ${notoSansJP.variable} ${audiowide.variable} min-h-screen`}>
         <PWARegister />
         <Nav isLoggedIn={loggedIn} />
-        <main className="pt-16 pb-20 sm:pb-0 max-w-2xl mx-auto">
+        <main className="pb-16 sm:pb-0 max-w-2xl mx-auto">
           {children}
         </main>
       </body>

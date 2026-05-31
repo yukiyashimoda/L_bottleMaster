@@ -67,9 +67,24 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
         className="sticky top-0 z-30"
         style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)' }}
       >
-        {/* 検索バー + アイコン */}
-        <div className="flex items-center gap-2 px-3 pt-3 pb-2">
-          <div className="relative flex-1">
+        {/* アプリアイコン行 */}
+        <div className="flex justify-end px-4 pt-3 pb-1">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            style={{
+              width: 34, height: 34, borderRadius: '50%',
+              overflow: 'hidden', padding: 0,
+              border: '2px solid var(--border)',
+              cursor: 'pointer',
+            }}
+          >
+            <img src="/apple-touch-icon.png" alt="menu" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </button>
+        </div>
+
+        {/* 検索バー行 */}
+        <div className="px-3 pb-2">
+          <div className="relative">
             <Search
               className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4"
               style={{ color: 'var(--text-muted)' }}
@@ -95,20 +110,6 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
               </button>
             )}
           </div>
-
-          {/* 丸型アプリアイコン */}
-          <button
-            onClick={() => setSidebarOpen(true)}
-            style={{
-              width: 38, height: 38, borderRadius: '50%',
-              overflow: 'hidden', padding: 0, flexShrink: 0,
-              border: '2px solid var(--border)',
-              boxShadow: 'var(--shadow-sm)',
-              cursor: 'pointer',
-            }}
-          >
-            <img src="/apple-touch-icon.png" alt="menu" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </button>
         </div>
 
         {/* キャストフィルター行 */}
@@ -237,7 +238,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
           width: 260,
           background: 'var(--bg-surface)',
           borderLeft: '1px solid var(--border)',
-          boxShadow: '-8px 0 32px rgba(0,0,0,0.2)',
+          boxShadow: sidebarOpen ? '-8px 0 32px rgba(0,0,0,0.2)' : 'none',
           display: 'flex', flexDirection: 'column',
           padding: '16px 16px 32px',
           transform: sidebarOpen ? 'translateX(0)' : 'translateX(100%)',

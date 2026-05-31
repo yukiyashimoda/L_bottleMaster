@@ -151,7 +151,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
                     style={{
                       background: active ? 'var(--text)' : 'transparent',
                       color: active ? 'var(--bg)' : 'var(--text-sub)',
-                      border: `2px solid ${active ? 'var(--text)' : 'var(--border)'}`,
+                      border: `2px solid ${active ? 'var(--text)' : 'var(--text-sub)'}`,
                       transform: active ? 'scale(1.08)' : 'scale(1)',
                     }}
                   >

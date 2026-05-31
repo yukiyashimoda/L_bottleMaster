@@ -15,24 +15,17 @@ interface CustomerCardProps {
 export function CustomerCard({ customer, bottles, designatedCastRuby, accentColor }: CustomerCardProps) {
   const old = isOldVisit(customer.lastVisitDate)
   const activeBottles = bottles.filter(b => b.remaining && parseInt(b.remaining) > 0)
-  const accent = accentColor ?? (old ? '#E8715A' : 'var(--border)')
 
   return (
     <Link href={`/customers/${customer.id}`}>
       <div
-        className="relative flex items-center gap-3 mx-3 my-1.5 rounded-2xl overflow-hidden transition-all duration-150 active:scale-[0.98]"
+        className="flex items-center gap-3 mx-3 my-1.5 rounded-2xl transition-all duration-150 active:scale-[0.98]"
         style={{
           background: 'var(--bg-surface)',
           boxShadow: 'var(--shadow-sm)',
         }}
       >
-        {/* 左アクセントバー */}
-        <div
-          className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-          style={{ background: accentColor ?? (old ? '#E8715A' : 'transparent') }}
-        />
-
-        <div className="flex items-center gap-3 w-full pl-4 pr-3 py-3.5">
+        <div className="flex items-center gap-3 w-full px-4 py-3.5">
           {/* アバター */}
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold shrink-0"
@@ -67,34 +60,11 @@ export function CustomerCard({ customer, bottles, designatedCastRuby, accentColo
               </div>
 
               {activeBottles.length > 0 && (
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1">
                   <GiBrandyBottle size={11} style={{ color: 'var(--gold)' }} />
-                  <div className="flex gap-0.5 items-end h-3">
-                    {activeBottles.slice(0, 4).map((b, i) => {
-                      const pct = parseInt(b.remaining) || 0
-                      return (
-                        <div
-                          key={i}
-                          className="w-1.5 rounded-full overflow-hidden"
-                          style={{ height: '100%', background: 'var(--bg-elevated)' }}
-                        >
-                          <div
-                            className="w-full rounded-full"
-                            style={{
-                              height: `${pct}%`,
-                              marginTop: `${100 - pct}%`,
-                              background: pct > 50 ? 'var(--gold)' : pct > 20 ? '#F97316' : '#E8715A',
-                            }}
-                          />
-                        </div>
-                      )
-                    })}
-                    {activeBottles.length > 4 && (
-                      <span className="text-[9px] ml-0.5" style={{ color: 'var(--text-muted)' }}>
-                        +{activeBottles.length - 4}
-                      </span>
-                    )}
-                  </div>
+                  <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+                    {activeBottles.length}本
+                  </span>
                 </div>
               )}
             </div>

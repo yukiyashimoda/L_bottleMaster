@@ -114,7 +114,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
 
         {/* キャストフィルター行 */}
         <div
-          className="overflow-x-auto pb-3 px-3"
+          className="overflow-x-auto pt-2 pb-3 px-3"
           style={{ scrollbarWidth: 'none' }}
         >
           <div className="flex items-end gap-3 w-max">
@@ -128,7 +128,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
                 style={{
                   background: !selectedCast ? 'var(--text)' : 'var(--bg-elevated)',
                   color: !selectedCast ? 'var(--bg)' : 'var(--text-sub)',
-                  transform: !selectedCast ? 'scale(1.08)' : 'scale(1)',
+                  border: `2px solid ${!selectedCast ? 'var(--text)' : 'transparent'}`,
                 }}
               >
                 全員
@@ -153,7 +153,6 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
                       background: active ? 'var(--text)' : 'transparent',
                       color: active ? 'var(--bg)' : 'var(--text-sub)',
                       border: `2px solid ${active ? 'var(--text)' : 'var(--text-sub)'}`,
-                      transform: active ? 'scale(1.08)' : 'scale(1)',
                     }}
                   >
                     {cast.ruby?.charAt(0) || cast.name.charAt(0)}

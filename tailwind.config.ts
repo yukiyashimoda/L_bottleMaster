@@ -12,8 +12,10 @@ const config: Config = {
       colors: {
         'brand-plum':  '#4B3C52',
         'brand-coral': '#F1896C',
-        'brand-gold':  '#F3C05E',
+        'brand-gold':  '#C9A96E',
         'brand-beige': '#E8E2D9',
+        gold:  'var(--gold)',
+        coral: 'var(--coral)',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

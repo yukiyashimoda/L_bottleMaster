@@ -4,39 +4,124 @@
 
 @layer base {
   :root {
-    --background: 36 25% 88%;
-    --foreground: 281 16% 28%;
-    --card: 0 0% 100%;
-    --card-foreground: 281 16% 28%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 281 16% 28%;
-    --primary: 281 16% 28%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 36 25% 88%;
-    --secondary-foreground: 281 16% 28%;
-    --muted: 36 25% 88%;
-    --muted-foreground: 281 16% 50%;
-    --accent: 36 25% 83%;
-    --accent-foreground: 281 16% 28%;
-    --destructive: 13 83% 68%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 36 20% 82%;
-    --input: 36 20% 82%;
-    --ring: 281 16% 28%;
-    --radius: 0.75rem;
+    /* ── Light mode ── */
+    --bg:           #FAFAF8;
+    --bg-surface:   #FFFFFF;
+    --bg-elevated:  #F5F3EE;
+    --border:       #E8E2D9;
+    --border-subtle: rgba(0,0,0,0.06);
+    --text:         #1C1C1E;
+    --text-sub:     #6B6670;
+    --text-muted:   #AEAEB2;
+    --gold:         #C9A96E;
+    --gold-bg:      rgba(201,169,110,0.12);
+    --coral:        #D4718A;
+    --coral-bg:     rgba(212,113,138,0.12);
+    --green:        #5BAD6F;
+    --green-bg:     rgba(91,173,111,0.12);
+    --shadow:       0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md:    0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --radius:       0.75rem;
+
+    /* shadcn compat */
+    --background:        36 25% 97%;
+    --foreground:        220 10% 12%;
+    --card:              0 0% 100%;
+    --card-foreground:   220 10% 12%;
+    --popover:           0 0% 100%;
+    --popover-foreground:220 10% 12%;
+    --primary:           38 42% 60%;
+    --primary-foreground:0 0% 100%;
+    --secondary:         36 25% 94%;
+    --secondary-foreground:220 10% 12%;
+    --muted:             36 20% 94%;
+    --muted-foreground:  220 5% 50%;
+    --accent:            36 25% 90%;
+    --accent-foreground: 220 10% 12%;
+    --destructive:       345 40% 58%;
+    --destructive-foreground:0 0% 100%;
+    --input:             36 20% 88%;
+    --ring:              38 42% 60%;
+  }
+
+  .dark {
+    /* ── Dark mode ── */
+    --bg:           #0D0D14;
+    --bg-surface:   #14141E;
+    --bg-elevated:  #1A1A26;
+    --border:       rgba(255,255,255,0.08);
+    --border-subtle: rgba(255,255,255,0.05);
+    --text:         #F0EDE8;
+    --text-sub:     rgba(240,237,232,0.55);
+    --text-muted:   rgba(240,237,232,0.30);
+    --gold:         #C9A96E;
+    --gold-bg:      rgba(201,169,110,0.15);
+    --coral:        #D4718A;
+    --coral-bg:     rgba(212,113,138,0.15);
+    --green:        #6FCF97;
+    --green-bg:     rgba(111,207,151,0.12);
+    --shadow:       0 1px 3px rgba(0,0,0,0.4);
+    --shadow-md:    0 4px 16px rgba(0,0,0,0.5);
+
+    /* shadcn compat */
+    --background:        231 15% 7%;
+    --foreground:        36 20% 93%;
+    --card:              233 15% 10%;
+    --card-foreground:   36 20% 93%;
+    --popover:           233 15% 10%;
+    --popover-foreground:36 20% 93%;
+    --primary:           38 42% 60%;
+    --primary-foreground:231 15% 7%;
+    --secondary:         233 12% 15%;
+    --secondary-foreground:36 20% 93%;
+    --muted:             233 12% 14%;
+    --muted-foreground:  36 10% 55%;
+    --accent:            233 12% 18%;
+    --accent-foreground: 36 20% 93%;
+    --destructive:       345 45% 55%;
+    --destructive-foreground:0 0% 100%;
+    --input:             233 12% 18%;
+    --ring:              38 42% 60%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
+
+  html { scroll-behavior: smooth; }
+
   body {
-    @apply bg-white text-brand-plum;
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9999px; }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+@layer utilities {
+  .surface {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+  }
+  .surface-elevated {
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+  }
+  .text-main  { color: var(--text); }
+  .text-sub   { color: var(--text-sub); }
+  .text-muted { color: var(--text-muted); }
+  .text-gold  { color: var(--gold); }
+  .text-coral { color: var(--coral); }
+  .text-green { color: var(--green); }
+  .bg-gold    { background-color: var(--gold-bg); }
+  .bg-coral   { background-color: var(--coral-bg); }
+  .bg-green   { background-color: var(--green-bg); }
+  .card-shadow { box-shadow: var(--shadow); }
+  .card-shadow-md { box-shadow: var(--shadow-md); }
 }

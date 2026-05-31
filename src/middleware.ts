@@ -4,8 +4,11 @@ import { SESSION_COOKIE, SESSION_VALUE } from '@/lib/auth'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // ログインページはそのまま通す
+  // ログインページ・PWA関連ファイルはそのまま通す
   if (pathname === '/login') return NextResponse.next()
+  if (pathname.startsWith('/sw.js')) return NextResponse.next()
+  if (pathname.startsWith('/manifest')) return NextResponse.next()
+  if (pathname.startsWith('/icon-') || pathname.startsWith('/apple-touch')) return NextResponse.next()
 
   const session = request.cookies.get(SESSION_COOKIE)?.value
   if (session === SESSION_VALUE) return NextResponse.next()

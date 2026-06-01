@@ -60,7 +60,14 @@ export async function POST(req: NextRequest) {
 
   const result = await model.generateContent(text)
   const raw = result.response.text().trim()
-  const jsonStr = raw.startsWith('```') ? raw.replace(/^```json?\n?/, '').replace(/\n?```$/, '') : raw
+
+  // ``` コードブロック除去 → それでもなければ最初の [ から最後の ] を切り出す
+  let jsonStr = raw.replace(/^```json?\s*/i, '').replace(/\s*```\s*$/, '').trim()
+  if (!jsonStr.startsWith('[')) {
+    const start = jsonStr.indexOf('[')
+    const end   = jsonStr.lastIndexOf(']')
+    if (start !== -1 && end !== -1) jsonStr = jsonStr.slice(start, end + 1)
+  }
 
   try {
     const customers = JSON.parse(jsonStr)

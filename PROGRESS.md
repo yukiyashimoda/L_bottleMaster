@@ -67,6 +67,24 @@
 
 ---
 
+## インポートルート実装ルール（必読・繰り返しバグ防止）
+
+`src/app/api/dev/import/route.ts` を触るときは以下を厳守：
+
+### キャスト紐付け
+| | 内容 |
+|--|------|
+| ❌ NG | `bottle.customer_staff` に INSERT（`core.customers` 参照のため常にNULL→エラー） |
+| ❌ NG | `core.staff` からキャストIDを引く |
+| ✅ 正解 | `public.casts` でname検索→IDを `public.customers.designated_cast_ids` にUPDATE |
+
+### tagカラム
+- `public.customers.tag` は `TEXT`（単一文字列）
+- 複数タグは `(c.tags ?? []).join(',') || null` でカンマ区切り文字列に変換
+- ❌ 配列をそのまま TEXT カラムに渡さない
+
+---
+
 ## データ挿入フォーマット（必読）
 
 `public.bottles` へのデータ挿入は以下の形式を厳守：

@@ -86,7 +86,7 @@ function toVisitRecord(r: any): VisitRecord {
     memo: r.memo,
     isAlert: r.is_alert ?? false,
     alertReason: r.alert_reason ?? '',
-    bottleSnapshots: r.bottle_snapshots ?? [],
+    bottleSnapshots: Array.isArray(r.bottle_snapshots) ? r.bottle_snapshots : [],
   }
 }
 

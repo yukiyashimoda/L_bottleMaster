@@ -40,7 +40,7 @@ async function setVisits(customerName: string, visits: {
     const iIds = await resolveIds(v.inStore)
     await sql`
       INSERT INTO visit_records (id,customer_id,visit_date,designated_cast_ids,in_store_cast_ids,bottles_opened,bottles_used,memo,is_alert,alert_reason,bottle_snapshots)
-      VALUES (${id()},${cid},${v.date},${dIds},${iIds},'{}','{}',${v.memo??''},false,'','{}')
+      VALUES (${id()},${cid},${v.date},${dIds},${iIds},'{}','{}',${v.memo??''},false,'','[]')
     `
   }
   // last_visit_date を最新訪問日に更新

@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
              '{}', false, '', ${c.note ?? ''},
              '{}', false, false, '', '{}',
              ${c.updated_at}, ${c.updated_at}, '',
-             ${c.aliases}, ${c.tags ?? []}, ${c.company ?? null}, ${c.appearance ?? null})
+             ${c.aliases}, ${(c.tags ?? []).join(',') || null}, ${c.company ?? null}, ${c.appearance ?? null})
           RETURNING id
         `
         customerId = rows[0].id as string
@@ -98,20 +98,19 @@ export async function POST(req: NextRequest) {
         `
       }
 
-      // customer_staff（core.staff と照合）
+      // designated_cast_ids を public.casts から解決して更新
+      const castIds: string[] = []
       for (const cs of c.staff) {
-        const staffRows = await sql`
-          SELECT id FROM core.staff WHERE name = ${cs.name} LIMIT 1
+        if (!cs.is_current) continue
+        const castRows = await sql`
+          SELECT id FROM public.casts WHERE name = ${cs.name} LIMIT 1
         `
-        if (!staffRows.length) continue
-        // public.customers の id (text) と core.staff の id (int) をリンク
+        if (castRows.length) castIds.push(castRows[0].id as string)
+      }
+      if (castIds.length > 0) {
         await sql`
-          INSERT INTO bottle.customer_staff (customer_id, staff_id, role, is_current)
-          VALUES (
-            (SELECT id::int FROM core.customers WHERE name = ${c.name} LIMIT 1),
-            ${staffRows[0].id as number}, ${cs.role}, ${cs.is_current}
-          )
-          ON CONFLICT (customer_id, staff_id, role) DO UPDATE SET is_current = EXCLUDED.is_current
+          UPDATE public.customers SET designated_cast_ids = ${castIds}
+          WHERE id = ${customerId}
         `
       }
 

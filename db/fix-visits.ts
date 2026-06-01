@@ -81,7 +81,7 @@ async function run() {
   console.log('=== 伊豆 ===')
   await setVisits('伊豆', [
     { date: '2025-04-26', designated: ['あいな'], inStore: ['みほ', 'さち'] },
-    { date: '2026-03-07', designated: ['あいな'], inStore: ['森'], memo: '森さんと来店。あいな飲み過ぎて昼過ぎに帰った' },
+    { date: '2026-03-07', designated: ['あいな'], inStore: [], memo: '森さんと来店。あいな飲み過ぎて昼過ぎに帰った' },
     { date: '2026-04-23', designated: ['まりか', 'あいな'], inStore: ['れん', 'ともな'] },
   ])
   await setMemo('伊豆', 'お連れみほ指名森さんボトルある')

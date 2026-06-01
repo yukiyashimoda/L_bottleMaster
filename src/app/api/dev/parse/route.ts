@@ -50,29 +50,33 @@ R1=2019, R2=2020, R3=2021, R4=2022, R5=2023, R6=2024, R7=2025, R8=2026
 ]`
 
 export async function POST(req: NextRequest) {
-  const { text } = await req.json() as { text: string }
-  if (!text?.trim()) return NextResponse.json({ error: 'テキストが空です' }, { status: 400 })
-
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-2.5-flash',
-    systemInstruction: SYSTEM_PROMPT,
-  })
-
-  const result = await model.generateContent(text)
-  const raw = result.response.text().trim()
-
-  // ``` コードブロック除去 → それでもなければ最初の [ から最後の ] を切り出す
-  let jsonStr = raw.replace(/^```json?\s*/i, '').replace(/\s*```\s*$/, '').trim()
-  if (!jsonStr.startsWith('[')) {
-    const start = jsonStr.indexOf('[')
-    const end   = jsonStr.lastIndexOf(']')
-    if (start !== -1 && end !== -1) jsonStr = jsonStr.slice(start, end + 1)
-  }
-
   try {
-    const customers = JSON.parse(jsonStr)
-    return NextResponse.json({ customers })
-  } catch {
-    return NextResponse.json({ error: 'パース失敗', raw }, { status: 422 })
+    const { text } = await req.json() as { text: string }
+    if (!text?.trim()) return NextResponse.json({ error: 'テキストが空です' }, { status: 400 })
+
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-2.5-flash',
+      systemInstruction: SYSTEM_PROMPT,
+    })
+
+    const result = await model.generateContent(text)
+    const raw = result.response.text().trim()
+
+    // ``` コードブロック除去 → それでもなければ最初の [ から最後の ] を切り出す
+    let jsonStr = raw.replace(/^```json?\s*/i, '').replace(/\s*```\s*$/, '').trim()
+    if (!jsonStr.startsWith('[')) {
+      const start = jsonStr.indexOf('[')
+      const end   = jsonStr.lastIndexOf(']')
+      if (start !== -1 && end !== -1) jsonStr = jsonStr.slice(start, end + 1)
+    }
+
+    try {
+      const customers = JSON.parse(jsonStr)
+      return NextResponse.json({ customers })
+    } catch {
+      return NextResponse.json({ error: 'パース失敗', raw }, { status: 422 })
+    }
+  } catch (e) {
+    return NextResponse.json({ error: `APIエラー: ${String(e)}` }, { status: 500 })
   }
 }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { neon } from '@neondatabase/serverless'
 
 type BottleInput = {
-  brand: string; number?: number | null; remaining?: number | null
+  brand: string; number?: number | null; remaining?: string | number | null
   status: 'active' | 'finished'; location?: string | null; bottle_tag?: string | null
 }
 type CustomerInput = {
@@ -15,6 +15,16 @@ type CustomerInput = {
 
 function genId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
+}
+
+// 残量を '70%' 形式に正規化（数値0.7→'70%'、文字列'70%'→そのまま）
+function toRemaining(r: string | number | null | undefined): string {
+  if (r == null) return ''
+  if (typeof r === 'number') return `${Math.round(r * 100)}%`
+  if (String(r).includes('%')) return String(r)
+  const n = parseFloat(String(r))
+  if (!isNaN(n) && n <= 1) return `${Math.round(n * 100)}%`
+  return String(r)
 }
 
 export async function POST(req: NextRequest) {
@@ -81,7 +91,7 @@ export async function POST(req: NextRequest) {
           VALUES (
             ${genId()}, ${customerId},
             ${bottleName},
-            ${b.remaining != null ? String(b.remaining) : ''},
+            ${toRemaining(b.remaining)},
             ${c.updated_at},
             ${b.status}
           )

@@ -33,7 +33,8 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
         onClick={() => setOpen(false)}
         style={{
           position: 'fixed', inset: 0, zIndex: 60,
-          background: 'rgba(0,0,0,0.4)',
+          background: 'rgba(0,0,0,0.7)',
+          backdropFilter: 'blur(4px)',
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
           transition: 'opacity 0.2s',
@@ -45,9 +46,9 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
         style={{
           position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 70,
           width: 260,
-          background: 'var(--bg-surface)',
-          borderLeft: '1px solid hsl(var(--border))',
-          boxShadow: open ? '-8px 0 32px rgba(0,0,0,0.2)' : 'none',
+          background: 'rgba(8,15,22,0.97)',
+          borderLeft: '1px solid rgba(129,236,255,0.12)',
+          boxShadow: open ? '-8px 0 32px rgba(0,0,0,0.45)' : 'none',
           display: 'flex', flexDirection: 'column',
           padding: '16px 16px 32px',
           transform: open ? 'translateX(0)' : 'translateX(100%)',
@@ -71,13 +72,19 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           <img
             src="/apple-touch-icon.png"
             alt="L Bottle Master"
-            style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid hsl(var(--border))' }}
+            style={{
+              width: 76,
+              height: 76,
+              borderRadius: 10,
+              border: '1px solid rgba(129,236,255,0.2)',
+              filter: 'drop-shadow(0 0 8px rgba(129,236,255,0.35))',
+            }}
           />
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--theme-accent)', marginBottom: 2 }}>
+            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 2 }}>
               Neo Snack L
             </div>
-            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--font-audiowide)' }}>
+            <div className="glow-text" style={{ fontSize: 18, fontWeight: 700, color: 'var(--theme-accent)', fontFamily: 'var(--font-doto, monospace)', letterSpacing: '0.12em' }}>
               Bottle Master
             </div>
           </div>
@@ -95,13 +102,15 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 style={{
                   display: 'flex', alignItems: 'center', gap: 12,
                   padding: '12px 16px', borderRadius: 12,
-                  background: active ? 'var(--theme-accent)' : 'transparent',
-                  color: active ? '#fff' : 'var(--theme-accent)',
+                  background: active ? 'rgba(129,236,255,0.08)' : 'transparent',
+                  color: active ? 'var(--theme-accent)' : 'var(--text-sub)',
+                  border: active ? '1px solid rgba(129,236,255,0.15)' : '1px solid transparent',
+                  textShadow: active ? '0 0 8px rgba(129,236,255,0.5)' : 'none',
                   textDecoration: 'none', fontSize: 15, fontWeight: 500,
                   transition: 'all 0.15s',
                 }}
               >
-                <Icon size={18} strokeWidth={active ? 0 : 2} fill={active ? '#fff' : 'none'} style={{ flexShrink: 0 }} />
+                <Icon size={18} strokeWidth={2} fill="none" style={{ flexShrink: 0, filter: active ? 'drop-shadow(0 0 4px rgba(129,236,255,0.8))' : 'none' }} />
                 {label}
               </Link>
             )
@@ -130,10 +139,13 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
         className="sm:hidden"
         style={{
           position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40,
-          height: 64,
-          background: 'var(--bg-surface)',
-          borderTop: '1px solid hsl(var(--border))',
+          minHeight: 72,
+          background: 'rgba(8,15,22,0.45)',
+          backdropFilter: 'blur(28px)',
+          WebkitBackdropFilter: 'blur(28px)',
+          boxShadow: '0 -4px 30px rgba(0,0,0,0.3)',
           display: 'flex', alignItems: 'center',
+          paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
         {LINKS.map(({ href, label, Icon }) => {
@@ -146,25 +158,40 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 flex: 1, display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center',
                 textDecoration: 'none',
+                minHeight: 72,
+                position: 'relative',
+                color: active ? 'var(--theme-accent)' : 'var(--text-muted)',
+                filter: active ? 'drop-shadow(0 0 5px rgba(129,236,255,0.7))' : 'none',
               }}
             >
+              {active && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: '25%',
+                    width: '50%',
+                    height: 2,
+                    borderRadius: '0 0 999px 999px',
+                    background: 'var(--theme-accent)',
+                    boxShadow: '0 0 8px var(--theme-accent)',
+                  }}
+                />
+              )}
               <div
                 style={{
                   display: 'flex', flexDirection: 'column', alignItems: 'center',
                   gap: 3,
-                  padding: active ? '5px 18px' : '5px 8px',
-                  borderRadius: 20,
-                  background: active ? 'var(--theme-accent)' : 'transparent',
                   transition: 'all 0.15s',
                 }}
               >
                 <Icon
-                  size={19}
-                  strokeWidth={active ? 0 : 2}
-                  fill={active ? '#fff' : 'none'}
-                  style={{ stroke: active ? 'none' : 'var(--theme-accent)' }}
+                  size={active ? 22 : 20}
+                  strokeWidth={2}
+                  fill="none"
+                  style={{ stroke: 'currentColor' }}
                 />
-                <span style={{ fontSize: 10, fontWeight: 600, color: active ? '#fff' : 'var(--theme-accent)', lineHeight: 1 }}>
+                <span style={{ fontSize: 9, fontWeight: active ? 700 : 500, color: 'currentColor', lineHeight: 1, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                   {label}
                 </span>
               </div>

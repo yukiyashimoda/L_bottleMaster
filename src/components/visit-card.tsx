@@ -358,7 +358,7 @@ export function VisitCard({ visit, casts, bottles, loggedIn }: VisitCardProps) {
 
                 </form>
                 <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
-                  <Button type="submit" form="visit-edit-form" disabled={loading} className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11">
+                  <Button type="submit" form="visit-edit-form" disabled={loading} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11">
                     {loading ? '更新中...' : '更新する'}
                   </Button>
                 </div>

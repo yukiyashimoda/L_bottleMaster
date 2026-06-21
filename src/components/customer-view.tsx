@@ -74,7 +74,8 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
             style={{
               width: 34, height: 34, borderRadius: '50%',
               overflow: 'hidden', padding: 0,
-              border: '2px solid hsl(var(--border))',
+              border: '1px solid rgba(129,236,255,0.2)',
+              filter: 'drop-shadow(0 0 6px rgba(129,236,255,0.35))',
               cursor: 'pointer',
             }}
           >
@@ -223,7 +224,8 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
         onClick={() => setSidebarOpen(false)}
         style={{
           position: 'fixed', inset: 0, zIndex: 60,
-          background: 'rgba(0,0,0,0.4)',
+          background: 'rgba(0,0,0,0.7)',
+          backdropFilter: 'blur(4px)',
           opacity: sidebarOpen ? 1 : 0,
           pointerEvents: sidebarOpen ? 'auto' : 'none',
           transition: 'opacity 0.2s',
@@ -235,9 +237,9 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
         style={{
           position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 70,
           width: 260,
-          background: 'var(--bg-surface)',
-          borderLeft: '1px solid hsl(var(--border))',
-          boxShadow: sidebarOpen ? '-8px 0 32px rgba(0,0,0,0.2)' : 'none',
+          background: 'rgba(8,15,22,0.97)',
+          borderLeft: '1px solid rgba(129,236,255,0.12)',
+          boxShadow: sidebarOpen ? '-8px 0 32px rgba(0,0,0,0.45)' : 'none',
           display: 'flex', flexDirection: 'column',
           padding: '16px 16px 32px',
           transform: sidebarOpen ? 'translateX(0)' : 'translateX(100%)',
@@ -252,10 +254,10 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
         </button>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '16px 0 28px' }}>
-          <img src="/apple-touch-icon.png" alt="L" style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid hsl(var(--border))' }} />
+          <img src="/apple-touch-icon.png" alt="L" style={{ width: 76, height: 76, borderRadius: 10, border: '1px solid rgba(129,236,255,0.2)', filter: 'drop-shadow(0 0 8px rgba(129,236,255,0.35))' }} />
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--theme-accent)', marginBottom: 2 }}>Neo Snack L</div>
-            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--font-audiowide)' }}>Bottle Master</div>
+            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 2 }}>Neo Snack L</div>
+            <div className="glow-text" style={{ fontSize: 18, fontWeight: 700, color: 'var(--theme-accent)', fontFamily: 'var(--font-doto, monospace)', letterSpacing: '0.12em' }}>Bottle Master</div>
           </div>
         </div>
 
@@ -273,6 +275,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
                 display: 'flex', alignItems: 'center',
                 padding: '12px 16px', borderRadius: 12,
                 color: 'var(--text-sub)', textDecoration: 'none',
+                border: '1px solid transparent',
                 fontSize: 15, fontWeight: 500,
               }}
             >

@@ -19,16 +19,18 @@ export function CustomerCard({ customer, bottles, designatedCastRuby, accentColo
   return (
     <Link href={`/customers/${customer.id}`}>
       <div
-        className="flex items-center gap-3 mx-3 my-1.5 rounded-2xl transition-all duration-150 active:scale-[0.98]"
+        className="flex items-center gap-3 mx-3 my-1.5 rounded-xl transition-all duration-150 active:scale-[0.98]"
         style={{
-          background: 'var(--bg-surface)',
-          boxShadow: 'var(--shadow-sm)',
+          background: 'rgba(12,20,28,0.82)',
+          border: '1px solid var(--line)',
+          boxShadow: customer.isAlert ? '0 0 16px rgba(255,113,108,0.16)' : 'var(--shadow-sm)',
+          backdropFilter: 'blur(10px)',
         }}
       >
         <div className="flex items-center gap-3 w-full px-4 py-3.5">
           {/* アバター */}
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-[9px] font-bold shrink-0 text-center leading-tight"
+            className="w-10 h-10 rounded-lg flex items-center justify-center text-[9px] font-bold shrink-0 text-center leading-tight"
             style={{
               background: accentColor ? `${accentColor}20` : 'var(--bg-elevated)',
               color: accentColor ?? 'var(--text-muted)',

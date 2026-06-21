@@ -1,12 +1,15 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_JP, Audiowide } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { Nav } from '@/components/nav'
 import { isAuthenticated } from '@/lib/auth'
 import { PWARegister } from '@/components/pwa-register'
 
-const notoSansJP = Noto_Sans_JP({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-noto' })
-const audiowide = Audiowide({ subsets: ['latin'], weight: '400', variable: '--font-audiowide' })
+const doto = localFont({
+  src: '../../public/fonts/Doto-Bold.ttf',
+  variable: '--font-doto',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'L BOTTLE MASTER',
@@ -41,10 +44,11 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={`${notoSansJP.className} ${notoSansJP.variable} ${audiowide.variable} min-h-screen`}>
+      <body className={`${doto.variable} min-h-screen`}>
         <PWARegister />
         <Nav isLoggedIn={loggedIn} />
-        <main className="pb-16 sm:pb-0 max-w-2xl mx-auto">
+        <div className="noise-overlay" />
+        <main className="relative z-0 pb-20 sm:pb-0 max-w-2xl mx-auto">
           {children}
         </main>
       </body>

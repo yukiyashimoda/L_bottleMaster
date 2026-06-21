@@ -449,7 +449,7 @@ export function NewVisitForm({
       <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11"
       >
         {loading ? '記録中...' : '来店を記録する'}
       </Button>

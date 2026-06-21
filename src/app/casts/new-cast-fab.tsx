@@ -46,7 +46,7 @@ export function NewCastFab() {
       {/* FAB */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-24 sm:bottom-8 right-5 z-50 w-14 h-14 rounded-full bg-brand-coral text-white shadow-lg flex items-center justify-center hover:bg-brand-coral/90 transition-colors active:scale-95"
+        className="fixed bottom-24 sm:bottom-8 right-5 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors active:scale-95"
         aria-label="キャストを追加"
       >
         <Plus className="h-6 w-6" />
@@ -122,7 +122,7 @@ export function NewCastFab() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11"
               >
                 {loading ? '登録中...' : 'キャストを登録する'}
               </Button>

@@ -38,7 +38,7 @@ export default function LoginPage() {
         <div className="flex items-center justify-center gap-2.5 mb-8">
           <div className="flex flex-col leading-none gap-0.5">
             <span className="text-[9px] font-medium text-brand-plum/50 tracking-widest uppercase">Neo Snack L</span>
-            <span className="text-brand-plum text-base" style={{ fontFamily: 'var(--font-audiowide)' }}>Bottle Master Ver１</span>
+            <span className="text-brand-plum text-base glow-text" style={{ fontFamily: 'var(--font-doto, monospace)', letterSpacing: '0.12em' }}>Bottle Master Ver１</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11"
             >
               {loading ? 'ログイン中...' : 'ログイン'}
             </Button>

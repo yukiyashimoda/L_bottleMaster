@@ -89,7 +89,7 @@ export default async function CustomerDetailPage({
         <div className="rounded-xl border border-brand-beige bg-white p-5 shadow-sm">
           {/* 名前・ニックネーム */}
           <div className="flex items-start gap-4">
-            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 overflow-hidden ${customer.isAlert ? 'bg-brand-coral/20 text-brand-coral' : designatedCastRuby ? 'bg-brand-coral text-white' : 'bg-brand-gold text-brand-plum'}`}>
+            <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-[11px] font-bold shrink-0 overflow-hidden border ${customer.isAlert ? 'bg-brand-coral/20 text-brand-coral border-brand-coral/40' : designatedCastRuby ? 'bg-primary/10 text-primary border-primary/20' : 'bg-brand-gold/10 text-brand-gold border-brand-gold/40'}`}>
               {avatarLabel}
             </div>
             <div className="flex-1 min-w-0">
@@ -180,7 +180,7 @@ export default async function CustomerDetailPage({
         {/* 来店を記録するボタン */}
         {loggedIn && (
           <Link href={`/customers/${id}/visits/new`} className="block mt-2">
-            <Button className="w-full bg-brand-plum hover:bg-brand-plum/90 text-white font-bold h-11">
+            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11">
               <Plus className="h-4 w-4 mr-2" />
               来店を記録する
             </Button>

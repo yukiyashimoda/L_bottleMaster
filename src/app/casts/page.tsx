@@ -56,9 +56,9 @@ export default async function CastListPage() {
                   <Link
                     key={cast.id}
                     href={`/casts/${cast.id}`}
-                    className="flex items-center gap-3 px-4 py-3 mx-3 my-1.5 rounded-2xl bg-card transition-all shadow-sm active:scale-[0.98]"
+                    className="flex items-center gap-3 px-4 py-3 mx-3 my-1.5 rounded-xl bg-card/80 border border-border transition-all shadow-sm backdrop-blur active:scale-[0.98]"
                   >
-                    <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden border border-primary/20">
                       {cast.ruby}
                     </div>
                     <div className="flex-1 min-w-0">

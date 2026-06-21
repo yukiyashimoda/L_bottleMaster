@@ -1,5 +1,6 @@
 export interface Customer {
   id: string
+  storeId?: string
   name: string
   ruby: string
   nickname: string
@@ -19,6 +20,7 @@ export interface Customer {
 
 export interface Bottle {
   id: string
+  storeId?: string
   customerId: string
   name: string
   remaining: string
@@ -27,6 +29,7 @@ export interface Bottle {
 
 export interface Cast {
   id: string
+  storeId?: string
   name: string
   ruby: string
   memo: string
@@ -36,6 +39,7 @@ export interface Cast {
 
 export interface VisitRecord {
   id: string
+  storeId?: string
   customerId: string
   visitDate: string
   designatedCastIds: string[]

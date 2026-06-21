@@ -27,9 +27,12 @@ interface BottleRow {
   deleted: boolean
 }
 
-function percentToNum(remaining: string): number {
-  const n = parseInt(remaining)
-  return isNaN(n) ? 100 : Math.round(n / 5) * 5
+function percentToNum(remaining: string | number): number {
+  const raw = typeof remaining === 'number' ? remaining : Number(String(remaining).replace('%', '').trim())
+  if (Number.isNaN(raw)) return 100
+
+  const percent = raw <= 1 ? raw * 100 : raw
+  return Math.min(100, Math.max(0, Math.round(percent / 5) * 5))
 }
 
 function remainingColor(v: number): string {

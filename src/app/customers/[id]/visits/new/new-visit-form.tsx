@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Search, X, Plus, AlertTriangle } from 'lucide-react'
+import { Search, X, Plus } from 'lucide-react'
 import { GiBrandyBottle } from 'react-icons/gi'
+import { CastAssignmentPicker } from '@/components/cast-assignment-picker'
 import { createVisitAction } from './actions'
 import type { Cast, Bottle, Customer } from '@/types'
 
@@ -38,93 +39,6 @@ function remainingColor(v: number): string {
   if (v <= 30) return 'text-brand-plum/50'
   if (v <= 60) return 'text-brand-plum/80'
   return 'text-brand-plum'
-}
-
-function CastMultiSelect({
-  label,
-  casts,
-  selectedIds,
-  onChange,
-}: {
-  label: string
-  casts: Cast[]
-  selectedIds: string[]
-  onChange: (ids: string[]) => void
-}) {
-  const [query, setQuery] = useState('')
-
-  const filtered = query.trim()
-    ? casts.filter((c) => c.name.includes(query) || c.ruby.includes(query))
-    : casts
-
-  const toggle = (id: string) => {
-    onChange(
-      selectedIds.includes(id)
-        ? selectedIds.filter((x) => x !== id)
-        : [...selectedIds, id]
-    )
-  }
-
-  return (
-    <div className="space-y-1.5">
-      <Label className="text-brand-plum">
-        {label}
-        {selectedIds.length > 0 && (
-          <span className="ml-2 text-xs text-brand-plum/60">{selectedIds.length}名選択中</span>
-        )}
-      </Label>
-      <div className="rounded-lg border border-brand-beige bg-white overflow-hidden">
-        {selectedIds.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-brand-beige">
-            {selectedIds.map((id) => {
-              const c = casts.find((x) => x.id === id)
-              if (!c) return null
-              return (
-                <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white text-xs text-brand-plum">
-                  {c.name}
-                  <button type="button" onClick={() => toggle(id)} className="text-brand-plum/60 hover:text-brand-plum">
-                    <X className="h-3 w-3" />
-                  </button>
-                </span>
-              )
-            })}
-          </div>
-        )}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="名前・ふりがなで検索"
-            className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-brand-plum placeholder:text-brand-plum/50"
-          />
-        </div>
-        <div className="max-h-36 overflow-y-auto border-t border-brand-beige">
-          {filtered.length === 0 ? (
-            <p className="px-3 py-2 text-xs text-brand-plum/50">該当するキャストがいません</p>
-          ) : (
-            filtered.map((cast) => (
-              <label
-                key={cast.id}
-                className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors
-                  ${selectedIds.includes(cast.id) ? 'bg-white' : 'hover:bg-white'}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedIds.includes(cast.id)}
-                  onChange={() => toggle(cast.id)}
-                  className="accent-brand-plum"
-                />
-                <span className="text-sm text-brand-plum">{cast.name}</span>
-                <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
-              </label>
-            ))
-          )}
-        </div>
-      </div>
-    </div>
-  )
 }
 
 const today = new Date().toISOString().split('T')[0]
@@ -209,7 +123,7 @@ export function NewVisitForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 pb-24">
+    <form onSubmit={handleSubmit} className="touch-form space-y-5 pb-28">
       {error && (
         <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
           {error}
@@ -223,18 +137,12 @@ export function NewVisitForm({
         <Input name="visitDate" type="date" required defaultValue={today} />
       </div>
 
-      <CastMultiSelect
-        label="本指名キャスト"
+      <CastAssignmentPicker
         casts={casts}
-        selectedIds={designatedCastIds}
-        onChange={setDesignatedCastIds}
-      />
-
-      <CastMultiSelect
-        label="場内指名キャスト"
-        casts={casts}
-        selectedIds={inStoreCastIds}
-        onChange={setInStoreCastIds}
+        designatedIds={designatedCastIds}
+        inStoreIds={inStoreCastIds}
+        onDesignatedChange={setDesignatedCastIds}
+        onInStoreChange={setInStoreCastIds}
       />
 
       {/* キープボトル */}

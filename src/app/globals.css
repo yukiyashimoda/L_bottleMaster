@@ -166,4 +166,24 @@
     padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
     z-index: 80 !important;
   }
+  .touch-form label {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .touch-form input:not([type="checkbox"]):not([type="range"]),
+  .touch-form textarea {
+    min-height: 3.25rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .touch-form textarea {
+    min-height: 7rem;
+  }
+  .touch-form input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .touch-form input[type="range"] {
+    height: 1rem;
+  }
 }

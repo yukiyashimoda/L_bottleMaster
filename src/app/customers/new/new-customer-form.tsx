@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Search, X, Plus } from 'lucide-react'
 import { GiBrandyBottle } from 'react-icons/gi'
+import { CastAssignmentPicker } from '@/components/cast-assignment-picker'
 import { createCustomerAction } from './actions'
 import type { Cast, Customer } from '@/types'
 
@@ -31,90 +32,11 @@ function remainingColor(v: number): string {
   return 'text-brand-plum'
 }
 
-function CastMultiSelect({
-  label,
-  casts,
-  selectedIds,
-  onChange,
-}: {
-  label: string
-  casts: Cast[]
-  selectedIds: string[]
-  onChange: (ids: string[]) => void
-}) {
-  const [query, setQuery] = useState('')
-
-  const filtered = query.trim()
-    ? casts.filter((c) => c.name.includes(query) || c.ruby.includes(query))
-    : casts
-
-  const toggle = (id: string) => {
-    onChange(
-      selectedIds.includes(id)
-        ? selectedIds.filter((x) => x !== id)
-        : [...selectedIds, id]
-    )
-  }
-
-  return (
-    <div className="space-y-1.5">
-      <Label className="text-brand-plum">{label}</Label>
-      <div className="rounded-lg border border-brand-beige bg-white overflow-hidden">
-        {selectedIds.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 px-3 py-2 border-b border-brand-beige">
-            {selectedIds.map((id) => {
-              const c = casts.find((x) => x.id === id)
-              if (!c) return null
-              return (
-                <span key={id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white text-xs text-brand-plum">
-                  {c.name}
-                  <button type="button" onClick={() => toggle(id)} className="text-brand-plum/60 hover:text-brand-plum">
-                    <X className="h-3 w-3" />
-                  </button>
-                </span>
-              )
-            })}
-          </div>
-        )}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="名前・ふりがなで検索"
-            className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-0 outline-none text-brand-plum placeholder:text-brand-plum/50"
-          />
-        </div>
-        <div className="max-h-36 overflow-y-auto border-t border-brand-beige">
-          {filtered.length === 0 ? (
-            <p className="px-3 py-2 text-xs text-brand-plum/50">該当するキャストがいません</p>
-          ) : (
-            filtered.map((cast) => (
-              <label
-                key={cast.id}
-                className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors
-                  ${selectedIds.includes(cast.id) ? 'bg-white' : 'hover:bg-white'}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedIds.includes(cast.id)}
-                  onChange={() => toggle(cast.id)}
-                  className="accent-brand-plum"
-                />
-                <span className="text-sm text-brand-plum">{cast.name}</span>
-                <span className="text-xs text-brand-plum/50">（{cast.ruby}）</span>
-              </label>
-            ))
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
+type NewCustomerStep = 'designation' | 'casts' | 'details'
 
 export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
   const router = useRouter()
+  const [step, setStep] = useState<NewCustomerStep>('designation')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [isAlert, setIsAlert] = useState(false)
@@ -194,13 +116,110 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
     }
   }
 
+  const selectedCastCount = designatedCastIds.length + inStoreCastIds.length
+
+  if (step === 'designation') {
+    return (
+      <div className="touch-form space-y-5 pb-24">
+        <div className="rounded-xl border border-brand-beige bg-white p-5">
+          <p className="text-sm font-semibold text-primary">STEP 1</p>
+          <h2 className="mt-2 text-xl font-bold text-brand-plum">指名はありますか？</h2>
+          <p className="mt-2 text-sm leading-6 text-brand-plum/60">
+            本指名・場内指名がある場合は、次の画面でキャストを選択します。
+          </p>
+        </div>
+
+        <div className="grid gap-3">
+          <button
+            type="button"
+            onClick={() => setStep('casts')}
+            className="rounded-xl border border-primary/40 bg-primary/10 px-5 py-5 text-left"
+          >
+            <span className="block text-lg font-bold text-primary">指名あり</span>
+            <span className="mt-1 block text-sm text-brand-plum/60">本指名・場内指名を選択する</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setDesignatedCastIds([])
+              setInStoreCastIds([])
+              setStep('details')
+            }}
+            className="rounded-xl border border-brand-beige bg-white px-5 py-5 text-left"
+          >
+            <span className="block text-lg font-bold text-brand-plum">指名なし</span>
+            <span className="mt-1 block text-sm text-brand-plum/60">顧客情報の入力へ進む</span>
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === 'casts') {
+    return (
+      <div className="touch-form space-y-5 pb-28">
+        <div className="rounded-xl border border-brand-beige bg-white p-4">
+          <p className="text-sm font-semibold text-primary">STEP 2</p>
+          <h2 className="mt-1 text-xl font-bold text-brand-plum">指名キャストを選択</h2>
+        </div>
+
+        <CastAssignmentPicker
+          casts={casts}
+          designatedIds={designatedCastIds}
+          inStoreIds={inStoreCastIds}
+          onDesignatedChange={setDesignatedCastIds}
+          onInStoreChange={setInStoreCastIds}
+        />
+
+        <div className="form-action-bar fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              className="h-12 w-28 border-brand-beige text-brand-plum"
+              onClick={() => setStep('designation')}
+            >
+              戻る
+            </Button>
+            <Button
+              type="button"
+              className="h-12 flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => setStep('details')}
+            >
+              顧客情報へ進む
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 pb-24">
+    <form onSubmit={handleSubmit} className="touch-form space-y-5 pb-28">
       {error && (
         <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
           {error}
         </div>
       )}
+
+      <div className="rounded-xl border border-brand-beige bg-white p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-sm font-semibold text-primary">STEP 3</p>
+            <h2 className="mt-1 text-lg font-bold text-brand-plum">顧客情報</h2>
+            <p className="mt-1 text-sm text-brand-plum/60">
+              指名: {selectedCastCount > 0 ? `${selectedCastCount}件選択中` : 'なし'}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setStep(selectedCastCount > 0 ? 'casts' : 'designation')}
+            className="rounded-lg border border-brand-beige px-3 py-2 text-sm font-bold text-brand-plum"
+          >
+            変更
+          </button>
+        </div>
+      </div>
 
       <div className="space-y-1.5">
         <Label className="text-brand-plum">氏名（漢字）<span className="text-brand-coral ml-0.5">*</span></Label>
@@ -225,20 +244,6 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
           onChange={(e) => setFirstVisitDate(e.target.value)}
         />
       </div>
-
-      <CastMultiSelect
-        label="本指名キャスト"
-        casts={casts}
-        selectedIds={designatedCastIds}
-        onChange={setDesignatedCastIds}
-      />
-
-      <CastMultiSelect
-        label="場内指名キャスト"
-        casts={casts}
-        selectedIds={inStoreCastIds}
-        onChange={setInStoreCastIds}
-      />
 
       {/* 領収書名 */}
       <div className="space-y-1.5">

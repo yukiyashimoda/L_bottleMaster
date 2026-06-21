@@ -254,7 +254,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
         </button>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '16px 0 28px' }}>
-          <img src="/apple-touch-icon.png" alt="L" style={{ width: 76, height: 76, borderRadius: 10, border: '1px solid rgba(129,236,255,0.2)', filter: 'drop-shadow(0 0 8px rgba(129,236,255,0.35))' }} />
+          <img src="/apple-touch-icon.png" alt="L" style={{ width: 76, height: 76, borderRadius: '50%', border: '1px solid rgba(129,236,255,0.2)', filter: 'drop-shadow(0 0 8px rgba(129,236,255,0.35))' }} />
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 2 }}>Neo Snack L</div>
             <div className="glow-text" style={{ fontSize: 18, fontWeight: 700, color: 'var(--theme-accent)', fontFamily: 'var(--font-doto, monospace)', letterSpacing: '0.12em' }}>Bottle Master</div>

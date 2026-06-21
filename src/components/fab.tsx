@@ -8,15 +8,10 @@ export function Fab({ href, label }: FabProps) {
   return (
     <Link
       href={href}
-      className="fixed bottom-24 sm:bottom-8 right-5 z-50 flex items-center gap-2 font-semibold px-4 py-3.5 rounded-2xl transition-all hover:scale-105 active:scale-95"
-      style={{
-        background: 'var(--theme-accent)',
-        color: '#fff',
-        boxShadow: '0 8px 24px color-mix(in srgb, var(--theme-accent) 40%, transparent)',
-      }}
+      className="fixed bottom-24 sm:bottom-8 right-5 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors active:scale-95"
+      aria-label={label ?? '追加'}
     >
-      <Plus className="h-5 w-5" />
-      {label && <span className="text-sm">{label}</span>}
+      <Plus className="h-6 w-6" />
     </Link>
   )
 }

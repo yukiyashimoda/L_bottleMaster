@@ -163,6 +163,7 @@
     background: rgba(8,15,22,0.88) !important;
     border-color: var(--line) !important;
     box-shadow: 0 -4px 30px rgba(0,0,0,0.35);
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
     z-index: 80 !important;
   }
 }

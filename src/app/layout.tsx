@@ -48,7 +48,7 @@ export default async function RootLayout({
         <PWARegister />
         <Nav isLoggedIn={loggedIn} />
         <div className="noise-overlay" />
-        <main className="relative z-0 pb-20 sm:pb-0 max-w-2xl mx-auto">
+        <main className="relative pb-20 sm:pb-0 max-w-2xl mx-auto">
           {children}
         </main>
       </body>

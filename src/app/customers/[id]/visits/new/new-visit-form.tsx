@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Search, X, Plus } from 'lucide-react'
+import { Search, X, Plus, UserPlus } from 'lucide-react'
 import { GiBrandyBottle } from 'react-icons/gi'
 import { CastAssignmentPicker } from '@/components/cast-assignment-picker'
 import { createVisitAction } from './actions'
@@ -56,6 +56,7 @@ export function NewVisitForm({
   const [error, setError] = useState('')
   const [designatedCastIds, setDesignatedCastIds] = useState<string[]>(defaultDesignatedCastIds)
   const [inStoreCastIds, setInStoreCastIds] = useState<string[]>([])
+  const [castPickerOpen, setCastPickerOpen] = useState(false)
   const [linkedCustomerIds, setLinkedCustomerIds] = useState<string[]>(defaultLinkedCustomerIds)
   const [linkedQuery, setLinkedQuery] = useState('')
   const [isAlert, setIsAlert] = useState(false)
@@ -76,6 +77,13 @@ export function NewVisitForm({
       { id: `new-${Date.now()}`, name: '', remaining: 100, openedDate: today, isNew: true },
     ])
   }
+
+  const selectedDesignatedCasts = designatedCastIds
+    .map((id) => casts.find((c) => c.id === id))
+    .filter(Boolean)
+  const selectedInStoreCasts = inStoreCastIds
+    .map((id) => casts.find((c) => c.id === id))
+    .filter(Boolean)
 
   const removeBottle = (id: string) => {
     setBottles((prev) => prev.filter((b) => b.id !== id))
@@ -137,13 +145,84 @@ export function NewVisitForm({
         <Input name="visitDate" type="date" required defaultValue={today} />
       </div>
 
-      <CastAssignmentPicker
-        casts={casts}
-        designatedIds={designatedCastIds}
-        inStoreIds={inStoreCastIds}
-        onDesignatedChange={setDesignatedCastIds}
-        onInStoreChange={setInStoreCastIds}
-      />
+      <section className="space-y-3">
+        <div className="flex items-center justify-between gap-3">
+          <Label className="text-brand-plum">指名キャスト</Label>
+          <button
+            type="button"
+            onClick={() => setCastPickerOpen(true)}
+            className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 text-sm font-bold text-primary"
+          >
+            <UserPlus className="h-4 w-4" />
+            追加
+          </button>
+        </div>
+
+        <div className="rounded-xl border border-brand-beige bg-white p-4">
+          <div className="space-y-3">
+            <div>
+              <p className="text-sm font-bold text-brand-plum/60">本指名</p>
+              <p className="mt-1 text-base font-semibold text-brand-plum">
+                {selectedDesignatedCasts.length > 0
+                  ? selectedDesignatedCasts.map((c) => c!.name).join('・')
+                  : '未選択'}
+              </p>
+            </div>
+            <div className="border-t border-brand-beige pt-3">
+              <p className="text-sm font-bold text-brand-plum/60">場内</p>
+              <p className="mt-1 text-base font-semibold text-brand-plum">
+                {selectedInStoreCasts.length > 0
+                  ? selectedInStoreCasts.map((c) => c!.name).join('・')
+                  : '未選択'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {castPickerOpen && (
+        <div className="fixed inset-0 z-[90] flex items-end justify-center sm:items-center">
+          <div
+            className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+            onClick={() => setCastPickerOpen(false)}
+          />
+          <div className="relative z-[91] max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-brand-beige bg-card p-4 shadow-2xl sm:rounded-2xl">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-primary">CAST</p>
+                <h2 className="text-lg font-bold text-brand-plum">指名キャストを追加</h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCastPickerOpen(false)}
+                className="flex h-11 w-11 items-center justify-center rounded-lg text-brand-plum/70"
+                aria-label="閉じる"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <CastAssignmentPicker
+              casts={casts}
+              designatedIds={designatedCastIds}
+              inStoreIds={inStoreCastIds}
+              onDesignatedChange={setDesignatedCastIds}
+              onInStoreChange={setInStoreCastIds}
+              title="キャスト一覧"
+            />
+
+            <div className="sticky bottom-0 -mx-4 mt-4 border-t border-brand-beige bg-card/95 px-4 py-3 backdrop-blur">
+              <Button
+                type="button"
+                className="h-12 w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={() => setCastPickerOpen(false)}
+              >
+                選択を反映する
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* キープボトル */}
       <div className="space-y-2">

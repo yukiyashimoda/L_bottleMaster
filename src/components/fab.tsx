@@ -10,9 +10,9 @@ export function Fab({ href, label }: FabProps) {
       href={href}
       className="fixed bottom-24 sm:bottom-8 right-5 z-50 flex items-center gap-2 font-semibold px-4 py-3.5 rounded-2xl transition-all hover:scale-105 active:scale-95"
       style={{
-        background: 'var(--accent)',
-        color: 'var(--text)',
-        boxShadow: '0 8px 24px color-mix(in srgb, var(--accent) 40%, transparent)',
+        background: 'var(--theme-accent)',
+        color: '#fff',
+        boxShadow: '0 8px 24px color-mix(in srgb, var(--theme-accent) 40%, transparent)',
       }}
     >
       <Plus className="h-5 w-5" />

@@ -71,10 +71,10 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           <img
             src="/apple-touch-icon.png"
             alt="L Bottle Master"
-            style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid var(--border)' }}
+            style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid hsl(var(--border))' }}
           />
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: 2 }}>
+            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--theme-accent)', marginBottom: 2 }}>
               Neo Snack L
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--font-audiowide)' }}>
@@ -95,8 +95,8 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 style={{
                   display: 'flex', alignItems: 'center', gap: 12,
                   padding: '12px 16px', borderRadius: 12,
-                  background: active ? 'var(--accent)' : 'transparent',
-                  color: active ? '#fff' : 'var(--accent)',
+                  background: active ? 'var(--theme-accent)' : 'transparent',
+                  color: active ? '#fff' : 'var(--theme-accent)',
                   textDecoration: 'none', fontSize: 15, fontWeight: 500,
                   transition: 'all 0.15s',
                 }}
@@ -154,7 +154,7 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                   gap: 3,
                   padding: active ? '5px 18px' : '5px 8px',
                   borderRadius: 20,
-                  background: active ? 'var(--accent)' : 'transparent',
+                  background: active ? 'var(--theme-accent)' : 'transparent',
                   transition: 'all 0.15s',
                 }}
               >
@@ -162,9 +162,9 @@ export function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                   size={19}
                   strokeWidth={active ? 0 : 2}
                   fill={active ? '#fff' : 'none'}
-                  style={{ stroke: active ? 'none' : 'var(--accent)' }}
+                  style={{ stroke: active ? 'none' : 'var(--theme-accent)' }}
                 />
-                <span style={{ fontSize: 10, fontWeight: 600, color: active ? '#fff' : 'var(--accent)', lineHeight: 1 }}>
+                <span style={{ fontSize: 10, fontWeight: 600, color: active ? '#fff' : 'var(--theme-accent)', lineHeight: 1 }}>
                   {label}
                 </span>
               </div>

@@ -24,17 +24,17 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
   return (
     <div>
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-plum/50" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="名前・ふりがなで検索"
-          className="pl-9 pr-9 bg-white border-brand-beige"
+          className="pl-9 pr-9"
         />
         {query && (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-plum/50 hover:text-brand-plum"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
           >
             <X className="h-4 w-4" />
           </button>
@@ -42,7 +42,7 @@ export function CastSearch({ casts, visitCounts }: CastSearchProps) {
       </div>
 
       {filtered && (
-        <div className="mt-2 rounded-lg border border-brand-beige bg-white overflow-hidden shadow-sm">
+        <div className="mt-2 rounded-lg border border-brand-beige bg-card overflow-hidden shadow-sm">
           {filtered.length === 0 ? (
             <p className="text-center text-brand-plum/50 py-4 text-sm">
               該当するキャストが見つかりません

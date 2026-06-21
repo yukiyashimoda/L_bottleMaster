@@ -53,15 +53,15 @@ export function CustomerCard({ customer, bottles, designatedCastRuby, accentColo
 
             <div className="flex items-center gap-3 mt-1">
               <div className="flex items-center gap-1">
-                <Clock className="h-3 w-3" style={{ color: old ? 'var(--accent)' : 'var(--text-muted)' }} />
-                <span className="text-[11px]" style={{ color: old ? 'var(--accent)' : 'var(--text-muted)' }}>
+                <Clock className="h-3 w-3" style={{ color: old ? 'var(--theme-accent)' : 'var(--text-muted)' }} />
+                <span className="text-[11px]" style={{ color: old ? 'var(--theme-accent)' : 'var(--text-muted)' }}>
                   {formatDate(customer.lastVisitDate)}
                 </span>
               </div>
 
               {activeBottles.length > 0 && (
                 <div className="flex items-center gap-1">
-                  <GiBrandyBottle size={11} style={{ color: 'var(--gold)' }} />
+                  <GiBrandyBottle size={11} style={{ color: 'var(--theme-gold)' }} />
                   <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
                     {activeBottles.length}本
                   </span>
@@ -75,13 +75,13 @@ export function CustomerCard({ customer, bottles, designatedCastRuby, accentColo
             {customer.isAlert && (
               <div
                 className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}
+                style={{ background: 'var(--accent-bg)', color: 'var(--theme-accent)' }}
               >
                 <AlertTriangle className="h-2.5 w-2.5" />要確認
               </div>
             )}
             {customer.hasGlass && (
-              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ background: 'var(--gold-bg)', color: 'var(--gold)' }}>
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ background: 'var(--gold-bg)', color: 'var(--theme-gold)' }}>
                 グラス
               </span>
             )}

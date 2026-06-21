@@ -10,10 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'brand-plum':  '#4B3C52',
-        'brand-coral': '#F1896C',
-        'brand-gold':  '#F3C05E',
-        'brand-beige': '#E8E2D9',
+        'brand-plum':  "hsl(var(--brand-plum) / <alpha-value>)",
+        'brand-coral': "hsl(var(--brand-coral) / <alpha-value>)",
+        'brand-gold':  "hsl(var(--brand-gold) / <alpha-value>)",
+        'brand-beige': "hsl(var(--brand-beige) / <alpha-value>)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

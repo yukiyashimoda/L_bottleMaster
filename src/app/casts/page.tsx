@@ -28,7 +28,7 @@ export default async function CastListPage() {
   const activeGroups = Array.from(grouped.keys())
 
   return (
-    <div className="relative min-h-screen bg-[#F5F1EE]">
+    <div className="relative min-h-screen" style={{ background: 'var(--bg)' }}>
       <div className="sticky top-0 z-20 px-4 py-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}>
         <h1 className="text-xl font-bold text-brand-plum mb-3">キャスト一覧</h1>
         <CastSearch
@@ -56,7 +56,7 @@ export default async function CastListPage() {
                   <Link
                     key={cast.id}
                     href={`/casts/${cast.id}`}
-                    className="flex items-center gap-3 px-4 py-3 mx-3 my-2 rounded-2xl bg-white transition-all shadow-[3px_3px_8px_rgba(75,60,82,0.12),-2px_-2px_6px_rgba(255,255,255,0.95)] hover:shadow-[4px_4px_12px_rgba(75,60,82,0.16),-2px_-2px_8px_rgba(255,255,255,1)]"
+                    className="flex items-center gap-3 px-4 py-3 mx-3 my-1.5 rounded-2xl bg-card transition-all shadow-sm active:scale-[0.98]"
                   >
                     <div className="w-10 h-10 rounded-full bg-brand-plum text-white flex items-center justify-center text-[10px] font-bold shrink-0 overflow-hidden">
                       {cast.ruby}

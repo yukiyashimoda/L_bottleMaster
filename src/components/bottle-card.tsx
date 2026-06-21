@@ -20,11 +20,11 @@ export function BottleCard({ bottle }: BottleCardProps) {
     <div
       className="relative flex items-center gap-3 p-3 rounded-lg border border-brand-beige overflow-hidden"
       style={{
-        background: `linear-gradient(to right, #F3C05E 0%, #F3C05E ${pct}%, #fafaf9 ${pct}%, #fafaf9 100%)`,
+        background: `linear-gradient(to right, var(--theme-gold) 0%, var(--theme-gold) ${pct}%, var(--bg-surface) ${pct}%, var(--bg-surface) 100%)`,
       }}
     >
       <div className="flex items-center justify-center shrink-0">
-        <GiBrandyBottle size={20} color="#4B3C52" />
+        <GiBrandyBottle size={20} color="currentColor" className="text-brand-plum" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="font-medium text-brand-plum text-sm truncate">{bottle.name}</div>

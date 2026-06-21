@@ -46,7 +46,7 @@ export function NewCastFab() {
       {/* FAB */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-20 sm:bottom-6 right-6 z-30 w-14 h-14 rounded-full bg-brand-plum text-white shadow-lg flex items-center justify-center hover:bg-brand-plum/90 transition-colors"
+        className="fixed bottom-24 sm:bottom-8 right-5 z-50 w-14 h-14 rounded-full bg-brand-coral text-white shadow-lg flex items-center justify-center hover:bg-brand-coral/90 transition-colors active:scale-95"
         aria-label="キャストを追加"
       >
         <Plus className="h-6 w-6" />
@@ -62,7 +62,7 @@ export function NewCastFab() {
           />
 
           {/* Modal */}
-          <div className="relative z-50 w-full max-w-lg bg-white rounded-t-2xl sm:rounded-2xl shadow-xl">
+          <div className="relative z-50 w-full max-w-lg bg-card rounded-t-2xl sm:rounded-2xl shadow-xl">
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-brand-beige">
               <div className="flex items-center gap-2">

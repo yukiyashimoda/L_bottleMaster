@@ -9,7 +9,7 @@ import { logoutAction } from '@/app/login/actions'
 import type { Customer, Bottle, Cast } from '@/types'
 
 const CAST_COLORS = [
-  'var(--accent)', 'var(--accent2)', '#22C55E', '#F59E0B',
+  'var(--theme-accent)', 'var(--theme-accent2)', '#22C55E', '#F59E0B',
   '#EC4899', '#14B8A6', '#3B82F6', '#A855F7',
   '#F97316', '#06B6D4', '#84CC16', '#EF4444',
 ]
@@ -74,7 +74,7 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
             style={{
               width: 34, height: 34, borderRadius: '50%',
               overflow: 'hidden', padding: 0,
-              border: '2px solid var(--border)',
+              border: '2px solid hsl(var(--border))',
               cursor: 'pointer',
             }}
           >
@@ -252,9 +252,9 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
         </button>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '16px 0 28px' }}>
-          <img src="/apple-touch-icon.png" alt="L" style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid var(--border)' }} />
+          <img src="/apple-touch-icon.png" alt="L" style={{ width: 76, height: 76, borderRadius: '50%', border: '2px solid hsl(var(--border))' }} />
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: 2 }}>Neo Snack L</div>
+            <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--theme-accent)', marginBottom: 2 }}>Neo Snack L</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--font-audiowide)' }}>Bottle Master</div>
           </div>
         </div>

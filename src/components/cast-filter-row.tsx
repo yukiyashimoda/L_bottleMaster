@@ -6,7 +6,7 @@ import { getHiraganaGroup, hiraganaGroups } from '@/lib/utils'
 
 // キャストアバターの色サイクル（THEME変数で統一する場合はここを変更）
 const CAST_COLORS = [
-  'var(--accent)', 'var(--accent2)', '#22C55E', '#F59E0B',
+  'var(--theme-accent)', 'var(--theme-accent2)', '#22C55E', '#F59E0B',
   '#EC4899',       '#14B8A6',        '#3B82F6', '#A855F7',
   '#F97316',       '#06B6D4',        '#84CC16', '#EF4444',
 ]
@@ -38,7 +38,7 @@ export function CastFilterRow({ casts, customers, bottlesMap }: Props) {
         style={{
           top: 60,
           background: 'var(--bg)',
-          borderBottom: '1px solid var(--border)',
+          borderBottom: '1px solid hsl(var(--border))',
           scrollbarWidth: 'none',
         }}
       >

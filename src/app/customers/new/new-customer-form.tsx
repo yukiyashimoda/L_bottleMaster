@@ -397,9 +397,9 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
                     step={5}
                     value={bottle.remaining}
                     onChange={(e) => updateBottle(idx, 'remaining', Number(e.target.value))}
-                    className="w-full h-2 rounded-full appearance-none cursor-pointer accent-brand-plum bg-white"
+                    className="w-full h-2 rounded-full appearance-none cursor-pointer accent-brand-gold bg-white"
                     style={{
-                      background: `linear-gradient(to right, hsl(var(--brand-plum)) 0%, hsl(var(--brand-plum)) ${bottle.remaining}%, hsl(var(--brand-beige)) ${bottle.remaining}%, hsl(var(--brand-beige)) 100%)`
+                      background: `linear-gradient(to right, var(--theme-gold) 0%, var(--theme-gold) ${bottle.remaining}%, var(--bg-elevated) ${bottle.remaining}%, var(--bg-elevated) 100%)`
                     }}
                   />
                   <div className="flex justify-between mt-1">

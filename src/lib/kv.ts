@@ -54,6 +54,20 @@ function normalizeRemaining(value: unknown): string {
   return '100%'
 }
 
+function toHiragana(text: string): string {
+  return text.replace(/[ァ-ヶ]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0x60)
+  )
+}
+
+function customerSortKey(name: string, ruby: string): string {
+  const raw = ruby.trim() || name.trim()
+  const normalized = toHiragana(raw)
+  const first = normalized.charAt(0)
+  const isKana = /^[ぁ-ゖー]/.test(first)
+  return `${isKana ? '0' : '1'}-${normalized}`
+}
+
 // Row mappers
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function toCustomer(c: any, p: any = {}): Customer {
@@ -126,7 +140,7 @@ function toVisitRecord(r: any): VisitRecord {
 export async function getCustomers(): Promise<Customer[]> {
   if (!useDB) {
     return Array.from(store.customers.values()).filter(inCurrentStore).sort((a, b) =>
-      a.ruby.localeCompare(b.ruby, 'ja')
+      customerSortKey(a.name, a.ruby).localeCompare(customerSortKey(b.name, b.ruby), 'ja')
     )
   }
   const sql = getSQL()
@@ -150,9 +164,9 @@ export async function getCustomers(): Promise<Customer[]> {
     FROM customers c
     JOIN customer_store_profiles p ON p.customer_id = c.id
     WHERE p.store_id = ${getCurrentStoreId()}
-    ORDER BY c.ruby
   `
-  return rows.map((row) => toCustomer(row, {
+  return rows
+    .map((row) => toCustomer(row, {
     store_id: row.store_id,
     designated_cast_ids: row.profile_designated_cast_ids,
     linked_customer_ids: row.profile_linked_customer_ids,
@@ -167,6 +181,7 @@ export async function getCustomers(): Promise<Customer[]> {
     updated_at: row.profile_updated_at,
     updated_by: row.profile_updated_by,
   }))
+    .sort((a, b) => customerSortKey(a.name, a.ruby).localeCompare(customerSortKey(b.name, b.ruby), 'ja'))
 }
 
 export async function getCustomer(id: string): Promise<Customer | null> {
@@ -424,12 +439,14 @@ export async function deleteBottle(id: string): Promise<boolean> {
 export async function getCasts(): Promise<Cast[]> {
   if (!useDB) {
     return Array.from(store.casts.values()).filter(inCurrentStore).sort((a, b) =>
-      a.ruby.localeCompare(b.ruby, 'ja')
+      customerSortKey(a.name, a.ruby).localeCompare(customerSortKey(b.name, b.ruby), 'ja')
     )
   }
   const sql = getSQL()
-  const rows = await sql`SELECT * FROM casts WHERE store_id = ${getCurrentStoreId()} ORDER BY ruby`
-  return rows.map(toCast)
+  const rows = await sql`SELECT * FROM casts WHERE store_id = ${getCurrentStoreId()}`
+  return rows
+    .map(toCast)
+    .sort((a, b) => customerSortKey(a.name, a.ruby).localeCompare(customerSortKey(b.name, b.ruby), 'ja'))
 }
 
 export async function getCast(id: string): Promise<Cast | null> {

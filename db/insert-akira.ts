@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { createBottle, createCast, createCustomer, deleteBottle, getBottlesByCustomer, getCasts, getCustomers, updateCustomer } from '../src/lib/kv'
+import { neon } from '@neondatabase/serverless'
+import { getCurrentStoreId } from '../src/lib/store-context'
 
 type ParsedBottle = {
   name: string
@@ -12,6 +13,7 @@ type ParsedCustomer = {
   name: string
   memo: string
   lastVisitDate: string | null
+  visitDates: string[]
   bottles: ParsedBottle[]
 }
 
@@ -42,19 +44,27 @@ function parseEraDate(text: string): string | null {
   return `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
 }
 
-function latestDate(text: string): string | null {
+function collectVisitDates(text: string): string[] {
   const matches = [...text.matchAll(/R([1-9]\d?)\s*[ 　]*([0-9]{1,2})\/([0-9]{1,2})/g)]
-  if (matches.length === 0) return null
-  const dates = matches
-    .map((m) => parseEraDate(m[0]))
-    .filter((d): d is string => !!d)
-  if (dates.length === 0) return null
-  return dates.sort().at(-1) ?? null
+  if (matches.length === 0) return []
+  const seen = new Set<string>()
+  const dates: string[] = []
+  for (const m of matches) {
+    const date = parseEraDate(m[0])
+    if (!date || seen.has(date)) continue
+    seen.add(date)
+    dates.push(date)
+  }
+  return dates
 }
 
 function splitHeader(header: string): { name: string; inlineTail: string } {
   const trimmed = header.trim()
-  const marker = trimmed.search(/(?:タグ[:：]|R[1-9]\d?\s*[ 　]*\d{1,2}\/\d{1,2}|[（(]残量|飲み切り|飲みきり)/)
+  const markers = [
+    trimmed.search(/(?:\s+[^\s　]+[（(]残量|\s+[^\s　]+(?:飲み切り|飲みきり))/),
+    trimmed.search(/(?:タグ[:：]|R[1-9]\d?\s*[ 　]*\d{1,2}\/\d{1,2}|[（(]残量|飲み切り|飲みきり)/),
+  ].filter((n) => n > 0)
+  const marker = markers.length > 0 ? Math.min(...markers) : -1
   if (marker > 0) {
     return {
       name: trimmed.slice(0, marker).replace(/[ 　]+$/, ''),
@@ -151,15 +161,61 @@ function parseRaw(raw: string): ParsedCustomer[] {
 
 function buildCustomer(header: string, body: string[]): ParsedCustomer {
   const { name, inlineTail } = splitHeader(header)
+  const combinedText = [header, inlineTail, ...body].filter(Boolean).join('\n')
+  const visitDates = collectVisitDates(combinedText)
+  const lastVisitDate = visitDates.at(-1) ?? null
   const bodyText = [inlineTail, ...body].filter(Boolean).join('\n')
-  const lastVisitDate = latestDate([header, ...body].join('\n'))
   const bottles = parseBottles(bodyText)
   const memo = parseMemo(bodyText)
-  return { name: name.trim(), memo, lastVisitDate, bottles }
+  return { name: name.trim(), memo, lastVisitDate, visitDates, bottles }
+}
+
+async function resetImportedData(sql: ReturnType<typeof neon>): Promise<void> {
+  const storeId = getCurrentStoreId()
+  const importedCustomers = await sql`
+    SELECT c.id
+    FROM customers c
+    JOIN customer_store_profiles p ON p.customer_id = c.id
+    WHERE p.store_id = ${storeId}
+      AND (c.updated_by = 'akira-import' OR p.updated_by = 'akira-import')
+  `
+  const customerIds = importedCustomers.map((row) => row.id)
+  if (customerIds.length === 0) return
+
+  await sql`
+    DELETE FROM visit_records
+    WHERE customer_id = ANY(${customerIds})
+  `
+  await sql`
+    DELETE FROM bottles
+    WHERE customer_id = ANY(${customerIds})
+  `
+  await sql`
+    DELETE FROM customers
+    WHERE id = ANY(${customerIds})
+  `
+  await sql`
+    DELETE FROM casts
+    WHERE name = 'あきら' AND updated_by = 'akira-import'
+  `
 }
 
 async function run() {
   loadEnv()
+  const {
+    createBottle,
+    createCast,
+    createCustomer,
+    createVisitRecord,
+    deleteBottle,
+    getBottlesByCustomer,
+    getCasts,
+    getCustomers,
+    updateCustomer,
+  } = await import('../src/lib/kv')
+  const sql = neon(process.env.DATABASE_URL!)
+
+  await resetImportedData(sql)
 
   const raw = String.raw`■あきら
 
@@ -461,6 +517,21 @@ R5　4/20`
     const existingBottles = await getBottlesByCustomer(customerId)
     for (const b of existingBottles) {
       await deleteBottle(b.id)
+    }
+
+    for (const visitDate of item.visitDates) {
+      await createVisitRecord({
+        customerId,
+        visitDate: new Date(`${visitDate}T00:00:00.000Z`).toISOString(),
+        designatedCastIds: [akiraCastId],
+        inStoreCastIds: [],
+        bottlesOpened: [],
+        bottlesUsed: [],
+        memo: item.memo,
+        isAlert: false,
+        alertReason: '',
+        bottleSnapshots: [],
+      })
     }
 
     for (const b of item.bottles) {

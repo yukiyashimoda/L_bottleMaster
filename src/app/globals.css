@@ -96,6 +96,9 @@
     min-height: 48px;
     touch-action: manipulation;
   }
+  button.w-11.h-6.rounded-full {
+    min-height: 1.5rem !important;
+  }
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
@@ -155,5 +158,11 @@
   }
   .relative .absolute.bg-white.rounded-full {
     background-color: var(--text) !important;
+  }
+  .form-action-bar {
+    background: rgba(8,15,22,0.88) !important;
+    border-color: var(--line) !important;
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.35);
+    z-index: 80 !important;
   }
 }

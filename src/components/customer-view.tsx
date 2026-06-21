@@ -72,14 +72,15 @@ export function CustomerView({ customers, casts, bottlesMap, loggedIn }: Props) 
           <button
             onClick={() => setSidebarOpen(true)}
             style={{
-              width: 34, height: 34, borderRadius: '50%',
+              width: 48, height: 48, minHeight: 48, borderRadius: '50%',
               overflow: 'hidden', padding: 0,
               border: '1px solid rgba(129,236,255,0.2)',
               filter: 'drop-shadow(0 0 6px rgba(129,236,255,0.35))',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
-            <img src="/apple-touch-icon.png" alt="menu" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="/apple-touch-icon.png" alt="menu" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', display: 'block' }} />
           </button>
         </div>
 

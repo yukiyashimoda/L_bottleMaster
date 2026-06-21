@@ -477,7 +477,7 @@ export function NewCustomerForm({ casts, customers }: NewCustomerFormProps) {
         </div>
       )}
 
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
+      <div className="form-action-bar fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
         <Button
           type="submit"
           disabled={loading}

@@ -14,11 +14,11 @@ export default async function NewCustomerPage() {
       {/* Header */}
       <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}>
         <Link href="/">
-          <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-500">
+          <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-plum/70">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
-        <h1 className="font-bold text-gray-900">新規顧客登録</h1>
+        <h1 className="font-bold text-brand-plum">新規顧客登録</h1>
       </div>
 
       <div className="px-4 py-5">

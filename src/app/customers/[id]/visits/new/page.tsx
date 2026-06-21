@@ -26,13 +26,13 @@ export default async function NewVisitPage({
     <div className="min-h-screen pb-10">
       <div className="sticky top-0 z-20 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid hsl(var(--border))' }}>
         <Link href={`/customers/${id}`}>
-          <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-500">
+          <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-plum/70">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
         <div>
-          <h1 className="font-bold text-gray-900 text-sm">来店記録</h1>
-          <p className="text-xs text-gray-400">{customer.name}</p>
+          <h1 className="font-bold text-brand-plum text-sm">来店記録</h1>
+          <p className="text-xs text-brand-plum/50">{customer.name}</p>
         </div>
       </div>
 

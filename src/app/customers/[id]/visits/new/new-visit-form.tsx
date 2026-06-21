@@ -209,7 +209,7 @@ export function NewVisitForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5 pb-24">
       {error && (
         <div className="p-3 rounded-lg bg-brand-coral/10 border border-brand-coral/40 text-brand-coral text-sm">
           {error}
@@ -446,13 +446,15 @@ export function NewVisitForm({
         <Textarea name="memo" placeholder="特記事項など" rows={3} />
       </div>
 
-      <Button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11"
-      >
-        {loading ? '記録中...' : '来店を記録する'}
-      </Button>
+      <div className="form-action-bar fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-brand-beige px-4 py-3 max-w-2xl mx-auto">
+        <Button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11"
+        >
+          {loading ? '記録中...' : '来店を記録する'}
+        </Button>
+      </div>
     </form>
   )
 }
